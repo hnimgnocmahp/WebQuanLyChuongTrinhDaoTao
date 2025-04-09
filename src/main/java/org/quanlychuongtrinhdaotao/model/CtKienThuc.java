@@ -28,5 +28,44 @@ public class CtKienThuc {
     @Column(name = "soTinChi")
     private int soTinChi;
 
-    // Getter và Setter
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public KhungChuongTrinh getKhungChuongTrinh() {
+        return khungChuongTrinh;
+    }
+
+    public void setKhungChuongTrinh(KhungChuongTrinh khungChuongTrinh) {
+        this.khungChuongTrinh = khungChuongTrinh;
+    }
+
+    public String getTenKienThuc() {
+        return tenKienThuc;
+    }
+
+    public void setTenKienThuc(String tenKienThuc) {
+        this.tenKienThuc = tenKienThuc;
+    }
+
+    public String getLoaiKienThuc() {
+        return loaiKienThuc;
+    }
+
+    public void setLoaiKienThuc(String loaiKienThuc) {
+        this.loaiKienThuc = loaiKienThuc;
+    }
+
+    public int getSoTinChi() {
+        return soTinChi;
+    }
+
+    public void setSoTinChi(int soTinChi) {
+        this.soTinChi = soTinChi;
+    }
+// Getter và Setter
 }

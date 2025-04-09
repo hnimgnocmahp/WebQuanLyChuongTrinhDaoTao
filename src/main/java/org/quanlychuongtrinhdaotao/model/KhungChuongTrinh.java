@@ -27,4 +27,36 @@ public class KhungChuongTrinh {
     private int soTinChi;
 
     // Getter và Setter
+
+    public ChuongTrinhDaoTao getChuongTrinhDaoTao() {
+        return chuongTrinhDaoTao;
+    }
+
+    public void setChuongTrinhDaoTao(ChuongTrinhDaoTao chuongTrinhDaoTao) {
+        this.chuongTrinhDaoTao = chuongTrinhDaoTao;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getKhoiKenThuc() {
+        return khoiKenThuc;
+    }
+
+    public void setKhoiKenThuc(String khoiKenThuc) {
+        this.khoiKenThuc = khoiKenThuc;
+    }
+
+    public int getSoTinChi() {
+        return soTinChi;
+    }
+
+    public void setSoTinChi(int soTinChi) {
+        this.soTinChi = soTinChi;
+    }
 }
