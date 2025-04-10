@@ -27,5 +27,44 @@ public class GiangVien {
     @Column(name = "hocVi")
     private String hocVi;
 
-    // Getter và Setter
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getMaCB() {
+        return maCB;
+    }
+
+    public void setMaCB(String maCB) {
+        this.maCB = maCB;
+    }
+
+    public String getHoTen() {
+        return hoTen;
+    }
+
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
+    }
+
+    public int getNamSinh() {
+        return namSinh;
+    }
+
+    public void setNamSinh(int namSinh) {
+        this.namSinh = namSinh;
+    }
+
+    public String getHocVi() {
+        return hocVi;
+    }
+
+    public void setHocVi(String hocVi) {
+        this.hocVi = hocVi;
+    }
+// Getter và Setter
 }

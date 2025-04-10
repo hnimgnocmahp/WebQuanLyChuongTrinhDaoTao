@@ -18,9 +18,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User getUserByName(String name){
+    public User getUserByName(String name) {
         return userRepository.getById(name);
     }
-
-
+    public boolean existsByMssv(String mssv) {
+        return userRepository.existsById(mssv);
+    }
 }
+
+
+
+
