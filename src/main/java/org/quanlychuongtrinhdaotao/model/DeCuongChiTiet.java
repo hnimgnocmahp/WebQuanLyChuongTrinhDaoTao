@@ -22,6 +22,29 @@ public class DeCuongChiTiet {
     @Column(name = "boPhanDuocDanhGia")
     private String boPhanDuocDanhGia;
 
-    // Getter và Setter
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public HocPhan getHocPhan() {
+        return hocPhan;
+    }
+
+    public void setHocPhan(HocPhan hocPhan) {
+        this.hocPhan = hocPhan;
+    }
+
+    public String getBoPhanDuocDanhGia() {
+        return boPhanDuocDanhGia;
+    }
+
+    public void setBoPhanDuocDanhGia(String boPhanDuocDanhGia) {
+        this.boPhanDuocDanhGia = boPhanDuocDanhGia;
+    }
+// Getter và Setter
 }
 

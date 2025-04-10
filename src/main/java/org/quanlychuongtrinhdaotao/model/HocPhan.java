@@ -34,5 +34,60 @@ public class HocPhan {
     @Column(name = "thucTap")
     private boolean thucTap;
 
-    // Getter và Setter
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public CtKienThuc getCtkienThuc() {
+        return ctkienThuc;
+    }
+
+    public void setCtkienThuc(CtKienThuc ctkienThuc) {
+        this.ctkienThuc = ctkienThuc;
+    }
+
+    public String getTenHocPhan() {
+        return tenHocPhan;
+    }
+
+    public void setTenHocPhan(String tenHocPhan) {
+        this.tenHocPhan = tenHocPhan;
+    }
+
+    public int getSoTinChi() {
+        return soTinChi;
+    }
+
+    public void setSoTinChi(int soTinChi) {
+        this.soTinChi = soTinChi;
+    }
+
+    public boolean isLyThuyet() {
+        return lyThuyet;
+    }
+
+    public void setLyThuyet(boolean lyThuyet) {
+        this.lyThuyet = lyThuyet;
+    }
+
+    public boolean isThucHanh() {
+        return thucHanh;
+    }
+
+    public void setThucHanh(boolean thucHanh) {
+        this.thucHanh = thucHanh;
+    }
+
+    public boolean isThucTap() {
+        return thucTap;
+    }
+
+    public void setThucTap(boolean thucTap) {
+        this.thucTap = thucTap;
+    }
+// Getter và Setter
 }
