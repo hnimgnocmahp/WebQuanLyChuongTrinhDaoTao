@@ -16,9 +16,8 @@ public class KhungChuongTrinh {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "ctd_id")
-    private ChuongTrinhDaoTao chuongTrinhDaoTao;
+    @Column(name = "tenKienThuc")
+    private String tenKienThuc;
 
     @Column(name = "khoiKenThuc")
     private String khoiKenThuc;
@@ -26,37 +25,11 @@ public class KhungChuongTrinh {
     @Column(name = "soTinChi")
     private int soTinChi;
 
-    // Getter và Setter
+    @Column(name = "soTinChiBatBuoc")
+    private int soTinChiBatBuoc;
 
-    public ChuongTrinhDaoTao getChuongTrinhDaoTao() {
-        return chuongTrinhDaoTao;
-    }
+    @ManyToOne
+    @JoinColumn(name = "ctdt_id")
+    private ChuongTrinhDaoTao chuongTrinhDaoTao;
 
-    public void setChuongTrinhDaoTao(ChuongTrinhDaoTao chuongTrinhDaoTao) {
-        this.chuongTrinhDaoTao = chuongTrinhDaoTao;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getKhoiKenThuc() {
-        return khoiKenThuc;
-    }
-
-    public void setKhoiKenThuc(String khoiKenThuc) {
-        this.khoiKenThuc = khoiKenThuc;
-    }
-
-    public int getSoTinChi() {
-        return soTinChi;
-    }
-
-    public void setSoTinChi(int soTinChi) {
-        this.soTinChi = soTinChi;
-    }
 }

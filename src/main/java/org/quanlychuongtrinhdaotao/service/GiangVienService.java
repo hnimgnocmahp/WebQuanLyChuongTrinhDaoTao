@@ -52,4 +52,12 @@ public class GiangVienService {
             return null;
         }
     }
+
+    public boolean existsByGiangVien(String maCB) {
+        return giangVienRepository.existsByMaCB(maCB);
+    }
+
+    public Optional<GiangVien> findByMaCB(String maCB) {
+        return giangVienRepository.findByMaCB(maCB);
+    }
 }

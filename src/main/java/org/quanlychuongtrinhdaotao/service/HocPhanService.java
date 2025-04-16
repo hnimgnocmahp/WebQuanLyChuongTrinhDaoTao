@@ -33,7 +33,6 @@ public class HocPhanService {
             hocPhan.setLyThuyet(updatedHocPhan.isLyThuyet());
             hocPhan.setThucHanh(updatedHocPhan.isThucHanh());
             hocPhan.setThucTap(updatedHocPhan.isThucTap());
-            hocPhan.setCtkienThuc(updatedHocPhan.getCtkienThuc());
             return hocPhanRepository.save(hocPhan);
         } else {
             return null; // HocPhan không tồn tại

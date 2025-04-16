@@ -15,36 +15,12 @@ public class DeCuongChiTiet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "hocphan_id")
     private HocPhan hocPhan;
 
     @Column(name = "boPhanDuocDanhGia")
     private String boPhanDuocDanhGia;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public HocPhan getHocPhan() {
-        return hocPhan;
-    }
-
-    public void setHocPhan(HocPhan hocPhan) {
-        this.hocPhan = hocPhan;
-    }
-
-    public String getBoPhanDuocDanhGia() {
-        return boPhanDuocDanhGia;
-    }
-
-    public void setBoPhanDuocDanhGia(String boPhanDuocDanhGia) {
-        this.boPhanDuocDanhGia = boPhanDuocDanhGia;
-    }
-// Getter và Setter
 }
 

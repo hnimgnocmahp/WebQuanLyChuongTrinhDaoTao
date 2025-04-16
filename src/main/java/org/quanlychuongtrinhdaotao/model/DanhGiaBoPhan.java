@@ -28,44 +28,4 @@ public class DanhGiaBoPhan {
     @Column(name = "hinhThucDanhGia")
     private String hinhThucDanhGia;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public DeCuongChiTiet getDeCuongChiTiet() {
-        return deCuongChiTiet;
-    }
-
-    public void setDeCuongChiTiet(DeCuongChiTiet deCuongChiTiet) {
-        this.deCuongChiTiet = deCuongChiTiet;
-    }
-
-    public float getDiemDanhGiaBoPhan() {
-        return diemDanhGiaBoPhan;
-    }
-
-    public void setDiemDanhGiaBoPhan(float diemDanhGiaBoPhan) {
-        this.diemDanhGiaBoPhan = diemDanhGiaBoPhan;
-    }
-
-    public float getTrongSo() {
-        return trongSo;
-    }
-
-    public void setTrongSo(float trongSo) {
-        this.trongSo = trongSo;
-    }
-
-    public String getHinhThucDanhGia() {
-        return hinhThucDanhGia;
-    }
-
-    public void setHinhThucDanhGia(String hinhThucDanhGia) {
-        this.hinhThucDanhGia = hinhThucDanhGia;
-    }
-// Getter và Setter
 }

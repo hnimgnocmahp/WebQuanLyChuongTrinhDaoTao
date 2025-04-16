@@ -1,7 +1,6 @@
 package org.quanlychuongtrinhdaotao.service;
 
 import org.quanlychuongtrinhdaotao.model.ChuongTrinhDaoTao;
-import org.quanlychuongtrinhdaotao.model.CtKienThuc;
 import org.quanlychuongtrinhdaotao.repository.ChuongTrinhDaoTaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

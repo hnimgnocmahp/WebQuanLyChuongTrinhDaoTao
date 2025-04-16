@@ -1,8 +1,7 @@
 package org.quanlychuongtrinhdaotao.security;
 
-
-
-import org.quanlychuongtrinhdaotao.repository.UserRepository;
+import org.quanlychuongtrinhdaotao.model.GiangVien;
+import org.quanlychuongtrinhdaotao.repository.GiangVienRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import java.util.Optional;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -41,14 +43,15 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return mssv -> userRepository.findById(mssv)
-                .map(user -> org.springframework.security.core.userdetails.User.builder()
-                        .username(user.getMssv())
-                        .password(user.getPassword())
-                        .roles("USER")
-                        .build())
-                .orElseThrow(() -> new UsernameNotFoundException("Không tìm thấy MSSV: " + mssv));
+    public UserDetailsService userDetailsService(GiangVienRepository giangVienRepository) {
+        return maCB -> {
+            Optional<GiangVien> giangVien = Optional.of(giangVienRepository.findByMaCB(maCB)
+                    .orElseThrow(() -> new UsernameNotFoundException("Không tìm thấy mã cán bộ: " + maCB)));
+            return User.builder()
+                    .username(giangVien.get().getMaCB())
+                    .password(giangVien.get().getMatKhau())
+                    .build();
+        };
     }
 
     @Bean

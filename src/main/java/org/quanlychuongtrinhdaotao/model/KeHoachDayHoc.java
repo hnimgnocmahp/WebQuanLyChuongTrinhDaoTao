@@ -25,36 +25,7 @@ public class KeHoachDayHoc {
     @Column(name = "namHoc")
     private int namHoc;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getHockiThucHien() {
-        return hockiThucHien;
-    }
-
-    public void setHockiThucHien(String hockiThucHien) {
-        this.hockiThucHien = hockiThucHien;
-    }
-
-    public HocPhan getHocPhan() {
-        return hocPhan;
-    }
-
-    public void setHocPhan(HocPhan hocPhan) {
-        this.hocPhan = hocPhan;
-    }
-
-    public int getNamHoc() {
-        return namHoc;
-    }
-
-    public void setNamHoc(int namHoc) {
-        this.namHoc = namHoc;
-    }
-// Getter và Setter
+    @ManyToOne
+    @JoinColumn(name = "khungchuongtrinh_id")
+    private KhungChuongTrinh khungChuongTrinh;
 }
