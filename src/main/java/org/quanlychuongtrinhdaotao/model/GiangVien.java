@@ -18,8 +18,8 @@ public class GiangVien {
     @Column(name = "maCB")
     private String maCB;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "matKhau")
+    private String matKhau;
 
     @Column(name = "hoTen")
     private String hoTen;
