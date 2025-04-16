@@ -15,12 +15,14 @@ public class HocPhan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "ctkienthuc_id")
-    private CtKienThuc ctkienThuc;
-
     @Column(name = "tenHocPhan")
     private String tenHocPhan;
+
+    @Column(name = "maHocPhan")
+    private String maHocPhan;
+
+    @Column(name = "maHocPhanTruoc")
+    private String maHocPhanTruoc;
 
     @Column(name = "soTinChi")
     private int soTinChi;
@@ -34,60 +36,11 @@ public class HocPhan {
     @Column(name = "thucTap")
     private boolean thucTap;
 
-    public int getId() {
-        return id;
-    }
+    @Column(name = "loaiKienThuc")
+    private boolean loaiKienThuc;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "khungchuongtrinh_id")
+    private KhungChuongTrinh khungChuongTrinh;
 
-    public CtKienThuc getCtkienThuc() {
-        return ctkienThuc;
-    }
-
-    public void setCtkienThuc(CtKienThuc ctkienThuc) {
-        this.ctkienThuc = ctkienThuc;
-    }
-
-    public String getTenHocPhan() {
-        return tenHocPhan;
-    }
-
-    public void setTenHocPhan(String tenHocPhan) {
-        this.tenHocPhan = tenHocPhan;
-    }
-
-    public int getSoTinChi() {
-        return soTinChi;
-    }
-
-    public void setSoTinChi(int soTinChi) {
-        this.soTinChi = soTinChi;
-    }
-
-    public boolean isLyThuyet() {
-        return lyThuyet;
-    }
-
-    public void setLyThuyet(boolean lyThuyet) {
-        this.lyThuyet = lyThuyet;
-    }
-
-    public boolean isThucHanh() {
-        return thucHanh;
-    }
-
-    public void setThucHanh(boolean thucHanh) {
-        this.thucHanh = thucHanh;
-    }
-
-    public boolean isThucTap() {
-        return thucTap;
-    }
-
-    public void setThucTap(boolean thucTap) {
-        this.thucTap = thucTap;
-    }
-// Getter và Setter
 }
