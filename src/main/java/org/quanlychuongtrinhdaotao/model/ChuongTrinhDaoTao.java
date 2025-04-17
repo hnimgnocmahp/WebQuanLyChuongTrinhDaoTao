@@ -21,19 +21,19 @@ public class ChuongTrinhDaoTao {
     @Column(name = "bac_cdt")
     private String bacCdt;
 
-    @Column(name = "loaiBang_cdt")
+    @Column(name = "loai_bang_cdt")
     private String loaiBangCdt;
 
-    @Column(name = "thoiGian")
+    @Column(name = "thoi_gian")
     private String thoiGian;
 
-    @Column(name = "soTinChiToiThieu")
+    @Column(name = "so_tin_chi_toi_thieu")
     private int soTinChiToiThieu;
 
-    @Column(name = "khoaQuanLy")
+    @Column(name = "khoa_quan_ly")
     private String khoaQuanLy;
 
-    @Column(name = "ngonNgu")
+    @Column(name = "ngon_ngu")
     private String ngonNgu;
 
     @ManyToOne
