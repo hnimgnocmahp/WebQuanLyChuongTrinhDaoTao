@@ -10,45 +10,24 @@ import java.util.Optional;
 
 @Service
 public class DeCuongChiTietService {
-    private final DeCuongChiTietRepository deCuongChiTietRepository;
 
     @Autowired
-    public DeCuongChiTietService(DeCuongChiTietRepository deCuongChiTietRepository){
-        this.deCuongChiTietRepository = deCuongChiTietRepository;
+    private DeCuongChiTietRepository repository;
+
+    public List<DeCuongChiTiet> getAll() {
+        return repository.findAll();
     }
 
-    public DeCuongChiTiet createDeCuongChiTiet(DeCuongChiTiet deCuongChiTiet){
-        return deCuongChiTietRepository.save(deCuongChiTiet);
+    public DeCuongChiTiet getById(int id) {
+        Optional<DeCuongChiTiet> optional = repository.findById(id);
+        return optional.orElse(null);
     }
 
-    public DeCuongChiTiet getDeCuongChiTietById(int id){
-        return deCuongChiTietRepository.findById(id).orElse(null);
+    public DeCuongChiTiet save(DeCuongChiTiet obj) {
+        return repository.save(obj);
     }
 
-    public List<DeCuongChiTiet> getAllDeCuongChiTiet(){
-        return deCuongChiTietRepository.findAll();
-    }
-
-    public boolean deleteDeCuongChiTiet(int id){
-        if (deCuongChiTietRepository.existsById(id)){
-            deCuongChiTietRepository.deleteById(id);
-            return true;
-        }
-        else return false;
-    }
-
-    public DeCuongChiTiet updateDeCuongChiTiet(int id, DeCuongChiTiet updateDeCuongChiTiet){
-        Optional<DeCuongChiTiet> existDeCuongChiTiet = deCuongChiTietRepository.findById(id);
-        if (existDeCuongChiTiet.isPresent()){
-            DeCuongChiTiet deCuongChiTiet = existDeCuongChiTiet.get();
-            deCuongChiTiet.setHocPhan(updateDeCuongChiTiet.getHocPhan());
-            deCuongChiTiet.setBoPhanDuocDanhGia(updateDeCuongChiTiet.getBoPhanDuocDanhGia());
-
-            return deCuongChiTietRepository.save(deCuongChiTiet);
-        }
-        else {
-            return null;
-        }
+    public void delete(int id) {
+        repository.deleteById(id);
     }
 }
-

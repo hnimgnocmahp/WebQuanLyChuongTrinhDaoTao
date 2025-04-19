@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách Khung chương trình</title>
+</head>
+<body>
+<h1>Danh sách Khung Chương Trình</h1>
+
+<a th:href="@{/khungchuongtrinh/add}">Thêm khung chương trình mới</a>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Tên Kiến Thức</th>
+        <th>Khối Kiến Thức</th>
+        <th>Số Tín Chỉ</th>
+        <th>Số Tín Chỉ Bắt Buộc</th>
+        <th>Hành động</th>
+    </tr>
+    <tr th:each="kc : ${khungChuongTrinhs}">
+        <td th:text="${kc.id}"></td>
+        <td th:text="${kc.tenKienThuc}"></td>
+        <td th:text="${kc.khoiKenThuc}"></td>
+        <td th:text="${kc.soTinChi}"></td>
+        <td th:text="${kc.soTinChiBatBuoc}"></td>
+        <td>
+            <a th:href="@{'/khungchuongtrinh/edit/' + ${kc.id}}">Sửa</a> |
+            <a th:href="@{'/khungchuongtrinh/delete/' + ${kc.id}}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

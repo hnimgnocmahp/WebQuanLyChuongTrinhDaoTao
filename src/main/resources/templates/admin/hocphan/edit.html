@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Sửa học phần</title>
+</head>
+<body>
+<h1>Sửa học phần</h1>
+
+<form th:action="@{'/hocphan/edit/' + ${hocPhan.id}}" th:object="${hocPhan}" method="post">
+  Tên học phần: <input type="text" th:field="*{tenHocPhan}"/> <br/>
+  Mã học phần: <input type="text" th:field="*{maHocPhan}"/> <br/>
+  Số tín chỉ: <input type="number" th:field="*{soTinChi}"/> <br/>
+  <button type="submit">Cập nhật</button>
+</form>
+
+<a th:href="@{/hocphan}">Quay lại danh sách</a>
+</body>
+</html>

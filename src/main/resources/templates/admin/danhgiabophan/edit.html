@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sửa đánh giá bộ phận</title>
+</head>
+<body>
+<h1>Sửa Đánh Giá Bộ Phận</h1>
+
+<form th:action="@{'/danhgiabophan/edit/' + ${danhGiaBoPhan.id}}" th:object="${danhGiaBoPhan}" method="post">
+    Điểm đánh giá: <input type="number" step="0.1" th:field="*{diemDanhGiaBoPhan}" /> <br/>
+    Trọng số: <input type="number" step="0.1" th:field="*{trongSo}" /> <br/>
+    Hình thức đánh giá: <input type="text" th:field="*{hinhThucDanhGia}" /> <br/>
+    <button type="submit">Cập nhật</button>
+</form>
+
+<a th:href="@{/danhgiabophan}">Quay lại danh sách</a>
+</body>
+</html>

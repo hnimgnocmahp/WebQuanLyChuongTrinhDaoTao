@@ -6,45 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class KhungChuongTrinhService {
-    private final KhungChuongTrinhRepository khungChuongTrinhRepository;
 
     @Autowired
-    public KhungChuongTrinhService(KhungChuongTrinhRepository khungChuongTrinhRepository){
-        this.khungChuongTrinhRepository = khungChuongTrinhRepository;
-    }
+    private KhungChuongTrinhRepository khungChuongTrinhRepository;
 
-    public KhungChuongTrinh createKhungChuongTrinh(KhungChuongTrinh khungChuongTrinh){
-        return khungChuongTrinhRepository.save(khungChuongTrinh);
-    }
-
-    public KhungChuongTrinh getKhungChuongTrinhByID(int id){
-        return khungChuongTrinhRepository.findById(id).orElse(null);
-    }
-
-    public List<KhungChuongTrinh> getAllKhungChuongTrinh(){
+    public List<KhungChuongTrinh> getAllKhungChuongTrinh() {
         return khungChuongTrinhRepository.findAll();
     }
 
-    public boolean deleteKhungChuongTrinh (int id){
-        if(khungChuongTrinhRepository.existsById(id)){
-            khungChuongTrinhRepository.deleteById(id);
-            return true;
-        }
-        else{
-            return false;
-        }
+    public KhungChuongTrinh getKhungChuongTrinhById(int id) {
+        Optional<KhungChuongTrinh> optional = khungChuongTrinhRepository.findById(id);
+        return optional.orElse(null);
     }
 
-    public KhungChuongTrinh updateKhungChuongTrinh(int id,KhungChuongTrinh UpdatekhungChuongTrinh){
-        KhungChuongTrinh existKhungChuongTrinh = khungChuongTrinhRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Not exist" + id));
-        existKhungChuongTrinh.setChuongTrinhDaoTao(UpdatekhungChuongTrinh.getChuongTrinhDaoTao());
-        existKhungChuongTrinh.setKhoiKenThuc(UpdatekhungChuongTrinh.getKhoiKenThuc());
-        existKhungChuongTrinh.setSoTinChi(UpdatekhungChuongTrinh.getSoTinChi());
+    public KhungChuongTrinh saveKhungChuongTrinh(KhungChuongTrinh khungChuongTrinh) {
+        return khungChuongTrinhRepository.save(khungChuongTrinh);
+    }
 
-        return khungChuongTrinhRepository.save(existKhungChuongTrinh);
+    public void deleteKhungChuongTrinh(int id) {
+        khungChuongTrinhRepository.deleteById(id);
     }
 }

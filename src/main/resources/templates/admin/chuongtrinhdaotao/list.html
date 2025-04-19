@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách Chương trình đào tạo</title>
+</head>
+<body>
+<h1>Danh sách Chương Trình Đào Tạo</h1>
+
+<a th:href="@{/chuongtrinhdaotao/add}">Thêm mới</a>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Tên CTĐT</th>
+        <th>Bậc</th>
+        <th>Loại Bằng</th>
+        <th>Thời Gian</th>
+        <th>Số TC tối thiểu</th>
+        <th>Khoa Quản Lý</th>
+        <th>Ngôn Ngữ</th>
+        <th>Hành động</th>
+    </tr>
+    <tr th:each="ctdt : ${chuongTrinhDaoTaos}">
+        <td th:text="${ctdt.id}"></td>
+        <td th:text="${ctdt.tenCdt}"></td>
+        <td th:text="${ctdt.bacCdt}"></td>
+        <td th:text="${ctdt.loaiBangCdt}"></td>
+        <td th:text="${ctdt.thoiGian}"></td>
+        <td th:text="${ctdt.soTinChiToiThieu}"></td>
+        <td th:text="${ctdt.khoaQuanLy}"></td>
+        <td th:text="${ctdt.ngonNgu}"></td>
+        <td>
+            <a th:href="@{'/chuongtrinhdaotao/edit/' + ${ctdt.id}}">Sửa</a> |
+            <a th:href="@{'/chuongtrinhdaotao/delete/' + ${ctdt.id}}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

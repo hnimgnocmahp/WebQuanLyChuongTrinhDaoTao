@@ -10,54 +10,24 @@ import java.util.Optional;
 
 @Service
 public class GiangVienService {
-    private final GiangVienRepository giangVienRepository;
 
     @Autowired
-    public GiangVienService(GiangVienRepository giangVienRepository){
-        this.giangVienRepository = giangVienRepository;
-    }
+    private GiangVienRepository giangVienRepository;
 
-    public GiangVien createGiangVien(GiangVien giangVien){
-        return giangVienRepository.save(giangVien);
-    }
-
-    public GiangVien getGiangVienById(int id){
-        return giangVienRepository.findById(id).orElse(null);
-    }
-
-    public List<GiangVien> getAllGiangVien(){
+    public List<GiangVien> getAllGiangVien() {
         return giangVienRepository.findAll();
     }
 
-    public boolean deleteGiangVien(int id){
-        if (giangVienRepository.existsById(id)){
-            giangVienRepository.deleteById(id);
-            return true;
-        }
-        else return false;
+    public GiangVien getGiangVienById(int id) {
+        Optional<GiangVien> optional = giangVienRepository.findById(id);
+        return optional.orElse(null);
     }
 
-    public GiangVien updateGiangVien(int id, GiangVien updateGiangVien){
-        Optional <GiangVien> existGiangVien = giangVienRepository.findById(id);
-        if (existGiangVien.isPresent()){
-            GiangVien giangVien = existGiangVien.get();
-            giangVien.setHocVi(updateGiangVien.getHocVi());
-            giangVien.setMaCB(updateGiangVien.getMaCB());
-            giangVien.setHoTen(updateGiangVien.getHoTen());
-            giangVien.setNamSinh(updateGiangVien.getNamSinh());
-
-            return giangVienRepository.save(giangVien);
-        }
-        else {
-            return null;
-        }
+    public GiangVien saveGiangVien(GiangVien giangVien) {
+        return giangVienRepository.save(giangVien);
     }
 
-    public boolean existsByGiangVien(String maCB) {
-        return giangVienRepository.existsByMaCB(maCB);
-    }
-
-    public Optional<GiangVien> findByMaCB(String maCB) {
-        return giangVienRepository.findByMaCB(maCB);
+    public void deleteGiangVien(int id) {
+        giangVienRepository.deleteById(id);
     }
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sửa chương trình đào tạo</title>
+</head>
+<body>
+<h1>Sửa Chương Trình Đào Tạo</h1>
+
+<form th:action="@{'/chuongtrinhdaotao/edit/' + ${chuongTrinhDaoTao.id}}" th:object="${chuongTrinhDaoTao}" method="post">
+    Tên CTĐT: <input type="text" th:field="*{tenCdt}" /> <br/>
+    Bậc: <input type="text" th:field="*{bacCdt}" /> <br/>
+    Loại bằng: <input type="text" th:field="*{loaiBangCdt}" /> <br/>
+    Thời gian: <input type="text" th:field="*{thoiGian}" /> <br/>
+    Số tín chỉ tối thiểu: <input type="number" th:field="*{soTinChiToiThieu}" /> <br/>
+    Khoa quản lý: <input type="text" th:field="*{khoaQuanLy}" /> <br/>
+    Ngôn ngữ: <input type="text" th:field="*{ngonNgu}" /> <br/>
+    <button type="submit">Cập nhật</button>
+</form>
+
+<a th:href="@{/chuongtrinhdaotao}">Quay lại danh sách</a>
+</body>
+</html>

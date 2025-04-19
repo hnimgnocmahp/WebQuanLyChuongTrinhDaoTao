@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Sửa đề cương chi tiết</title>
+</head>
+<body>
+<h1>Sửa Đề Cương Chi Tiết</h1>
+
+<form th:action="@{'/decuongchitiet/edit/' + ${deCuongChiTiet.id}}" th:object="${deCuongChiTiet}" method="post">
+  Bộ phận được đánh giá: <input type="text" th:field="*{boPhanDuocDanhGia}" /> <br/>
+  <button type="submit">Cập nhật</button>
+</form>
+
+<a th:href="@{/templates/admin/decuongchitiet}">Quay lại danh sách</a>
+</body>
+</html>

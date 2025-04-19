@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Danh sách học phần</title>
+</head>
+<body>
+<h1>Danh sách Học Phần</h1>
+
+<a th:href="@{/hocphan/add}">Thêm học phần mới</a>
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Tên học phần</th>
+    <th>Mã học phần</th>
+    <th>Số tín chỉ</th>
+    <th>Hành động</th>
+  </tr>
+  <tr th:each="hp : ${hocPhans}">
+    <td th:text="${hp.id}"></td>
+    <td th:text="${hp.tenHocPhan}"></td>
+    <td th:text="${hp.maHocPhan}"></td>
+    <td th:text="${hp.soTinChi}"></td>
+    <td>
+      <a th:href="@{'/hocphan/edit/' + ${hp.id}}">Sửa</a> |
+      <a th:href="@{'/hocphan/delete/' + ${hp.id}}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

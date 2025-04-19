@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Danh sách Đánh giá bộ phận</title>
+</head>
+<body>
+<h1>Danh sách Đánh Giá Bộ Phận</h1>
+
+<a th:href="@{/danhgiabophan/add}">Thêm mới</a>
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Điểm đánh giá</th>
+    <th>Trọng số</th>
+    <th>Hình thức đánh giá</th>
+    <th>Hành động</th>
+  </tr>
+  <tr th:each="dg : ${danhGiaBoPhans}">
+    <td th:text="${dg.id}"></td>
+    <td th:text="${dg.diemDanhGiaBoPhan}"></td>
+    <td th:text="${dg.trongSo}"></td>
+    <td th:text="${dg.hinhThucDanhGia}"></td>
+    <td>
+      <a th:href="@{'/danhgiabophan/edit/' + ${dg.id}}">Sửa</a> |
+      <a th:href="@{'/danhgiabophan/delete/' + ${dg.id}}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

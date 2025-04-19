@@ -1,51 +1,33 @@
 package org.quanlychuongtrinhdaotao.service;
 
 import org.quanlychuongtrinhdaotao.model.KeHoachDayHoc;
-import org.quanlychuongtrinhdaotao.model.KeHoachDayHoc;
 import org.quanlychuongtrinhdaotao.repository.KeHoachDayHocRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class KeHoachDayHocService {
-    private final KeHoachDayHocRepository keHoachDayHocRepository;
 
     @Autowired
-    public KeHoachDayHocService(KeHoachDayHocRepository keHoachDayHocRepository){
-        this.keHoachDayHocRepository = keHoachDayHocRepository;
-    }
+    private KeHoachDayHocRepository keHoachDayHocRepository;
 
-    public KeHoachDayHoc createKeHoachDayHoc(KeHoachDayHoc keHoachDayHoc){
-        return keHoachDayHocRepository.save(keHoachDayHoc);
-    }
-
-    public KeHoachDayHoc getKeHoachDayHocByID(int id){
-        return keHoachDayHocRepository.findById(id).orElse(null);
-    }
-
-    public List<KeHoachDayHoc> getAllKeHoachDayHoc(){
+    public List<KeHoachDayHoc> getAllKeHoachDayHoc() {
         return keHoachDayHocRepository.findAll();
     }
 
-    public boolean deleteKeHoachDayHoc (int id){
-        if(keHoachDayHocRepository.existsById(id)){
-            keHoachDayHocRepository.deleteById(id);
-            return true;
-        }
-        else{
-            return false;
-        }
+    public KeHoachDayHoc getKeHoachDayHocById(int id) {
+        Optional<KeHoachDayHoc> optional = keHoachDayHocRepository.findById(id);
+        return optional.orElse(null);
     }
 
-    public KeHoachDayHoc updateKeHoachDayHoc(int id,KeHoachDayHoc UpdatekeHoachDayHoc){
-        KeHoachDayHoc existKeHoachDayHoc = keHoachDayHocRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Not exist" + id));
-        existKeHoachDayHoc.setNamHoc(UpdatekeHoachDayHoc.getNamHoc());
-        existKeHoachDayHoc.setHocPhan(UpdatekeHoachDayHoc.getHocPhan());
-        existKeHoachDayHoc.setHockiThucHien(UpdatekeHoachDayHoc.getHockiThucHien());
+    public KeHoachDayHoc saveKeHoachDayHoc(KeHoachDayHoc keHoachDayHoc) {
+        return keHoachDayHocRepository.save(keHoachDayHoc);
+    }
 
-        return keHoachDayHocRepository.save(existKeHoachDayHoc);
+    public void deleteKeHoachDayHoc(int id) {
+        keHoachDayHocRepository.deleteById(id);
     }
 }

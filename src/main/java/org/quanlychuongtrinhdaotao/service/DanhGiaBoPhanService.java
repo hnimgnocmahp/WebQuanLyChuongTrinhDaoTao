@@ -11,49 +11,23 @@ import java.util.Optional;
 @Service
 public class DanhGiaBoPhanService {
 
-    private final DanhGiaBoPhanRepository danhGiaBoPhanRepository;
-
     @Autowired
-    public DanhGiaBoPhanService(DanhGiaBoPhanRepository danhGiaBoPhanRepository) {
-        this.danhGiaBoPhanRepository = danhGiaBoPhanRepository;
+    private DanhGiaBoPhanRepository repository;
+
+    public List<DanhGiaBoPhan> getAll() {
+        return repository.findAll();
     }
 
-    // Lấy tất cả các danh giá bộ phận
-    public List<DanhGiaBoPhan> getAllDanhGiaBoPhan() {
-        return danhGiaBoPhanRepository.findAll();
+    public DanhGiaBoPhan getById(int id) {
+        Optional<DanhGiaBoPhan> optional = repository.findById(id);
+        return optional.orElse(null);
     }
 
-    // Lấy danh giá bộ phận theo id
-    public Optional<DanhGiaBoPhan> getDanhGiaBoPhanById(int id) {
-        return danhGiaBoPhanRepository.findById(id);
+    public DanhGiaBoPhan save(DanhGiaBoPhan obj) {
+        return repository.save(obj);
     }
 
-    // Tạo mới một danh giá bộ phận
-    public DanhGiaBoPhan createDanhGiaBoPhan(DanhGiaBoPhan danhGiaBoPhan) {
-        return danhGiaBoPhanRepository.save(danhGiaBoPhan);
-    }
-
-    // Cập nhật một danh giá bộ phận
-    public DanhGiaBoPhan updateDanhGiaBoPhan(int id, DanhGiaBoPhan updatedDanhGiaBoPhan) {
-        Optional<DanhGiaBoPhan> existDanhGiaBoPhan = danhGiaBoPhanRepository.findById(id);
-        if (existDanhGiaBoPhan.isPresent()) {
-            DanhGiaBoPhan danhGiaBoPhan = existDanhGiaBoPhan.get();
-            danhGiaBoPhan.setHinhThucDanhGia(updatedDanhGiaBoPhan.getHinhThucDanhGia());
-            danhGiaBoPhan.setDiemDanhGiaBoPhan(updatedDanhGiaBoPhan.getDiemDanhGiaBoPhan());
-            danhGiaBoPhan.setTrongSo(updatedDanhGiaBoPhan.getTrongSo());
-            danhGiaBoPhan.setDeCuongChiTiet(updatedDanhGiaBoPhan.getDeCuongChiTiet());
-            return danhGiaBoPhanRepository.save(danhGiaBoPhan);
-        } else {
-            return null; // Hoặc ném một ngoại lệ nếu không tìm thấy đối tượng
-        }
-    }
-
-    // Xóa danh giá bộ phận
-    public boolean deleteDanhGiaBoPhan(int id) {
-        if (danhGiaBoPhanRepository.existsById(id)) {
-            danhGiaBoPhanRepository.deleteById(id);
-            return true;
-        }
-        return false;
+    public void delete(int id) {
+        repository.deleteById(id);
     }
 }

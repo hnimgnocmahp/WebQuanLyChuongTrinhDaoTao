@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách Đề cương chi tiết</title>
+</head>
+<body>
+<h1>Danh sách Đề Cương Chi Tiết</h1>
+
+<a th:href="@{/templates/admin/decuongchitiet/add}">Thêm mới</a>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Bộ phận được đánh giá</th>
+        <th>Hành động</th>
+    </tr>
+    <tr th:each="dc : ${deCuongChiTiets}">
+        <td th:text="${dc.id}"></td>
+        <td th:text="${dc.boPhanDuocDanhGia}"></td>
+        <td>
+            <a th:href="@{'/decuongchitiet/edit/' + ${dc.id}}">Sửa</a> |
+            <a th:href="@{'/decuongchitiet/delete/' + ${dc.id}}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
