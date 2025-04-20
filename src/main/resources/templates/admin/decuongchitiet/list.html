@@ -1,3 +1,4 @@
+<!-- File: src/main/resources/templates/admin/decuongchitiet/list.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -6,22 +7,28 @@
 <body>
 <h1>Danh sách Đề Cương Chi Tiết</h1>
 
-<a th:href="@{/templates/admin/decuongchitiet/add}">Thêm mới</a>
+<a th:href="@{/admin/decuongchitiet/add}">Thêm mới</a>
 
 <table border="1">
+    <thead>
     <tr>
         <th>ID</th>
         <th>Bộ phận được đánh giá</th>
         <th>Hành động</th>
     </tr>
-    <tr th:each="dc : ${deCuongChiTiets}">
-        <td th:text="${dc.id}"></td>
-        <td th:text="${dc.boPhanDuocDanhGia}"></td>
+    </thead>
+    <tbody>
+    <tr th:each="dcct : ${deCuongChiTiets}">
+        <td th:text="${dcct.id}"></td>
+        <td th:text="${dcct.boPhanDuocDanhGia}"></td>
         <td>
-            <a th:href="@{'/decuongchitiet/edit/' + ${dc.id}}">Sửa</a> |
-            <a th:href="@{'/decuongchitiet/delete/' + ${dc.id}}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
+            <a th:href="@{'/admin/decuongchitiet/edit/' + ${dcct.id}}">Sửa</a> |
+            <a th:href="@{'/admin/decuongchitiet/delete/' + ${dcct.id}}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
         </td>
     </tr>
+    </tbody>
 </table>
+
+<a th:href="@{/admin}">Về trang chủ</a>
 </body>
 </html>

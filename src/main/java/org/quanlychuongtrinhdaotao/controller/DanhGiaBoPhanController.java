@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/danhgiabophan")
+@RequestMapping("/admin/danhgiabophan")
 public class DanhGiaBoPhanController {
 
     @Autowired
@@ -20,19 +20,19 @@ public class DanhGiaBoPhanController {
     public String list(Model model) {
         List<DanhGiaBoPhan> list = service.getAll();
         model.addAttribute("danhGiaBoPhans", list);
-        return "danhgiabophan/list";
+        return "admin/danhgiabophan/list";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("danhGiaBoPhan", new DanhGiaBoPhan());
-        return "danhgiabophan/add.html";
+        return "admin/danhgiabophan/add";
     }
 
     @PostMapping("/add")
     public String save(@ModelAttribute("danhGiaBoPhan") DanhGiaBoPhan obj) {
         service.save(obj);
-        return "redirect:/danhgiabophan";
+        return "redirect:/admin/danhgiabophan";
     }
 
     @GetMapping("/edit/{id}")
@@ -40,9 +40,9 @@ public class DanhGiaBoPhanController {
         DanhGiaBoPhan obj = service.getById(id);
         if (obj != null) {
             model.addAttribute("danhGiaBoPhan", obj);
-            return "danhgiabophan/edit";
+            return "admin/danhgiabophan/edit";
         }
-        return "redirect:/danhgiabophan";
+        return "redirect:/admin/danhgiabophan";
     }
 
     @PostMapping("/edit/{id}")
@@ -54,12 +54,12 @@ public class DanhGiaBoPhanController {
             obj.setHinhThucDanhGia(objUpdate.getHinhThucDanhGia());
             service.save(obj);
         }
-        return "redirect:/danhgiabophan";
+        return "redirect:/admin/danhgiabophan";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable int id) {
         service.delete(id);
-        return "redirect:/danhgiabophan";
+        return "redirect:/admin/danhgiabophan";
     }
 }

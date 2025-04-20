@@ -1,33 +1,42 @@
+<!-- File: src/main/resources/templates/admin/giangvien/list.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Danh sách giảng viên</title>
+    <title>Danh sách Giảng Viên</title>
 </head>
 <body>
 <h1>Danh sách Giảng Viên</h1>
 
-<a th:href="@{/giangvien/add}">Thêm giảng viên mới</a>
+<a th:href="@{/admin/giangvien/add}">Thêm mới</a>
 
 <table border="1">
+    <thead>
     <tr>
         <th>ID</th>
-        <th>Mã CB</th>
-        <th>Họ tên</th>
-        <th>Năm sinh</th>
-        <th>Học vị</th>
+        <th>Mã Cán Bộ</th>
+        <th>Mật Khẩu</th>
+        <th>Họ Tên</th>
+        <th>Năm Sinh</th>
+        <th>Học Vị</th>
         <th>Hành động</th>
     </tr>
+    </thead>
+    <tbody>
     <tr th:each="gv : ${giangViens}">
         <td th:text="${gv.id}"></td>
         <td th:text="${gv.maCB}"></td>
+        <td th:text="${gv.matKhau}"></td>
         <td th:text="${gv.hoTen}"></td>
         <td th:text="${gv.namSinh}"></td>
         <td th:text="${gv.hocVi}"></td>
         <td>
-            <a th:href="@{'/giangvien/edit/' + ${gv.id}}">Sửa</a> |
-            <a th:href="@{'/giangvien/delete/' + ${gv.id}}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+            <a th:href="@{'/admin/giangvien/edit/' + ${gv.id}}">Sửa</a> |
+            <a th:href="@{'/admin/giangvien/delete/' + ${gv.id}}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
         </td>
     </tr>
+    </tbody>
 </table>
+
+<a th:href="@{/admin}">Về trang chủ</a>
 </body>
 </html>

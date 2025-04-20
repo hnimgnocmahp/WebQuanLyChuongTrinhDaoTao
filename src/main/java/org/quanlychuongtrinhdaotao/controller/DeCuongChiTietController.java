@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/decuongchitiet")
+@RequestMapping("/admin/decuongchitiet")
 public class DeCuongChiTietController {
 
     @Autowired
@@ -20,19 +20,19 @@ public class DeCuongChiTietController {
     public String list(Model model) {
         List<DeCuongChiTiet> list = service.getAll();
         model.addAttribute("deCuongChiTiets", list);
-        return "decuongchitiet/list";
+        return "admin/decuongchitiet/list";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("deCuongChiTiet", new DeCuongChiTiet());
-        return "decuongchitiet/add.html";
+        return "admin/decuongchitiet/add";
     }
 
     @PostMapping("/add")
     public String save(@ModelAttribute("deCuongChiTiet") DeCuongChiTiet obj) {
         service.save(obj);
-        return "redirect:/decuongchitiet";
+        return "redirect:/admin/decuongchitiet";
     }
 
     @GetMapping("/edit/{id}")
@@ -40,9 +40,9 @@ public class DeCuongChiTietController {
         DeCuongChiTiet obj = service.getById(id);
         if (obj != null) {
             model.addAttribute("deCuongChiTiet", obj);
-            return "decuongchitiet/edit";
+            return "admin/decuongchitiet/edit";
         }
-        return "redirect:/decuongchitiet";
+        return "redirect:/admin/decuongchitiet";
     }
 
     @PostMapping("/edit/{id}")
@@ -52,12 +52,12 @@ public class DeCuongChiTietController {
             obj.setBoPhanDuocDanhGia(objUpdate.getBoPhanDuocDanhGia());
             service.save(obj);
         }
-        return "redirect:/decuongchitiet";
+        return "redirect:/admin/decuongchitiet";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable int id) {
         service.delete(id);
-        return "redirect:/decuongchitiet";
+        return "redirect:/admin/decuongchitiet";
     }
 }

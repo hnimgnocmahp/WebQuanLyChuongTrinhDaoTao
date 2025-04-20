@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/kehoachdayhoc")
+@RequestMapping("/admin/kehoachdayhoc")
 public class KeHoachDayHocController {
 
     @Autowired
@@ -20,19 +20,19 @@ public class KeHoachDayHocController {
     public String listKeHoachDayHoc(Model model) {
         List<KeHoachDayHoc> list = keHoachDayHocService.getAllKeHoachDayHoc();
         model.addAttribute("keHoachDayHocs", list);
-        return "kehoachdayhoc/list";
+        return "admin/kehoachdayhoc/list";
     }
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("keHoachDayHoc", new KeHoachDayHoc());
-        return "kehoachdayhoc/add.html";
+        return "admin/kehoachdayhoc/add";
     }
 
     @PostMapping("/add")
     public String saveKeHoachDayHoc(@ModelAttribute("keHoachDayHoc") KeHoachDayHoc keHoachDayHoc) {
         keHoachDayHocService.saveKeHoachDayHoc(keHoachDayHoc);
-        return "redirect:/kehoachdayhoc";
+        return "redirect:/admin/kehoachdayhoc";
     }
 
     @GetMapping("/edit/{id}")
@@ -40,9 +40,9 @@ public class KeHoachDayHocController {
         KeHoachDayHoc keHoachDayHoc = keHoachDayHocService.getKeHoachDayHocById(id);
         if (keHoachDayHoc != null) {
             model.addAttribute("keHoachDayHoc", keHoachDayHoc);
-            return "kehoachdayhoc/edit";
+            return "admin/kehoachdayhoc/edit";
         }
-        return "redirect:/kehoachdayhoc";
+        return "redirect:/admin/kehoachdayhoc";
     }
 
     @PostMapping("/edit/{id}")
@@ -53,12 +53,12 @@ public class KeHoachDayHocController {
             keHoachDayHoc.setNamHoc(updated.getNamHoc());
             keHoachDayHocService.saveKeHoachDayHoc(keHoachDayHoc);
         }
-        return "redirect:/kehoachdayhoc";
+        return "redirect:/admin/kehoachdayhoc";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteKeHoachDayHoc(@PathVariable("id") int id) {
         keHoachDayHocService.deleteKeHoachDayHoc(id);
-        return "redirect:/kehoachdayhoc";
+        return "redirect:/admin/kehoachdayhoc";
     }
 }

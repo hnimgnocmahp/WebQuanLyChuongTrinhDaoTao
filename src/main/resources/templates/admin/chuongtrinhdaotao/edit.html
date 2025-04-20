@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Sửa chương trình đào tạo</title>
+    <title>Sửa Chương Trình Đào Tạo</title>
 </head>
 <body>
 <h1>Sửa Chương Trình Đào Tạo</h1>
 
-<form th:action="@{'/chuongtrinhdaotao/edit/' + ${chuongTrinhDaoTao.id}}" th:object="${chuongTrinhDaoTao}" method="post">
-    Tên CTĐT: <input type="text" th:field="*{tenCdt}" /> <br/>
-    Bậc: <input type="text" th:field="*{bacCdt}" /> <br/>
-    Loại bằng: <input type="text" th:field="*{loaiBangCdt}" /> <br/>
-    Thời gian: <input type="text" th:field="*{thoiGian}" /> <br/>
-    Số tín chỉ tối thiểu: <input type="number" th:field="*{soTinChiToiThieu}" /> <br/>
-    Khoa quản lý: <input type="text" th:field="*{khoaQuanLy}" /> <br/>
-    Ngôn ngữ: <input type="text" th:field="*{ngonNgu}" /> <br/>
+<form th:action="@{'/admin/chuongtrinhdaotao/edit/' + ${chuongTrinhDaoTao.id}}" th:object="${chuongTrinhDaoTao}" method="post">
+    Tên CTĐT: <input type="text" th:field="*{tenCdt}" placeholder="Tên CTĐT" /> <br/>
+    Bậc: <input type="text" th:field="*{bacCdt}" placeholder="Bậc" /> <br/>
+    Loại bằng: <input type="text" th:field="*{loaiBangCdt}" placeholder="Loại Bằng" /> <br/>
+    Thời gian: <input type="text" th:field="*{thoiGian}" placeholder="Thời Gian" /> <br/>
+    Số tín chỉ tối thiểu: <input type="number" th:field="*{soTinChiToiThieu}" placeholder="Số Tín Chỉ Tối Thiểu" /> <br/>
+    Khoa quản lý: <input type="text" th:field="*{khoaQuanLy}" placeholder="Khoa Quản Lý" /> <br/>
+    Ngôn ngữ: <input type="text" th:field="*{ngonNgu}" placeholder="Ngôn Ngữ" /> <br/>
+
     <button type="submit">Cập nhật</button>
 </form>
 
-<a th:href="@{/chuongtrinhdaotao}">Quay lại danh sách</a>
+<a th:href="@{/admin/chuongtrinhdaotao}">Quay lại danh sách</a>
 </body>
 </html>

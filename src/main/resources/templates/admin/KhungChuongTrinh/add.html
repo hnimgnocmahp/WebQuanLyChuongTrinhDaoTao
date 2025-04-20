@@ -1,19 +1,18 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Thêm khung chương trình</title>
+    <title>Thêm Khung Chương Trình</title>
 </head>
 <body>
 <h1>Thêm Khung Chương Trình</h1>
 
-<form th:action="@{/khungchuongtrinh/add}" th:object="${khungChuongTrinh}" method="post">
-    Tên kiến thức: <input type="text" th:field="*{tenKienThuc}" /> <br/>
-    Khối kiến thức: <input type="text" th:field="*{khoiKenThuc}" /> <br/>
-    Số tín chỉ: <input type="number" th:field="*{soTinChi}" /> <br/>
-    Số tín chỉ bắt buộc: <input type="number" th:field="*{soTinChiBatBuoc}" /> <br/>
+<form th:action="@{/admin/khungchuongtrinh/add}" th:object="${khungChuongTrinh}" method="post">
+    Tên Kiến Thức: <input type="text" th:field="*{tenKienThuc}" /> <br/>
+    Khối Kiến Thức: <input type="text" th:field="*{khoiKenThuc}" /> <br/>
+    Số Tín Chỉ: <input type="number" th:field="*{soTinChi}" /> <br/>
+    Số Tín Chỉ Bắt Buộc: <input type="number" th:field="*{soTinChiBatBuoc}" /> <br/>
     <button type="submit">Lưu</button>
 </form>
 
-<a th:href="@{/khungchuongtrinh}">Quay lại danh sách</a>
+<a th:href="@{/admin/khungchuongtrinh}">Quay lại danh sách</a>
 </body>
 </html>

@@ -1,12 +1,11 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Danh sách Khung chương trình</title>
+    <title>Danh sách Khung Chương Trình</title>
 </head>
 <body>
 <h1>Danh sách Khung Chương Trình</h1>
 
-<a th:href="@{/khungchuongtrinh/add}">Thêm khung chương trình mới</a>
+<a th:href="@{/admin/khungchuongtrinh/add}">Thêm mới</a>
 
 <table border="1">
     <tr>
@@ -17,15 +16,15 @@
         <th>Số Tín Chỉ Bắt Buộc</th>
         <th>Hành động</th>
     </tr>
-    <tr th:each="kc : ${khungChuongTrinhs}">
-        <td th:text="${kc.id}"></td>
-        <td th:text="${kc.tenKienThuc}"></td>
-        <td th:text="${kc.khoiKenThuc}"></td>
-        <td th:text="${kc.soTinChi}"></td>
-        <td th:text="${kc.soTinChiBatBuoc}"></td>
+    <tr th:each="khung : ${khungChuongTrinhs}">
+        <td th:text="${khung.id}"></td>
+        <td th:text="${khung.tenKienThuc}"></td>
+        <td th:text="${khung.khoiKenThuc}"></td>
+        <td th:text="${khung.soTinChi}"></td>
+        <td th:text="${khung.soTinChiBatBuoc}"></td>
         <td>
-            <a th:href="@{'/khungchuongtrinh/edit/' + ${kc.id}}">Sửa</a> |
-            <a th:href="@{'/khungchuongtrinh/delete/' + ${kc.id}}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+            <a th:href="@{'/admin/khungchuongtrinh/edit/' + ${khung.id}}">Sửa</a> |
+            <a th:href="@{'/admin/khungchuongtrinh/delete/' + ${khung.id}}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
         </td>
     </tr>
 </table>

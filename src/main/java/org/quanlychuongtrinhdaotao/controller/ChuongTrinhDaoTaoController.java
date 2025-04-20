@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/chuongtrinhdaotao")
+@RequestMapping("/admin/chuongtrinhdaotao")
 public class ChuongTrinhDaoTaoController {
 
     @Autowired
@@ -20,19 +20,19 @@ public class ChuongTrinhDaoTaoController {
     public String list(Model model) {
         List<ChuongTrinhDaoTao> list = service.getAll();
         model.addAttribute("chuongTrinhDaoTaos", list);
-        return "chuongtrinhdaotao/list";
+        return "admin/chuongtrinhdaotao/list"; // ✅ Không có .html
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("chuongTrinhDaoTao", new ChuongTrinhDaoTao());
-        return "chuongtrinhdaotao/add.html";
+        return "admin/chuongtrinhdaotao/add"; // ✅ Không có .html
     }
 
     @PostMapping("/add")
     public String save(@ModelAttribute("chuongTrinhDaoTao") ChuongTrinhDaoTao obj) {
         service.save(obj);
-        return "redirect:/chuongtrinhdaotao";
+        return "redirect:/admin/chuongtrinhdaotao"; // ✅
     }
 
     @GetMapping("/edit/{id}")
@@ -40,9 +40,9 @@ public class ChuongTrinhDaoTaoController {
         ChuongTrinhDaoTao obj = service.getById(id);
         if (obj != null) {
             model.addAttribute("chuongTrinhDaoTao", obj);
-            return "chuongtrinhdaotao/edit";
+            return "admin/chuongtrinhdaotao/edit"; // ✅
         }
-        return "redirect:/chuongtrinhdaotao";
+        return "redirect:/admin/chuongtrinhdaotao"; // Nếu không tìm thấy thì quay về list
     }
 
     @PostMapping("/edit/{id}")
@@ -58,12 +58,12 @@ public class ChuongTrinhDaoTaoController {
             obj.setNgonNgu(objUpdate.getNgonNgu());
             service.save(obj);
         }
-        return "redirect:/chuongtrinhdaotao";
+        return "redirect:/admin/chuongtrinhdaotao"; // ✅
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable int id) {
         service.delete(id);
-        return "redirect:/chuongtrinhdaotao";
+        return "redirect:/admin/chuongtrinhdaotao"; // ✅
     }
 }

@@ -1,20 +1,21 @@
+<!-- File: src/main/resources/templates/admin/giangvien/add.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Thêm giảng viên</title>
+    <title>Thêm Giảng Viên</title>
 </head>
 <body>
 <h1>Thêm Giảng Viên</h1>
 
-<form th:action="@{/giangvien/add}" th:object="${giangVien}" method="post">
-    Mã CB: <input type="text" th:field="*{maCB}" /> <br/>
-    Mật khẩu: <input type="password" th:field="*{matKhau}" /> <br/>
-    Họ tên: <input type="text" th:field="*{hoTen}" /> <br/>
-    Năm sinh: <input type="number" th:field="*{namSinh}" /> <br/>
-    Học vị: <input type="text" th:field="*{hocVi}" /> <br/>
+<form th:action="@{/admin/giangvien/add}" th:object="${giangVien}" method="post">
+    Mã Cán Bộ: <input type="text" th:field="*{maCB}" /> <br/>
+    Mật Khẩu: <input type="password" th:field="*{matKhau}" /> <br/>
+    Họ Tên: <input type="text" th:field="*{hoTen}" /> <br/>
+    Năm Sinh: <input type="number" th:field="*{namSinh}" /> <br/>
+    Học Vị: <input type="text" th:field="*{hocVi}" /> <br/>
     <button type="submit">Lưu</button>
 </form>
 
-<a th:href="@{/giangvien}">Quay lại danh sách</a>
+<a th:href="@{/admin/giangvien}">Quay lại danh sách</a>
 </body>
 </html>

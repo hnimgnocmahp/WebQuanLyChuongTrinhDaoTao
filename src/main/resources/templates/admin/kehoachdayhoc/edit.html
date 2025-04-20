@@ -1,17 +1,16 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Sửa kế hoạch dạy học</title>
+    <title>Sửa Kế Hoạch Dạy Học</title>
 </head>
 <body>
-<h1>Sửa Kế hoạch Dạy Học</h1>
+<h1>Sửa Kế Hoạch Dạy Học</h1>
 
-<form th:action="@{'/kehoachdayhoc/edit/' + ${keHoachDayHoc.id}}" th:object="${keHoachDayHoc}" method="post">
+<form th:action="@{'/admin/kehoachdayhoc/edit/' + ${keHoachDayHoc.id}}" th:object="${keHoachDayHoc}" method="post">
     Học kỳ thực hiện: <input type="text" th:field="*{hockiThucHien}" /> <br/>
-    Năm học: <input type="number" th:field="*{namHoc}" /> <br/>
+    Năm học: <input type="text" th:field="*{namHoc}" /> <br/>
     <button type="submit">Cập nhật</button>
 </form>
 
-<a th:href="@{/kehoachdayhoc}">Quay lại danh sách</a>
+<a th:href="@{/admin/kehoachdayhoc}">Quay lại danh sách</a>
 </body>
 </html>

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/khungchuongtrinh")
+@RequestMapping("/admin/khungchuongtrinh")
 public class KhungChuongTrinhController {
 
     @Autowired
@@ -20,19 +20,19 @@ public class KhungChuongTrinhController {
     public String listKhungChuongTrinh(Model model) {
         List<KhungChuongTrinh> list = khungChuongTrinhService.getAllKhungChuongTrinh();
         model.addAttribute("khungChuongTrinhs", list);
-        return "khungchuongtrinh/list";
+        return "admin/khungchuongtrinh/list";
     }
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("khungChuongTrinh", new KhungChuongTrinh());
-        return "khungchuongtrinh/add.html";
+        return "admin/khungchuongtrinh/add";
     }
 
     @PostMapping("/add")
     public String saveKhungChuongTrinh(@ModelAttribute("khungChuongTrinh") KhungChuongTrinh khungChuongTrinh) {
         khungChuongTrinhService.saveKhungChuongTrinh(khungChuongTrinh);
-        return "redirect:/khungchuongtrinh";
+        return "redirect:/admin/khungchuongtrinh";
     }
 
     @GetMapping("/edit/{id}")
@@ -40,9 +40,9 @@ public class KhungChuongTrinhController {
         KhungChuongTrinh khungChuongTrinh = khungChuongTrinhService.getKhungChuongTrinhById(id);
         if (khungChuongTrinh != null) {
             model.addAttribute("khungChuongTrinh", khungChuongTrinh);
-            return "khungchuongtrinh/edit";
+            return "admin/khungchuongtrinh/edit";
         }
-        return "redirect:/khungchuongtrinh";
+        return "redirect:/admin/khungchuongtrinh";
     }
 
     @PostMapping("/edit/{id}")
@@ -55,12 +55,12 @@ public class KhungChuongTrinhController {
             khungChuongTrinh.setSoTinChiBatBuoc(updated.getSoTinChiBatBuoc());
             khungChuongTrinhService.saveKhungChuongTrinh(khungChuongTrinh);
         }
-        return "redirect:/khungchuongtrinh";
+        return "redirect:/admin/khungchuongtrinh";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteKhungChuongTrinh(@PathVariable("id") int id) {
         khungChuongTrinhService.deleteKhungChuongTrinh(id);
-        return "redirect:/khungchuongtrinh";
+        return "redirect:/admin/khungchuongtrinh";
     }
 }

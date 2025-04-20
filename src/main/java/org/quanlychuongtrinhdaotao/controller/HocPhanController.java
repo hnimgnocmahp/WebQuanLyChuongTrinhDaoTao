@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/hocphan")
+@RequestMapping("/admin/hocphan")
 public class HocPhanController {
 
     @Autowired
@@ -21,32 +21,32 @@ public class HocPhanController {
     public String listHocPhan(Model model) {
         List<HocPhan> hocPhanList = hocPhanService.getAllHocPhan();
         model.addAttribute("hocPhans", hocPhanList);
-        return "hocphan/list";  // return view: src/main/resources/templates/hocphan/list.html
+        return "admin/hocphan/list";  // view: src/main/resources/templates/admin/hocphan/list.html
     }
 
-    // Hiển thị form thêm học phần
+    // Form thêm học phần
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("hocPhan", new HocPhan());
-        return "hocphan/add.html";  // src/main/resources/templates/hocphan/add.html.html
+        return "admin/hocphan/add"; // view: src/main/resources/templates/admin/hocphan/add.html
     }
 
     // Xử lý thêm học phần
     @PostMapping("/add")
     public String saveHocPhan(@ModelAttribute("hocPhan") HocPhan hocPhan) {
         hocPhanService.saveHocPhan(hocPhan);
-        return "redirect:/hocphan"; // redirect về danh sách
+        return "redirect:/admin/hocphan"; // quay lại danh sách
     }
 
-    // Hiển thị form sửa học phần
+    // Form sửa học phần
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int id, Model model) {
         HocPhan hocPhan = hocPhanService.getHocPhanById(id);
         if (hocPhan != null) {
             model.addAttribute("hocPhan", hocPhan);
-            return "hocphan/edit"; // src/main/resources/templates/hocphan/edit.html
+            return "admin/hocphan/edit"; // view: src/main/resources/templates/admin/hocphan/edit.html
         }
-        return "redirect:/hocphan";
+        return "redirect:/admin/hocphan";
     }
 
     // Xử lý cập nhật học phần
@@ -64,13 +64,13 @@ public class HocPhanController {
             hocPhan.setLoaiKienThuc(hocPhanDetails.isLoaiKienThuc());
             hocPhanService.saveHocPhan(hocPhan);
         }
-        return "redirect:/hocphan";
+        return "redirect:/admin/hocphan";
     }
 
     // Xóa học phần
     @GetMapping("/delete/{id}")
     public String deleteHocPhan(@PathVariable("id") int id) {
         hocPhanService.deleteHocPhan(id);
-        return "redirect:/hocphan";
+        return "redirect:/admin/hocphan";
     }
 }

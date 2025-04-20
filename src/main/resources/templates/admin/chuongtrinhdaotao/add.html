@@ -6,17 +6,19 @@
 <body>
 <h1>Thêm Chương Trình Đào Tạo</h1>
 
-<form th:action="@{/chuongtrinhdaotao/add}" th:object="${chuongTrinhDaoTao}" method="post">
-    Tên CTĐT: <input type="text" th:field="*{tenCdt}" /> <br/>
-    Bậc: <input type="text" th:field="*{bacCdt}" /> <br/>
-    Loại bằng: <input type="text" th:field="*{loaiBangCdt}" /> <br/>
-    Thời gian: <input type="text" th:field="*{thoiGian}" /> <br/>
-    Số tín chỉ tối thiểu: <input type="number" th:field="*{soTinChiToiThieu}" /> <br/>
-    Khoa quản lý: <input type="text" th:field="*{khoaQuanLy}" /> <br/>
-    Ngôn ngữ: <input type="text" th:field="*{ngonNgu}" /> <br/>
+<form th:action="@{/admin/chuongtrinhdaotao/add}" th:object="${chuongTrinhDaoTao}" method="post">
+    <input type="text" th:field="*{tenCdt}" placeholder="Tên CDT" /> <br/>
+    <input type="text" th:field="*{bacCdt}" placeholder="Bậc CDT" /> <br/>
+    <input type="text" th:field="*{loaiBangCdt}" placeholder="Loại Bằng" /> <br/>
+    <input type="text" th:field="*{thoiGian}" placeholder="Thời Gian" /> <br/>
+    <input type="number" th:field="*{soTinChiToiThieu}" placeholder="Số tín chỉ tối thiểu" /> <br/>
+    <input type="text" th:field="*{khoaQuanLy}" placeholder="Khoa Quản Lý" /> <br/>
+    <input type="text" th:field="*{ngonNgu}" placeholder="Ngôn Ngữ" /> <br/>
+
     <button type="submit">Lưu</button>
 </form>
 
-<a th:href="@{/chuongtrinhdaotao}">Quay lại danh sách</a>
+<a th:href="@{/admin/chuongtrinhdaotao}">Quay lại danh sách</a>
+
 </body>
 </html>

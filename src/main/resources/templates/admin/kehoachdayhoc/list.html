@@ -1,12 +1,11 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Danh sách Kế hoạch dạy học</title>
+    <title>Danh sách Kế Hoạch Dạy Học</title>
 </head>
 <body>
-<h1>Danh sách Kế hoạch Dạy Học</h1>
+<h1>Danh sách Kế Hoạch Dạy Học</h1>
 
-<a th:href="@{/kehoachdayhoc/add}">Thêm kế hoạch mới</a>
+<a th:href="@{/admin/kehoachdayhoc/add}">Thêm mới</a>
 
 <table border="1">
     <tr>
@@ -15,13 +14,13 @@
         <th>Năm học</th>
         <th>Hành động</th>
     </tr>
-    <tr th:each="kh : ${keHoachDayHocs}">
-        <td th:text="${kh.id}"></td>
-        <td th:text="${kh.hockiThucHien}"></td>
-        <td th:text="${kh.namHoc}"></td>
+    <tr th:each="kehoach : ${keHoachDayHocs}">
+        <td th:text="${kehoach.id}"></td>
+        <td th:text="${kehoach.hockiThucHien}"></td>
+        <td th:text="${kehoach.namHoc}"></td>
         <td>
-            <a th:href="@{'/kehoachdayhoc/edit/' + ${kh.id}}">Sửa</a> |
-            <a th:href="@{'/kehoachdayhoc/delete/' + ${kh.id}}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+            <a th:href="@{'/admin/kehoachdayhoc/edit/' + ${kehoach.id}}">Sửa</a> |
+            <a th:href="@{'/admin/kehoachdayhoc/delete/' + ${kehoach.id}}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
         </td>
     </tr>
 </table>
