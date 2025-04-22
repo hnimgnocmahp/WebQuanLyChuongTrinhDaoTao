@@ -1,32 +1,47 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html layout:decorate="~{admin/fragments/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>Danh sách Khung Chương Trình</title>
 </head>
 <body>
-<h1>Danh sách Khung Chương Trình</h1>
+<div layout:fragment="content" class="container mt-4">
+    <h3 class="mb-4">Danh sách Khung Chương Trình</h3>
 
-<a th:href="@{/admin/khungchuongtrinh/add}">Thêm mới</a>
+    <div class="d-flex justify-content-end mb-3">
+        <a class="btn btn-primary" th:href="@{/admin/khungchuongtrinh/add}">Thêm mới</a>
+    </div>
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Tên Kiến Thức</th>
-        <th>Khối Kiến Thức</th>
-        <th>Số Tín Chỉ</th>
-        <th>Số Tín Chỉ Bắt Buộc</th>
-        <th>Hành động</th>
-    </tr>
-    <tr th:each="khung : ${khungChuongTrinhs}">
-        <td th:text="${khung.id}"></td>
-        <td th:text="${khung.tenKienThuc}"></td>
-        <td th:text="${khung.khoiKenThuc}"></td>
-        <td th:text="${khung.soTinChi}"></td>
-        <td th:text="${khung.soTinChiBatBuoc}"></td>
-        <td>
-            <a th:href="@{'/admin/khungchuongtrinh/edit/' + ${khung.id}}">Sửa</a> |
-            <a th:href="@{'/admin/khungchuongtrinh/delete/' + ${khung.id}}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
-        </td>
-    </tr>
-</table>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên Kiến Thức</th>
+                        <th>Khối Kiến Thức</th>
+                        <th>Số Tín Chỉ</th>
+                        <th>Số Tín Chỉ Bắt Buộc</th>
+                        <th>Hành động</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="khung : ${khungChuongTrinhs}">
+                        <td th:text="${khung.id}"></td>
+                        <td th:text="${khung.tenKienThuc}"></td>
+                        <td th:text="${khung.khoiKenThuc}"></td>
+                        <td th:text="${khung.soTinChi}"></td>
+                        <td th:text="${khung.soTinChiBatBuoc}"></td>
+                        <td>
+                            <a th:href="@{'/admin/khungchuongtrinh/edit/' + ${khung.id}}" class="btn btn-warning btn-sm">Sửa</a>
+                            <a th:href="@{'/admin/khungchuongtrinh/delete/' + ${khung.id}}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

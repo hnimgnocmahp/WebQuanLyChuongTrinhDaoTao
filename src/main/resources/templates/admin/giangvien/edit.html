@@ -1,21 +1,46 @@
-<!-- File: src/main/resources/templates/admin/giangvien/edit.html -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{admin/fragments/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <title>Sửa Giảng Viên</title>
 </head>
 <body>
-<h1>Sửa Giảng Viên</h1>
+<div layout:fragment="content" class="container mt-4">
+  <h3 class="mb-4">Sửa Giảng Viên</h3>
 
-<form th:action="@{'/admin/giangvien/edit/' + ${giangVien.id}}" th:object="${giangVien}" method="post">
-  Mã Cán Bộ: <input type="text" th:field="*{maCB}" /> <br/>
-  Mật Khẩu: <input type="password" th:field="*{matKhau}" /> <br/>
-  Họ Tên: <input type="text" th:field="*{hoTen}" /> <br/>
-  Năm Sinh: <input type="number" th:field="*{namSinh}" /> <br/>
-  Học Vị: <input type="text" th:field="*{hocVi}" /> <br/>
-  <button type="submit">Cập nhật</button>
-</form>
+  <div class="card">
+    <div class="card-body">
+      <form th:action="@{'/admin/giangvien/edit/' + ${giangVien.id}}" th:object="${giangVien}" method="post">
 
-<a th:href="@{/admin/giangvien}">Quay lại danh sách</a>
+        <div class="mb-3">
+          <label class="form-label">Mã Cán Bộ</label>
+          <input type="text" class="form-control" th:field="*{maCB}" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Mật Khẩu</label>
+          <input type="password" class="form-control" th:field="*{matKhau}" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Họ Tên</label>
+          <input type="text" class="form-control" th:field="*{hoTen}" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Năm Sinh</label>
+          <input type="number" class="form-control" th:field="*{namSinh}" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Học Vị</label>
+          <input type="text" class="form-control" th:field="*{hocVi}" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Cập nhật</button>
+        <a th:href="@{/admin/giangvien}" class="btn btn-secondary">Quay lại danh sách</a>
+      </form>
+    </div>
+  </div>
+</div>
 </body>
 </html>

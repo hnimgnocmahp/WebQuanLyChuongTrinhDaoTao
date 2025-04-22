@@ -1,29 +1,64 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{admin/fragments/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <title>Thêm Học Phần</title>
 </head>
 <body>
-<h1>Thêm Học Phần</h1>
+<div layout:fragment="content" class="container mt-4">
+  <h3 class="mb-4">Thêm Học Phần</h3>
 
-<form th:action="@{/admin/hocphan/add}" th:object="${hocPhan}" method="post">
-  Tên học phần: <input type="text" th:field="*{tenHocPhan}"/><br/>
-  Mã học phần: <input type="text" th:field="*{maHocPhan}"/><br/>
-  Mã học phần trước: <input type="text" th:field="*{maHocPhanTruoc}"/><br/>
-  Số tín chỉ: <input type="number" th:field="*{soTinChi}"/><br/>
+  <div class="card">
+    <div class="card-body">
+      <form th:action="@{/admin/hocphan/add}" th:object="${hocPhan}" method="post">
 
-  Lý thuyết: <input type="checkbox" th:field="*{lyThuyet}"/><br/>
-  Thực hành: <input type="checkbox" th:field="*{thucHanh}"/><br/>
-  Thực tập: <input type="checkbox" th:field="*{thucTap}"/><br/>
-  Loại kiến thức:
-  <select th:field="*{loaiKienThuc}">
-    <option value="true">Bắt buộc</option>
-    <option value="false">Tự chọn</option>
-  </select><br/>
+        <div class="mb-3">
+          <label class="form-label">Tên học phần</label>
+          <input type="text" class="form-control" th:field="*{tenHocPhan}" required>
+        </div>
 
-  <button type="submit">Lưu</button>
-</form>
+        <div class="mb-3">
+          <label class="form-label">Mã học phần</label>
+          <input type="text" class="form-control" th:field="*{maHocPhan}" required>
+        </div>
 
-<a th:href="@{/admin/hocphan}">Quay lại danh sách</a>
+        <div class="mb-3">
+          <label class="form-label">Mã học phần trước</label>
+          <input type="text" class="form-control" th:field="*{maHocPhanTruoc}">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Số tín chỉ</label>
+          <input type="number" class="form-control" th:field="*{soTinChi}" required>
+        </div>
+
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" th:field="*{lyThuyet}">
+          <label class="form-check-label">Lý thuyết</label>
+        </div>
+
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" th:field="*{thucHanh}">
+          <label class="form-check-label">Thực hành</label>
+        </div>
+
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" th:field="*{thucTap}">
+          <label class="form-check-label">Thực tập</label>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Loại kiến thức</label>
+          <select class="form-select" th:field="*{loaiKienThuc}">
+            <option value="true">Bắt buộc</option>
+            <option value="false">Tự chọn</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Lưu</button>
+        <a th:href="@{/admin/hocphan}" class="btn btn-secondary">Quay lại danh sách</a>
+      </form>
+    </div>
+  </div>
+</div>
 </body>
 </html>

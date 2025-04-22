@@ -1,18 +1,35 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{admin/fragments/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>Thêm Khung Chương Trình</title>
 </head>
 <body>
-<h1>Thêm Khung Chương Trình</h1>
+<div layout:fragment="content" class="container mt-4">
+    <h3 class="mb-4">Thêm Khung Chương Trình</h3>
 
-<form th:action="@{/admin/khungchuongtrinh/add}" th:object="${khungChuongTrinh}" method="post">
-    Tên Kiến Thức: <input type="text" th:field="*{tenKienThuc}" /> <br/>
-    Khối Kiến Thức: <input type="text" th:field="*{khoiKenThuc}" /> <br/>
-    Số Tín Chỉ: <input type="number" th:field="*{soTinChi}" /> <br/>
-    Số Tín Chỉ Bắt Buộc: <input type="number" th:field="*{soTinChiBatBuoc}" /> <br/>
-    <button type="submit">Lưu</button>
-</form>
-
-<a th:href="@{/admin/khungchuongtrinh}">Quay lại danh sách</a>
+    <div class="card">
+        <div class="card-body">
+            <form th:action="@{/admin/khungchuongtrinh/add}" th:object="${khungChuongTrinh}" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Tên Kiến Thức</label>
+                    <input type="text" class="form-control" th:field="*{tenKienThuc}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Khối Kiến Thức</label>
+                    <input type="text" class="form-control" th:field="*{khoiKenThuc}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Số Tín Chỉ</label>
+                    <input type="number" class="form-control" th:field="*{soTinChi}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Số Tín Chỉ Bắt Buộc</label>
+                    <input type="number" class="form-control" th:field="*{soTinChiBatBuoc}" required>
+                </div>
+                <button type="submit" class="btn btn-success">Lưu</button>
+                <a th:href="@{/admin/khungchuongtrinh}" class="btn btn-secondary">Quay lại danh sách</a>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

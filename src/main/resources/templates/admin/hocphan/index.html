@@ -1,46 +1,57 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{admin/fragments/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <title>Danh sách Học Phần</title>
 </head>
 <body>
-<h1>Danh sách Học Phần</h1>
+<div layout:fragment="content" class="container mt-4">
+  <h3 class="mb-4">Danh sách Học Phần</h3>
 
-<a th:href="@{/admin/hocphan/add}">Thêm mới</a>
+  <div class="d-flex justify-content-end mb-3">
+    <a class="btn btn-primary" th:href="@{/admin/hocphan/add}">Thêm mới</a>
+  </div>
 
-<table border="1">
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Tên học phần</th>
-    <th>Mã học phần</th>
-    <th>Mã học phần trước</th>
-    <th>Số tín chỉ</th>
-    <th>Lý thuyết</th>
-    <th>Thực hành</th>
-    <th>Thực tập</th>
-    <th>Loại kiến thức</th>
-    <th>Hành động</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="hp : ${hocPhans}">
-    <td th:text="${hp.id}"></td>
-    <td th:text="${hp.tenHocPhan}"></td>
-    <td th:text="${hp.maHocPhan}"></td>
-    <td th:text="${hp.maHocPhanTruoc}"></td>
-    <td th:text="${hp.soTinChi}"></td>
-    <td th:text="${hp.lyThuyet} ? 'Có' : 'Không'"></td>
-    <td th:text="${hp.thucHanh} ? 'Có' : 'Không'"></td>
-    <td th:text="${hp.thucTap} ? 'Có' : 'Không'"></td>
-    <td th:text="${hp.loaiKienThuc} ? 'Bắt buộc' : 'Tự chọn'"></td>
-    <td>
-      <a th:href="@{'/admin/hocphan/edit/' + ${hp.id}}">Sửa</a> |
-      <a th:href="@{'/admin/hocphan/delete/' + ${hp.id}}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
-
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Tên học phần</th>
+            <th>Mã học phần</th>
+            <th>Mã học phần trước</th>
+            <th>Số tín chỉ</th>
+            <th>Lý thuyết</th>
+            <th>Thực hành</th>
+            <th>Thực tập</th>
+            <th>Loại kiến thức</th>
+            <th>Hành động</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="hp : ${hocPhans}">
+            <td th:text="${hp.id}"></td>
+            <td th:text="${hp.tenHocPhan}"></td>
+            <td th:text="${hp.maHocPhan}"></td>
+            <td th:text="${hp.maHocPhanTruoc}"></td>
+            <td th:text="${hp.soTinChi}"></td>
+            <td th:text="${hp.lyThuyet} ? 'Có' : 'Không'"></td>
+            <td th:text="${hp.thucHanh} ? 'Có' : 'Không'"></td>
+            <td th:text="${hp.thucTap} ? 'Có' : 'Không'"></td>
+            <td th:text="${hp.loaiKienThuc} ? 'Bắt buộc' : 'Tự chọn'"></td>
+            <td>
+              <a th:href="@{'/admin/hocphan/edit/' + ${hp.id}}" class="btn btn-warning btn-sm">Sửa</a>
+              <a th:href="@{'/admin/hocphan/delete/' + ${hp.id}}"
+                 onclick="return confirm('Bạn chắc chắn muốn xóa?')"
+                 class="btn btn-danger btn-sm">Xóa</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
