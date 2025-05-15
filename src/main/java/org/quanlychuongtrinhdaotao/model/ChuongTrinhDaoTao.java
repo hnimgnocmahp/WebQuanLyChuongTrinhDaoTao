@@ -22,7 +22,7 @@ public class ChuongTrinhDaoTao {
     private String bacCdt;
 
     @Column(name = "loai_bang_cdt")
-    private String loaiBangCddt;
+    private String loaiBangCdt;
 
     private String loaiHinhDaotao;
 

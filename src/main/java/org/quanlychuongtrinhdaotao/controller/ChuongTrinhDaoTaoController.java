@@ -51,7 +51,7 @@ public class ChuongTrinhDaoTaoController {
         if (obj != null) {
             obj.setTenCdt(objUpdate.getTenCdt());
             obj.setBacCdt(objUpdate.getBacCdt());
-            obj.setLoaiBangCddt(objUpdate.getLoaiBangCddt());
+            obj.setLoaiBangCdt(objUpdate.getLoaiBangCdt());
             obj.setThoiGian(objUpdate.getThoiGian());
             obj.setSoTinChiToiThieu(objUpdate.getSoTinChiToiThieu());
 //            obj.setKhoaQuanLy(objUpdate.getKhoaQuanLy());
