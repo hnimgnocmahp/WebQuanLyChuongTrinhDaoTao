@@ -9,15 +9,19 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "nganh")
-public class Nganh {
+@Table(name = "chitietkienthuc")
+public class ChiTietKienThuc {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String tenNganh;
+    private String tenKienThuc;
+
+    private int soTinChiKhongBatBuoc;
+
+    private int soTinChiBatBuoc;
 
     @ManyToOne
-    @JoinColumn(name = "khoa_id")
-    private Khoa khoa;
+    @JoinColumn(name = "kct_id")
+    private KhungChuongTrinh khungChuongTrinh;
 }

@@ -15,10 +15,6 @@ public class DanhGiaBoPhan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "dcct_id")
-    private DeCuongChiTiet deCuongChiTiet;
-
     @Column(name = "diemDanhGiaBoPhan")
     private float diemDanhGiaBoPhan;
 
@@ -28,4 +24,7 @@ public class DanhGiaBoPhan {
     @Column(name = "hinhThucDanhGia")
     private String hinhThucDanhGia;
 
+    @ManyToOne
+    @JoinColumn(name = "dcct_id")
+    private DeCuongChiTiet deCuongChiTiet;
 }
