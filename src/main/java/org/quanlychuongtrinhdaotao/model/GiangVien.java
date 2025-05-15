@@ -30,4 +30,8 @@ public class GiangVien {
     @Column(name = "hocVi")
     private String hocVi;
 
+    @ManyToOne
+    @JoinColumn(name = "nganh_id")
+    private Nganh nganh;
+
 }

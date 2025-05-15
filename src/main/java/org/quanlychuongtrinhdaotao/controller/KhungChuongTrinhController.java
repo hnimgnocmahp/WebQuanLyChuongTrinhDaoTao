@@ -49,10 +49,10 @@ public class KhungChuongTrinhController {
     public String updateKhungChuongTrinh(@PathVariable("id") int id, @ModelAttribute("khungChuongTrinh") KhungChuongTrinh updated) {
         KhungChuongTrinh khungChuongTrinh = khungChuongTrinhService.getKhungChuongTrinhById(id);
         if (khungChuongTrinh != null) {
-            khungChuongTrinh.setTenKienThuc(updated.getTenKienThuc());
+//            khungChuongTrinh.setTenKienThuc(updated.getTenKienThuc());
             khungChuongTrinh.setKhoiKenThuc(updated.getKhoiKenThuc());
             khungChuongTrinh.setSoTinChi(updated.getSoTinChi());
-            khungChuongTrinh.setSoTinChiBatBuoc(updated.getSoTinChiBatBuoc());
+//            khungChuongTrinh.setSoTinChiBatBuoc(updated.getSoTinChiBatBuoc());
             khungChuongTrinhService.saveKhungChuongTrinh(khungChuongTrinh);
         }
         return "redirect:/admin/khungchuongtrinh";

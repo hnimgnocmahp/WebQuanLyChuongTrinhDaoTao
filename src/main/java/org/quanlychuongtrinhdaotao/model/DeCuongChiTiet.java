@@ -15,12 +15,11 @@ public class DeCuongChiTiet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "hocphan_id")
-    private HocPhan hocPhan;
-
     @Column(name = "boPhanDuocDanhGia")
     private String boPhanDuocDanhGia;
 
+    @ManyToOne
+    @JoinColumn(name = "hocphan_id")
+    private HocPhan hocPhan;
 }
 

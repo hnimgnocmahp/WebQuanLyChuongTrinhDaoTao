@@ -16,13 +16,22 @@ public class PhanCongGiangDay {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "maCanBo")
+    @JoinColumn(name = "giangvien_id")
     private GiangVien giangVien;
 
-    @Column(name = "hocKy")
-    private String hocKy;
+    private int hocKy1;
+
+    private int hocKy2;
+
+    private int hocKy3;
+
+    @ManyToOne
+    @JoinColumn(name = "hocphan_id")
+    private HocPhan hocPhan;
 
     @ManyToOne
     @JoinColumn(name = "khmn_id")
     private KeHoachMoNhom keHoachMoNhom;
+
+
 }

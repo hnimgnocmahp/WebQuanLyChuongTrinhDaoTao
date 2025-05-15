@@ -40,7 +40,7 @@ public class HocPhan {
     private boolean loaiKienThuc;
 
     @ManyToOne
-    @JoinColumn(name = "khungchuongtrinh_id")
-    private KhungChuongTrinh khungChuongTrinh;
+    @JoinColumn(name = "ctkt_id")
+    private ChiTietKienThuc chiTietKienThuc;
 
 }

@@ -16,17 +16,11 @@ public class KhungChuongTrinh {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "tenKienThuc")
-    private String tenKienThuc;
-
     @Column(name = "khoiKenThuc")
     private String khoiKenThuc;
 
     @Column(name = "soTinChi")
     private int soTinChi;
-
-    @Column(name = "soTinChiBatBuoc")
-    private int soTinChiBatBuoc;
 
     @ManyToOne
     @JoinColumn(name = "ctdt_id")

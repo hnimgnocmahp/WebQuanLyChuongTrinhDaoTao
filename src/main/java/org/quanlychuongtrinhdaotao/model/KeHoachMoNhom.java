@@ -15,12 +15,8 @@ public class KeHoachMoNhom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "hocphan_id")
-    private HocPhan hocPhan;
-
-    @Column(name = "maNhom")
-    private String maNhom;
+    @Column(name = "soLuongNhom")
+    private int soLuongNhom;
 
     @Column(name = "namHoc")
     private String namHoc;
@@ -28,6 +24,5 @@ public class KeHoachMoNhom {
     @Column(name = "soLuongSinhVien")
     private int soLuongSinhVien;
 
-    @Column(name = "soLuongNhom")
-    private int soLuongNhom;
+
 }
