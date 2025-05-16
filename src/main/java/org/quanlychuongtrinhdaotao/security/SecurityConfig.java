@@ -1,5 +1,7 @@
 package org.quanlychuongtrinhdaotao.security;
 
+import java.util.Optional;
+
 import org.quanlychuongtrinhdaotao.model.GiangVien;
 import org.quanlychuongtrinhdaotao.repository.GiangVienRepository;
 import org.springframework.context.annotation.Bean;
@@ -12,8 +14,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import java.util.Optional;
 
 @Configuration
 @EnableWebSecurity
@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/auth/login")
                         .loginProcessingUrl("/auth/login")
-                        .defaultSuccessUrl("/", true)
+                        .defaultSuccessUrl("/admin/chuongtrinhdaotao", true)
                         .usernameParameter("mssv")
                         .passwordParameter("password")
                         .permitAll()
