@@ -1,33 +1,40 @@
 package com.example.quanlydaotao.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import com.example.quanlydaotao.entity.CtdtDecuongchitiet;
+
 import com.example.quanlydaotao.entity.CtdtCotdiem;
+import com.example.quanlydaotao.entity.CtdtDecuongchitiet;
+import com.example.quanlydaotao.repository.CtdtCotdiemRepository;
+import com.example.quanlydaotao.repository.CtdtHocphanRepository;
+import com.example.quanlydaotao.service.DecuongchitietService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.example.quanlydaotao.repository.CtdtDecuongchitietRepository;
-import com.example.quanlydaotao.repository.CtdtCotdiemRepository;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
+@RequestMapping("/ctdt_decuongchitiet")
 public class CtdtDecuongchitietController {
 
-    @Autowired
-    private CtdtDecuongchitietRepository CtdtDecuongchitietRepository;
+    private final DecuongchitietService service;
+    private final CtdtCotdiemRepository ctdtCotdiemRepository;
+    private final CtdtHocphanRepository ctdtHocphanRepository;
 
     @Autowired
-    private CtdtCotdiemRepository ctdtCotdiemRepository;
+    public CtdtDecuongchitietController(DecuongchitietService service, CtdtCotdiemRepository ctdtCotdiemRepository, CtdtHocphanRepository ctdtHocphanRepository) {
+        this.service = service;
+        this.ctdtCotdiemRepository = ctdtCotdiemRepository;
+        this.ctdtHocphanRepository = ctdtHocphanRepository;
+    }
 
-    @GetMapping("/ctdt_decuongchitiet")
+    @GetMapping
     public String listCtdtDecuongchitiet(Model model) {
-        model.addAttribute("ctdt_decuongchitiet", CtdtDecuongchitietRepository.findAll());
+        model.addAttribute("ctdt_decuongchitiet", service.findAll());
         return "ctdt_decuongchitiet_list";
     }
 
@@ -35,13 +42,14 @@ public class CtdtDecuongchitietController {
     @ResponseBody
     @GetMapping("/decuong/{hocPhanId}")
     public ResponseEntity<?> getDeCuongByHocPhanId(@PathVariable Integer hocPhanId) {
-        CtdtDecuongchitiet decuong = CtdtDecuongchitietRepository.findByHocPhanId(hocPhanId);
+        CtdtDecuongchitiet decuong = service.findByHocPhanId(hocPhanId);
         if (decuong != null) {
             // Chỉ trả về các trường cần thiết
             Map<String, Object> result = new HashMap<>();
             result.put("muc_tieu", decuong.getMucTieu());
             result.put("noi_dung", decuong.getNoiDung());
             result.put("phuong_phap_giang_day", decuong.getPhuongPhapGiangDay());
+            result.put("trang_thai", decuong.getTrangThai());
             // Lấy danh sách cột điểm liên quan
             List<CtdtCotdiem> cotDiemList = ctdtCotdiemRepository.findByDecuongId(decuong.getId());
             result.put("cot_diem", cotDiemList);
@@ -49,5 +57,39 @@ public class CtdtDecuongchitietController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    // Hiển thị form thêm mới
+    @GetMapping("/new")
+    public String showCreateForm(Model model) {
+        model.addAttribute("decuongchitiet", new CtdtDecuongchitiet());
+        model.addAttribute("hocPhanList", ctdtHocphanRepository.findAll());
+        return "decuongchitiet_form";
+    }
+
+    // Hiển thị form sửa
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Integer id, Model model) {
+        CtdtDecuongchitiet decuongchitiet = service.findById(id);
+        if (decuongchitiet != null) {
+            model.addAttribute("decuongchitiet", decuongchitiet);
+            model.addAttribute("hocPhanList", ctdtHocphanRepository.findAll());
+            return "decuongchitiet_form";
+        }
+        return "redirect:/ctdt_decuongchitiet";
+    }
+
+    // Xử lý thêm mới và cập nhật
+    @PostMapping("/save")
+    public String save(@ModelAttribute("decuongchitiet") CtdtDecuongchitiet decuongchitiet) {
+        service.save(decuongchitiet);
+        return "redirect:/ctdt_decuongchitiet";
+    }
+
+    // Xử lý xóa
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        service.deleteById(id);
+        return "redirect:/ctdt_decuongchitiet";
     }
 }

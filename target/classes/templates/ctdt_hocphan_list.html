@@ -132,12 +132,21 @@
 
     <script>
       function showDeCuongChiTiet(hocPhanId) {
-        fetch("/decuong/" + hocPhanId)
+        fetch("/ctdt_decuongchitiet/decuong/" + hocPhanId)
           .then((response) => {
-            if (!response.ok) throw new Error("Không tìm thấy dữ liệu!");
+            if (!response.ok) {
+              throw new Error(
+                "Không tìm thấy dữ liệu đề cương cho học phần này!"
+              );
+            }
             return response.json();
           })
           .then((data) => {
+            // Kiểm tra trạng thái
+            if (data.trang_thai !== "Đã duyệt") {
+              throw new Error("Đề cương chưa được duyệt!");
+            }
+
             // Lấy tbody để render các dòng cột điểm
             const cotDiemBody = document.getElementById("cotDiemBody");
             cotDiemBody.innerHTML = "";
@@ -187,7 +196,7 @@
               <td id='mucTieuCell'></td>
               <td id='noiDungCell'></td>
               <td id='phuongPhapCell'></td>
-              <td colspan='3' class='text-center'>${error.message}</td>
+              <td colspan='3' class='text-center text-danger'>${error.message}</td>
             `;
             cotDiemBody.appendChild(row);
           });
