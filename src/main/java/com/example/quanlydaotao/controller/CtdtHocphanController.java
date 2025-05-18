@@ -62,4 +62,6 @@ public class CtdtHocphanController {
             service.deleteById(id);
             return "redirect:/ctdt_hocphan";
         }
+
+
 }
