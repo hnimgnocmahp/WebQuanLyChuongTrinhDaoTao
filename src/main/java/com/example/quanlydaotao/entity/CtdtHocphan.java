@@ -2,6 +2,8 @@ package com.example.quanlydaotao.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "ctdt_hocphan")
 public class CtdtHocphan {
@@ -60,5 +62,27 @@ public class CtdtHocphan {
 
     public String getHocPhanTienQuyet() { return hocPhanTienQuyet; }
     public void setHocPhanTienQuyet(String hocPhanTienQuyet) { this.hocPhanTienQuyet = hocPhanTienQuyet; }
+
+    @Transient
+    private List<CtdtKehoachdayhoc> kehoachs;
+
+    // Getter/Setter cho tất cả
+    public List<CtdtKehoachdayhoc> getKehoachs() {
+        return kehoachs;
+    }
+
+    public void setKehoachs(List<CtdtKehoachdayhoc> kehoachs) {
+        this.kehoachs = kehoachs;
+    }
+
+    public boolean hasHocKy(int hocKy) {
+        if (kehoachs == null) return false;
+        for (CtdtKehoachdayhoc k : kehoachs) {
+            if (k.getHocKy() != null && k.getHocKy() == hocKy) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
