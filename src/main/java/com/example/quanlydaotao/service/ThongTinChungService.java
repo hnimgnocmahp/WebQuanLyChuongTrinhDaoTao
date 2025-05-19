@@ -1,13 +1,7 @@
 package com.example.quanlydaotao.service;
 
-import com.example.quanlydaotao.entity.CtdtHocphan;
-import com.example.quanlydaotao.entity.CtdtKehoachdayhoc;
-import com.example.quanlydaotao.entity.CtdtKhungchuongtrinh;
-import com.example.quanlydaotao.entity.CtdtThongtinchung;
-import com.example.quanlydaotao.repository.CtdtHocphanRepository;
-import com.example.quanlydaotao.repository.CtdtKehoachdayhocRepository;
-import com.example.quanlydaotao.repository.CtdtKhungchuongtrinhRepository;
-import com.example.quanlydaotao.repository.CtdtThongtinchungRepository;
+import com.example.quanlydaotao.entity.*;
+import com.example.quanlydaotao.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +13,13 @@ public class ThongTinChungService {
     private final CtdtHocphanRepository hocphanRepo;
     private final CtdtKhungchuongtrinhRepository khungRepo;
     private final CtdtKehoachdayhocRepository kehoachdayhocRepo;
-    public ThongTinChungService(CtdtThongtinchungRepository CtdtThongtinchungRepository, CtdtHocphanRepository hocphanRepo, CtdtKhungchuongtrinhRepository khungRepo, CtdtKehoachdayhocRepository kehoachdayhocRepo) {
+    private final CtdtKhungchuongtrinhNhomkienthucRepository khungNhomRepo;
+    public ThongTinChungService(CtdtThongtinchungRepository CtdtThongtinchungRepository, CtdtHocphanRepository hocphanRepo, CtdtKhungchuongtrinhRepository khungRepo, CtdtKehoachdayhocRepository kehoachdayhocRepo, CtdtKhungchuongtrinhNhomkienthucRepository khungNhomRepo) {
         this.repo = CtdtThongtinchungRepository;
         this.hocphanRepo = hocphanRepo;
         this.khungRepo = khungRepo;
         this.kehoachdayhocRepo = kehoachdayhocRepo;
+        this.khungNhomRepo = khungNhomRepo;
     }
     public List<CtdtThongtinchung> findAll() { return repo.findAll(); }
     public Optional<CtdtThongtinchung> findById(Integer id) { return repo.findById(id); }
@@ -41,6 +37,14 @@ public class ThongTinChungService {
                 hp.setKehoachs(kehoachs);
             }
             khungchuongtrinh.setHocphans(hocphans);
+
+            // Gán số tín chỉ bắt buộc và tự chọn nếu có
+            List<CtdtKhungchuongtrinhNhomkienthuc> nhomKienThucList = khungNhomRepo.findByIdKhungchuongtrinh(khungchuongtrinh.getId());
+            if (!nhomKienThucList.isEmpty()) {
+                CtdtKhungchuongtrinhNhomkienthuc nhomKienThuc = nhomKienThucList.get(0);
+                khungchuongtrinh.setSoTinChiBatBuoc(nhomKienThuc.getSotinchibatbuoc());
+                khungchuongtrinh.setSoTinChiTuChon(nhomKienThuc.getSotinchituchon());
+            }
         }
 
         ctdt.setKhungchuongtrinhs(nhomList);
