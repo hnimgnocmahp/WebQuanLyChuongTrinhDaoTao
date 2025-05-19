@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 public interface CtdtUserRepository extends JpaRepository<CtdtUser, Integer> {
     Optional<CtdtUser> findByUsername(String username);
-
+    boolean existsByUsername(String username);
+    boolean existsByUsernameAndIdNot(String username, Integer id);
 }

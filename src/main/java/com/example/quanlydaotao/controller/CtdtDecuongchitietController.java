@@ -1,10 +1,10 @@
 package com.example.quanlydaotao.controller;
 
-
-
 import com.example.quanlydaotao.entity.CtdtCotdiem;
 import com.example.quanlydaotao.entity.CtdtDecuongchitiet;
+import com.example.quanlydaotao.entity.CtdtHocphan;
 import com.example.quanlydaotao.repository.CtdtCotdiemRepository;
+import com.example.quanlydaotao.repository.CtdtDecuongchitietRepository;
 import com.example.quanlydaotao.repository.CtdtHocphanRepository;
 import com.example.quanlydaotao.service.DecuongchitietService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +24,14 @@ public class CtdtDecuongchitietController {
     private final DecuongchitietService service;
     private final CtdtCotdiemRepository ctdtCotdiemRepository;
     private final CtdtHocphanRepository ctdtHocphanRepository;
+    private final CtdtDecuongchitietRepository ctdtDecuongchitietRepository;
 
     @Autowired
-    public CtdtDecuongchitietController(DecuongchitietService service, CtdtCotdiemRepository ctdtCotdiemRepository, CtdtHocphanRepository ctdtHocphanRepository) {
+    public CtdtDecuongchitietController(DecuongchitietService service, CtdtCotdiemRepository ctdtCotdiemRepository, CtdtHocphanRepository ctdtHocphanRepository, CtdtDecuongchitietRepository ctdtDecuongchitietRepository) {
         this.service = service;
         this.ctdtCotdiemRepository = ctdtCotdiemRepository;
         this.ctdtHocphanRepository = ctdtHocphanRepository;
+        this.ctdtDecuongchitietRepository = ctdtDecuongchitietRepository;
     }
 
     @GetMapping
@@ -42,15 +44,14 @@ public class CtdtDecuongchitietController {
     @ResponseBody
     @GetMapping("/decuong/{hocPhanId}")
     public ResponseEntity<?> getDeCuongByHocPhanId(@PathVariable Integer hocPhanId) {
-        CtdtDecuongchitiet decuong = service.findByHocPhanId(hocPhanId);
-        if (decuong != null) {
-            // Chỉ trả về các trường cần thiết
+        List<CtdtDecuongchitiet> decuongList = service.findByHocPhanId(hocPhanId);
+        if (!decuongList.isEmpty()) {
+            CtdtDecuongchitiet decuong = decuongList.get(0);
             Map<String, Object> result = new HashMap<>();
             result.put("muc_tieu", decuong.getMucTieu());
             result.put("noi_dung", decuong.getNoiDung());
             result.put("phuong_phap_giang_day", decuong.getPhuongPhapGiangDay());
             result.put("trang_thai", decuong.getTrangThai());
-            // Lấy danh sách cột điểm liên quan
             List<CtdtCotdiem> cotDiemList = ctdtCotdiemRepository.findByDecuongId(decuong.getId());
             result.put("cot_diem", cotDiemList);
             return ResponseEntity.ok(result);
@@ -61,9 +62,17 @@ public class CtdtDecuongchitietController {
 
     // Hiển thị form thêm mới
     @GetMapping("/new")
-    public String showCreateForm(Model model) {
+    public String showNewForm(Model model) {
+        // Lấy tất cả học phần
+        List<CtdtHocphan> allHocPhan = ctdtHocphanRepository.findAll();
+        // Lấy tất cả họcPhanId đã có đề cương chi tiết
+        List<Integer> usedHocPhanIds = ctdtDecuongchitietRepository.findAll()
+            .stream().map(CtdtDecuongchitiet::getHocPhanId).distinct().toList();
+        // Lọc ra các học phần chưa có đề cương chi tiết
+        List<CtdtHocphan> availableHocPhan = allHocPhan.stream()
+            .filter(hp -> !usedHocPhanIds.contains(hp.getId())).toList();
+        model.addAttribute("hocPhanList", availableHocPhan);
         model.addAttribute("decuongchitiet", new CtdtDecuongchitiet());
-        model.addAttribute("hocPhanList", ctdtHocphanRepository.findAll());
         return "decuongchitiet_form";
     }
 
@@ -89,7 +98,11 @@ public class CtdtDecuongchitietController {
     // Xử lý xóa
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
+        // Xóa tất cả cột điểm liên quan trước
+        ctdtCotdiemRepository.deleteAll(ctdtCotdiemRepository.findByDecuongId(id));
+        // Sau đó xóa đề cương
         service.deleteById(id);
         return "redirect:/ctdt_decuongchitiet";
     }
+
 }
