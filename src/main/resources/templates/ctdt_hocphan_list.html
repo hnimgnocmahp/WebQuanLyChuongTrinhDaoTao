@@ -64,13 +64,10 @@
                 onclick="return confirm('Xác nhận xóa?');"
                 >Xóa</a
               >
-              <a
-                class="btn btn-sm btn-info"
+              <a class="btn btn-sm btn-info"
                 href="#"
                 th:attr="data-bs-toggle='modal',data-bs-target='#deCuongModal'"
-                th:onclick="'showDeCuongChiTiet(' + ${item.id} + ')'"
-                >Chi tiết</a
-              >
+                th:onclick="'showDeCuongChiTiet(' + ${item.id} + ')'">Chi tiết</a>
             </td>
           </tr>
         </tbody>

@@ -1,6 +1,7 @@
 package com.example.quanlydaotao.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 
 import java.beans.Transient;
 import java.util.List;
@@ -22,6 +23,7 @@ public class CtdtKhungchuongtrinh {
     @Column(name = "ten_nhom")
     private String tenNhom;
 
+    @Min(value = 0, message = "Số tín chỉ phải là số dương")
     @Column(name = "so_tin_chi_toi_thieu")
     private Integer soTinChiToiThieu;
 
@@ -73,7 +75,6 @@ public class CtdtKhungchuongtrinh {
     }
 
     @jakarta.persistence.Transient
-
     private List<CtdtKhungchuongtrinhNhomkienthuc> khungchuongtrinhNhomkienthucs;
     private Integer soTinChiBatBuoc;
 
