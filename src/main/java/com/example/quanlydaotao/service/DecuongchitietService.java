@@ -1,10 +1,11 @@
 package com.example.quanlydaotao.service;
 
-import java.util.List;
 import com.example.quanlydaotao.entity.CtdtDecuongchitiet;
 import com.example.quanlydaotao.repository.CtdtDecuongchitietRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DecuongchitietService {
@@ -31,7 +32,7 @@ public class DecuongchitietService {
         repository.deleteById(id);
     }
 
-    public CtdtDecuongchitiet findByHocPhanId(Integer hocPhanId) {
+    public List<CtdtDecuongchitiet> findByHocPhanId(Integer hocPhanId) {
         return repository.findByHocPhanId(hocPhanId);
     }
 } 
