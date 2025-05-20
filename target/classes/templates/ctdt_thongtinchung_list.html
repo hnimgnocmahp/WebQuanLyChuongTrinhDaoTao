@@ -52,7 +52,12 @@
             <td th:text="${item.namBanHanh}"></td>
             <td th:text="${item.trangThai}"></td>
             <td>
-                <a th:href="@{|/ctdt_thongtinchung/kehoachdayhoc/${item.id}|}" class="btn btn-sm btn-warning">Xem thông tin chung</a>
+                <a
+                        th:href="@{|/ctdt_thongtinchung/edit/${item.id}|}"
+                        class="btn btn-sm btn-warning"
+                >Sửa</a
+                >
+                <a th:href="@{|/ctdt_thongtinchung/kehoachdayhoc/${item.id}|}" class="btn btn-sm btn-info">Xem thông tin chung</a>
 <!--                <a th:href="@{|/ctdt_hocphan/delete/${item.id}|}"-->
 <!--                   class="btn btn-sm btn-danger"-->
 <!--                   onclick="return confirm('Xác nhận xóa?');">Xóa</a>-->

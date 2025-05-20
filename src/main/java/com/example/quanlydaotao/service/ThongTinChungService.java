@@ -24,7 +24,7 @@ public class ThongTinChungService {
     public List<CtdtThongtinchung> findAll() { return repo.findAll(); }
     public Optional<CtdtThongtinchung> findById(Integer id) { return repo.findById(id); }
     public CtdtThongtinchung save(CtdtThongtinchung thongtinchung) { return repo.save(thongtinchung); }
-
+    public Optional<CtdtThongtinchung> findByMaCtdt(String MaCtdt) { return repo.findByMaCtdt(MaCtdt); }
     public CtdtThongtinchung getChiTietThongTin(Integer ctdtId) {
         CtdtThongtinchung ctdt = repo.findById(ctdtId).orElse(null);
         List<CtdtKhungchuongtrinh> nhomList = khungRepo.findByCtdtId(ctdtId);
