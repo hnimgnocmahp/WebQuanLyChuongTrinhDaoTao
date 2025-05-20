@@ -29,19 +29,30 @@
 
         <div class="mb-3">
           <label for="hocPhanId" class="form-label">Học phần</label>
-          <select
-            class="form-select"
-            id="hocPhanId"
-            th:field="*{hocPhanId}"
-            required
-          >
-            <option value="">Chọn học phần</option>
-            <option
-              th:each="hocPhan : ${hocPhanList}"
-              th:value="${hocPhan.id}"
-              th:text="${hocPhan.maHp + ' - ' + hocPhan.tenHp}"
-            ></option>
-          </select>
+          <th:block th:if="${decuongchitiet.id != null}">
+            <input type="hidden" th:field="*{hocPhanId}" />
+            <input
+              type="text"
+              class="form-control"
+              th:value="'ID: ' + ${decuongchitiet.hocPhanId}"
+              readonly
+            />
+          </th:block>
+          <th:block th:if="${decuongchitiet.id == null}">
+            <select
+              class="form-select"
+              id="hocPhanId"
+              th:field="*{hocPhanId}"
+              required
+            >
+              <option value="">Chọn học phần</option>
+              <option
+                th:each="hocPhan : ${hocPhanList}"
+                th:value="${hocPhan.id}"
+                th:text="${hocPhan.maHp + ' - ' + hocPhan.tenHp}"
+              ></option>
+            </select>
+          </th:block>
         </div>
 
         <div class="mb-3">

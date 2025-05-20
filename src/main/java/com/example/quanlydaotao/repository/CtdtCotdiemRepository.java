@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface CtdtCotdiemRepository extends JpaRepository<CtdtCotdiem, Integer> {
     List<CtdtCotdiem> findByDecuongId(Integer decuongId);
+    List<CtdtCotdiem> findByDecuongIdIn(List<Integer> decuongIds);
+    List<CtdtCotdiem> findByDecuongIdIsNotNull();
 }
