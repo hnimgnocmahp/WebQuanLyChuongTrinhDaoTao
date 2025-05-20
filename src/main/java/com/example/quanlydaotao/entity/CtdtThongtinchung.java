@@ -2,46 +2,48 @@ package com.example.quanlydaotao.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "ctdt_thongtinchung")
-public class CtdtThongtinchung {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    public class CtdtThongtinchung {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "id")
+        private Integer id;
 
-    @Column(name = "ma_ctdt")
-    private String maCtdt;
+        @Column(name = "ma_ctdt")
+        private String maCtdt;
 
-    @Column(name = "ten_ctdt")
-    private String tenCtdt;
+        @Column(name = "ten_ctdt")
+        private String tenCtdt;
 
-    @Column(name = "nganh")
-    private String nganh;
+        @Column(name = "nganh")
+        private String nganh;
 
-    @Column(name = "ma_nganh")
-    private String maNganh;
+        @Column(name = "ma_nganh")
+        private String maNganh;
 
-    @Column(name = "khoa_quan_ly")
-    private String khoaQuanLy;
+        @Column(name = "khoa_quan_ly")
+        private String khoaQuanLy;
 
-    @Column(name = "he_dao_tao")
-    private String heDaoTao;
+        @Column(name = "he_dao_tao")
+        private String heDaoTao;
 
-    @Column(name = "trinh_do")
-    private String trinhDo;
+        @Column(name = "trinh_do")
+        private String trinhDo;
 
-    @Column(name = "tong_tin_chi")
-    private Integer tongTinChi;
+        @Column(name = "tong_tin_chi")
+        private Integer tongTinChi;
 
-    @Column(name = "thoi_gian_dao_tao")
-    private String thoiGianDaoTao;
+        @Column(name = "thoi_gian_dao_tao")
+        private String thoiGianDaoTao;
 
-    @Column(name = "nam_ban_hanh")
-    private Integer namBanHanh;
+        @Column(name = "nam_ban_hanh")
+        private Integer namBanHanh;
 
-    @Column(name = "trang_thai")
-    private String trangThai;
+        @Column(name = "trang_thai")
+        private String trangThai;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -79,4 +81,15 @@ public class CtdtThongtinchung {
     public String getTrangThai() { return trangThai; }
     public void setTrangThai(String trangThai) { this.trangThai = trangThai; }
 
+    @Transient
+    private List<CtdtKhungchuongtrinh> khungchuongtrinhs;
+
+    // Getter/Setter cho tất cả
+    public List<CtdtKhungchuongtrinh> getKhungchuongtrinhs() {
+        return khungchuongtrinhs;
+    }
+
+    public void setKhungchuongtrinhs(List<CtdtKhungchuongtrinh> khungchuongtrinhs) {
+        this.khungchuongtrinhs = khungchuongtrinhs;
+    }
 }
