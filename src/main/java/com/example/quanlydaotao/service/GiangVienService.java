@@ -62,28 +62,27 @@ public class GiangVienService {
             giangvien.setHockyMap(HocKi);
         }
         return giangviens;
-    public List<CtdtGiangvien> findAll() {
-        return giangVienRepository.findAll();
     }
 
+
     public CtdtGiangvien findById(Integer id) {
-        return giangVienRepository.findById(id)
+        return gvrepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid giảng viên Id:" + id));
     }
 
     public CtdtGiangvien save(CtdtGiangvien giangVien) {
-        return giangVienRepository.save(giangVien);
+        return gvrepo.save(giangVien);
     }
 
     public void deleteById(Integer id) {
-        giangVienRepository.deleteById(id);
+        gvrepo.deleteById(id);
     }
 
     public boolean isUserIdDuplicate(Integer userId, Integer id) {
-        return giangVienRepository.existsByUserIdAndIdNot(userId, id == null ? -1 : id);
+        return gvrepo.existsByUserIdAndIdNot(userId, id == null ? -1 : id);
     }
 
     public boolean isMaGvDuplicate(String maGv, Integer id) {
-        return giangVienRepository.existsByMaGvAndIdNot(maGv, id == null ? -1 : id);
+        return gvrepo.existsByMaGvAndIdNot(maGv, id == null ? -1 : id);
     }
 }

@@ -17,7 +17,6 @@ public class CtdtUserController {
     @Autowired
     private CtdtUserRepository CtdtUserRepository;
 
-    @GetMapping("/ctdt_user")
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 

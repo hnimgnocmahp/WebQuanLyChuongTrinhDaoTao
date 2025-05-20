@@ -2,6 +2,7 @@ package com.example.quanlydaotao.entity;
 
 import jakarta.persistence.*;
 
+import java.beans.Transient;
 import java.util.List;
 
 @Entity
@@ -59,7 +60,7 @@ public class CtdtKhungchuongtrinh {
     public Integer getSoTinChiToiThieu() { return soTinChiToiThieu; }
     public void setSoTinChiToiThieu(Integer soTinChiToiThieu) { this.soTinChiToiThieu = soTinChiToiThieu; }
 
-    @Transient
+    @jakarta.persistence.Transient
     private List<CtdtHocphan> hocphans;
 
     // Getter/Setter cho tất cả
@@ -71,21 +72,24 @@ public class CtdtKhungchuongtrinh {
         this.hocphans = hocphans;
     }
 
-    @Transient
+    @jakarta.persistence.Transient
+
     private List<CtdtKhungchuongtrinhNhomkienthuc> khungchuongtrinhNhomkienthucs;
     private Integer soTinChiBatBuoc;
 
-    @Transient
+    @jakarta.persistence.Transient
     private Integer soTinChiTuChon;
 
     public List<CtdtKhungchuongtrinhNhomkienthuc> getKhungchuongtrinhNhomkienthucs() {
         return khungchuongtrinhNhomkienthucs;
+    }
     public Integer getSoTinChiBatBuoc() {
         return soTinChiBatBuoc;
     }
 
     public void setKhungchuongtrinhNhomkienthucs(List<CtdtKhungchuongtrinhNhomkienthuc> khungchuongtrinhNhomkienthucs) {
         this.khungchuongtrinhNhomkienthucs = khungchuongtrinhNhomkienthucs;
+    }
     public void setSoTinChiBatBuoc(Integer soTinChiBatBuoc) {
         this.soTinChiBatBuoc = soTinChiBatBuoc;
     }

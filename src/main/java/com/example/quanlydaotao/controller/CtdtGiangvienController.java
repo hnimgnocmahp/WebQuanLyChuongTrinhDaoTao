@@ -29,6 +29,8 @@ public class CtdtGiangvienController {
     @GetMapping
     public String list(Model model) {
         model.addAttribute("ctdt_giangvien", service.findAll());
+        return "ctdt_giangvien_list";
+    }
     @GetMapping("/ctdt_giangvien")
     public String listCtdtGiangvien(Model model) {
         model.addAttribute("ctdt_giangvien", giangVienService.findAll());
@@ -51,8 +53,9 @@ public class CtdtGiangvienController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
         service.deleteById(id);
-        return "redirect:/ctdt_giangvien";
-    @GetMapping("/ctdt_giangvien/phancong")
+        return "redirect:/ctdt_giangvien";}
+
+    @GetMapping("/phancong")
     public String phanCong(Model m){
         List<CtdtGiangvien> list = giangVienService.getPhanCong();
         m.addAttribute("giangviens", list);

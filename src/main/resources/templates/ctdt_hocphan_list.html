@@ -35,6 +35,7 @@
             <th>Nhóm ID</th>
             <th>Loại HP</th>
             <th>HP Tiên quyết</th>
+            <th>Hệ số học phần</th>
             <th>Hành động</th>
           </tr>
         </thead>
@@ -49,6 +50,7 @@
             <td th:text="${item.nhomId}"></td>
             <td th:text="${item.loaiHp}"></td>
             <td th:text="${item.hocPhanTienQuyet}"></td>
+            <td th:text="${item.heSoHocPhan}"></td>
             <td>
               <a
                 th:href="@{|/ctdt_hocphan/edit/${item.id}|}"
