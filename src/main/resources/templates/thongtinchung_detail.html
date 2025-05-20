@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Khung chương trình & nhóm kiến thức</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+</head>
+<body>
+<div th:replace="fragments :: navbar"></div>
+<div class="container my-4">
+  <h4 class="text-center fst-italic">
+    Các khối kiến thức và số tín chỉ trong chương trình giảng dạy
+  </h4>
+
+  <table class="table table-bordered ">
+    <thead class="table-light text-center align-middle">
+    <tr>
+      <th rowspan="2">STT</th>
+      <th rowspan="2">Các khối kiến thức</th>
+      <th colspan="2">Số tín chỉ</th>
+    </tr>
+    <tr class="table-light">
+      <th>Bắt buộc</th>
+      <th>Tự chọn</th>
+    </tr>
+    </thead>
+    <tbody  th:each="frame, fStat : ${ctdt.khungchuongtrinhs}">
+    <!-- 1) Lặp qua từng khung -->
+      <!-- tính số dòng cần rowspan = số nhóm trong khung + 1 (dành cho dòng header của khung) -->
+      <th:block th:with="entries=${frame.khungchuongtrinhNhomkienthucs},
+                          rowCount=${entries.size() + 1}">
+
+        <!-- Dòng header của khung -->
+        <tr class="fw-bold">
+          <td class="text-center align-middle" th:text="${fStat.index + 1}">1</td>
+          <td th:text="${frame.tenNhom}">Khối ...</td>
+          <!-- tổng tín chỉ bắt buộc & tự chọn của cả khung -->
+          <td class="text-center align-middle" th:if="${entries.size() > 0}" th:text="${frame.tongSoTinChiBatBuoc}">34</td>
+          <td class="text-center align-middle" th:if="${entries.size() > 0}" th:text="${frame.tongSoTinChiTuChon }" >0</td>
+          <td class="text-center align-middle" th:unless="${entries.size() > 0}" th:text="0" >0</td>
+          <td class="text-center align-middle" th:unless="${entries.size() > 0}" th:text="0" >0</td>
+
+
+        </tr>
+
+        <!-- 2) In chi tiết từng nhóm kiến thức trong khung -->
+        <tr th:each="entry : ${entries}">
+          <td></td>
+          <td class="fst-italic"
+              th:text="${entry.nhomkienthuc.tenNhom}">
+            Kiến thức ...
+          </td>
+          <td class="text-center align-middle" th:text="${entry.sotinchibatbuoc}">12</td>
+          <td class="text-center align-middle" th:text="${entry.sotinchituchon}">2</td>
+        </tr>
+
+    </th:block>
+
+    <!-- Dòng tổng chung -->
+<!--    <tr class="fw-bold table-light">-->
+<!--      <td colspan="2">Tổng</td>-->
+<!--      <td th:text="${totalBB}">124</td>-->
+<!--      <td th:text="${totalTC}">31</td>-->
+<!--    </tr>-->
+    </tbody>
+      <tr>
+        <td class="text-end align-middle fw-bold" colspan="2">Tổng</td>
+        <td class="text-center align-middle fw-bold" th:text="${totalBB}">124</td>
+        <td class="text-center align-middle fw-bold" th:text="${totalTC}">31</td>
+      </tr>
+
+      <td class="mt-2 fst-italic text-center align-middle" colspan="2"> <Strong> Số tín chỉ tối thiểu phải tích lũy </Strong><br>
+        (không tính số tín chỉ Giáo dục thể chất
+        và Giáo dục quốc phòng và an ninh)</td>
+      <td class="text-center align-middle fw-bold" th:text="${totalBB + totalTC}" colspan="2">31</td>
+
+  </table>
+
+  <!-- Ghi chú dưới bảng -->
+<!--  <div class="mt-2 fst-italic text-center">-->
+<!--    Số tín chỉ tối thiểu phải tích lũy-->
+<!--    (không tính số tín chỉ Giáo dục thể chất-->
+<!--    và Giáo dục quốc phòng và an ninh):-->
+<!--&lt;!&ndash;    <strong th:text="${ctdt.tongTinChi}">155</strong>&ndash;&gt;-->
+<!--    <strong th:text="${totalBB + totalTC}">155</strong>-->
+<!--  </div>-->
+</div>
+</body>
+</html>
