@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2 class="m-2">Kế hoạch dạy học</h2>
+    <a href="/ctdt_thongtinchung" class="btn btn-secondary m-2">Quay lại</a>
+
+
+    <table class="table table-bordered text-center">
+        <thead>
+        <tr>
+            <th rowspan="2">TT</th>
+            <th rowspan="2">Mã HP</th>
+            <th rowspan="2">Tên Học phần</th>
+            <th rowspan="2">Số tín chỉ</th>
+            <th colspan="12">Học kỳ thực hiện</th>
+            <th rowspan="2">Mã học phần trước</th>
+        </tr>
+        <tr>
+            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th>
+        </tr>
+        </thead>
+        <tbody th:each="khungchuongtrinh : ${thongTinChung.khungchuongtrinhs}">
+        <tr>
+            <td colspan="3" class="text-start fw-bold">
+                <span th:text="${khungchuongtrinh.tenNhom}"></span>
+            </td>
+            <td colspan="1" class="text-center fw-bold">
+                <span th:text="${khungchuongtrinh.soTinChiToiThieu} + '/' + ${khungchuongtrinh.soTinChiToiThieu}"></span>
+            </td>
+            <td colspan="13" class="text-start fw-bold"></td>
+
+
+        </tr>
+
+        <tr>
+            <td colspan="3" class="fw-bold text-start">Các học phần bắt buộc</td>
+            <td colspan="1" class="text-center fw-bold">
+                <span th:text="${khungchuongtrinh.soTinChiBatBuoc} + '/' + ${khungchuongtrinh.soTinChiBatBuoc}"></span>
+            </td>
+            <td colspan="13" class="text-start fw-bold"></td>
+        </tr>
+
+        <th:block th:each="hp, stat : ${khungchuongtrinh.hocphans}">
+            <th:block th:if="${hp.loaiHp == 'Bắt buộc'}">
+                <tr>
+                    <td th:text="${stat.index + 1}"></td>
+                    <td th:text="${hp.maHp}"></td>
+                    <td th:text="${hp.tenHp}"></td>
+                    <td th:text="${hp.soTinChi}"></td>
+                    <td th:each="i : ${#numbers.sequence(1,12)}"
+                        th:text="${hp.hasHocKy(i) ? 'x' : ''}"></td>
+                    <td th:text="${hp.hocPhanTienQuyet}"></td>
+                </tr>
+            </th:block>
+        </th:block>
+
+
+
+        <!-- Tự chọn -->
+        <tr>
+            <td colspan="3" class="fw-bold text-start">Các học phần tự chọn</td>
+            <td colspan="1" class="text-center fw-bold">
+                <span th:text="${khungchuongtrinh.soTinChiTuChon} + '/' + ${khungchuongtrinh.soTinChiTuChon}"></span>
+            </td>
+            <td colspan="13" class="text-start fw-bold"></td>
+        </tr>
+
+        <th:block th:each="hp, stat : ${khungchuongtrinh.hocphans}">
+            <th:block th:if="${hp.loaiHp == 'Tự chọn'}">
+                <tr>
+                    <td th:text="${stat.index + 1}"></td>
+                    <td th:text="${hp.maHp}"></td>
+                    <td th:text="${hp.tenHp}"></td>
+                    <td th:text="${hp.soTinChi}"></td>
+                    <td th:each="i : ${#numbers.sequence(1,12)}"
+                        th:text="${hp.hasHocKy(i) ? 'x' : ''}"></td>
+                    <td th:text="${hp.hocPhanTienQuyet}"></td>
+                </tr>
+            </th:block>
+        </th:block>
+        </tbody>
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</body>
+</html>

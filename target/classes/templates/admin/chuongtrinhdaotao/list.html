@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html layout:decorate="~{admin/fragments/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="">
+<head>
+    <title>Danh sách Chương trình đào tạo</title>
+</head>
+<body>
+<div layout:fragment="content" class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Danh sách Chương Trình Đào Tạo</h3>
+        <a class="btn btn-primary" th:href="@{/admin/chuongtrinhdaotao/add}">Thêm mới</a>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Danh sách CTĐT</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên CTĐT</th>
+                        <th>Bậc</th>
+                        <th>Loại Bằng</th>
+                        <th>Thời Gian</th>
+                        <th>Số TC tối thiểu</th>
+                        <th>Khoa Quản Lý</th>
+                        <th>Ngôn Ngữ</th>
+                        <th>Hành độngf</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ctdt : ${chuongTrinhDaoTaos}">
+                        <td th:text="${ctdt.id}"></td>
+                        <td th:text="${ctdt.tenCdt}"></td>
+                        <td th:text="${ctdt.bacCdt}"></td>
+                        <td th:text="${ctdt.loaiBangCdt}"></td>
+                        <td th:text="${ctdt.thoiGian}"></td>
+                        <td th:text="${ctdt.soTinChiToiThieu}"></td>
+<!--                        <td th:text="${ctdt.khoaQuanLy}"></td>-->
+                        <td th:text="${ctdt.ngonNgu}"></td>
+                        <td>
+                            <a th:href="@{'/admin/chuongtrinhdaotao/edit/' + ${ctdt.id}}" class="btn btn-warning btn-sm">Sửa</a>
+                            <a th:href="@{'/admin/chuongtrinhdaotao/delete/' + ${ctdt.id}}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
