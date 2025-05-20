@@ -16,20 +16,10 @@
 
         <div class="mb-3">
             <label class="form-label">Mã CTĐT</label>
-
-            <th:block th:if="${thongTinChung.id != null}">
-                <!-- ẩn input để gửi dữ liệu -->
-                <input type="hidden" th:field="*{maCtdt}" />
-                <!-- input hiển thị readonly -->
-                <input type="text" th:value="*{maCtdt}" class="form-control" readonly />
-            </th:block>
-
-            <th:block th:if="${thongTinChung.id == null}">
-                <!-- input bình thường cho tạo mới -->
-                <input type="text" th:field="*{maCtdt}" class="form-control" required />
-            </th:block>
+            <!-- Bỏ readonly để cho phép chỉnh sửa khi cập nhật -->
+            <input type="text" th:field="*{maCtdt}" class="form-control" required />
+            <span class="text-danger" th:if="${#fields.hasErrors('maCtdt')}" th:errors="*{maCtdt}"></span>
         </div>
-
 
         <div class="mb-3">
             <label class="form-label">Tên CTĐT</label>
@@ -68,7 +58,12 @@
 
         <div class="mb-3">
             <label class="form-label">Năm ban hành</label>
-            <input type="number" th:field="*{namBanHanh}" class="form-control" th:min="${#dates.year(#dates.createNow())}" required/>
+            <th:block th:if="${thongTinChung.id == null}">
+                <input type="number" th:field="*{namBanHanh}" class="form-control" th:min="${#dates.year(#dates.createNow())}" required/>
+            </th:block>
+            <th:block th:if="${thongTinChung.id != null}">
+                <input type="number" th:field="*{namBanHanh}" class="form-control" required/>
+            </th:block>
         </div>
 
         <div class="mb-3">

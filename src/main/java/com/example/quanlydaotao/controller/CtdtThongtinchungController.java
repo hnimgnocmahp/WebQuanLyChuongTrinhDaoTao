@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Year;
 import java.util.Optional;
 
 @Controller
@@ -32,11 +33,12 @@ public class CtdtThongtinchungController {
 
     @GetMapping("/new")
     public String showCreate(Model m) {
-        m.addAttribute("thongTinChung", new CtdtThongtinchung());
+        CtdtThongtinchung thongTinChung = new CtdtThongtinchung();
+        thongTinChung.setNamBanHanh(Year.now().getValue());
+        m.addAttribute("thongTinChung", thongTinChung);
         m.addAttribute("thongTinChungList", service.findAll());
         return "thongtinchung_form";
     }
-
     @PostMapping("/save")
     public String save(@Valid @ModelAttribute("thongTinChung") CtdtThongtinchung thongtinchung,
                        BindingResult errs,
