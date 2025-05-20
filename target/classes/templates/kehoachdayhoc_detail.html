@@ -5,6 +5,10 @@
     <title>Title</title>
 </head>
 <body>
+    <h2 class="m-2">Kế hoạch dạy học</h2>
+    <a href="/ctdt_thongtinchung" class="btn btn-secondary m-2">Quay lại</a>
+
+
     <table class="table table-bordered text-center">
         <thead>
         <tr>
@@ -12,67 +16,72 @@
             <th rowspan="2">Mã HP</th>
             <th rowspan="2">Tên Học phần</th>
             <th rowspan="2">Số tín chỉ</th>
-            <th colspan="8">Học kỳ thực hiện</th>
+            <th colspan="12">Học kỳ thực hiện</th>
             <th rowspan="2">Mã học phần trước</th>
         </tr>
         <tr>
-            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th>
+            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th>
         </tr>
         </thead>
         <tbody th:each="khungchuongtrinh : ${thongTinChung.khungchuongtrinhs}">
         <tr>
             <td colspan="3" class="text-start fw-bold">
                 <span th:text="${khungchuongtrinh.tenNhom}"></span>
-<!--                <span class="float-end">34/34</span> &lt;!&ndash; Có thể thay bằng biến nếu cần &ndash;&gt;-->
             </td>
-            <td colspan="1" class="text-start fw-bold">
-<!--                <span th:text="${khungchuongtrinh.tenNhom}"></span>-->
-                <span class="float-end">34/34</span> <!-- Có thể thay bằng biến nếu cần -->
+            <td colspan="1" class="text-center fw-bold">
+                <span th:text="${khungchuongtrinh.soTinChiToiThieu} + '/' + ${khungchuongtrinh.soTinChiToiThieu}"></span>
             </td>
-            <td colspan="1" class="text-start fw-bold">
+            <td colspan="13" class="text-start fw-bold"></td>
 
-            </td>
-            <td colspan="1" class="text-start fw-bold">
 
-            </td>
-            <td colspan="1" class="text-start fw-bold">
-
-            </td>
-            <td colspan="1" class="text-start fw-bold">
-
-            </td>
-            <td colspan="1" class="text-start fw-bold">
-
-            </td>
-            <td colspan="1" class="text-start fw-bold">
-
-            </td>
-            <td colspan="1" class="text-start fw-bold">
-
-            </td>
-            <td colspan="1" class="text-start fw-bold">
-
-            </td>
         </tr>
 
-        <!-- Hàng học phần -->
-        <tr th:each="hp, stat : ${khungchuongtrinh.hocphans}">
-            <td th:text="${stat.index + 1}"></td>
-            <td th:text="${hp.maHp}"></td>
-            <td th:text="${hp.tenHp}"></td>
-            <td th:text="${hp.soTinChi}"></td>
-
-            <td th:each="i : ${#numbers.sequence(1,8)}"
-                th:text="${hp.hasHocKy(i) ? 'x' : ''}">
+        <tr>
+            <td colspan="3" class="fw-bold text-start">Các học phần bắt buộc</td>
+            <td colspan="1" class="text-center fw-bold">
+                <span th:text="${khungchuongtrinh.soTinChiBatBuoc} + '/' + ${khungchuongtrinh.soTinChiBatBuoc}"></span>
             </td>
-<!--            <td th:if="${hp.kehoachs == null or hp.kehoachs.size() == 0}"></td> &lt;!&ndash; hoặc để trống &ndash;&gt;-->
-
-<!--            <td th:if="${hp.kehoachs != null and hp.kehoachs.size() > 0}" th:text="${hp.kehoachs[0].hocKy}"></td>-->
-<!--            <td th:if="${hp.kehoachs == null or hp.kehoachs.size() == 0}"></td> &lt;!&ndash; hoặc để trống &ndash;&gt;-->
-
-
-            <td th:text="${hp.hocPhanTienQuyet}"></td>
+            <td colspan="13" class="text-start fw-bold"></td>
         </tr>
+
+        <th:block th:each="hp, stat : ${khungchuongtrinh.hocphans}">
+            <th:block th:if="${hp.loaiHp == 'Bắt buộc'}">
+                <tr>
+                    <td th:text="${stat.index + 1}"></td>
+                    <td th:text="${hp.maHp}"></td>
+                    <td th:text="${hp.tenHp}"></td>
+                    <td th:text="${hp.soTinChi}"></td>
+                    <td th:each="i : ${#numbers.sequence(1,12)}"
+                        th:text="${hp.hasHocKy(i) ? 'x' : ''}"></td>
+                    <td th:text="${hp.hocPhanTienQuyet}"></td>
+                </tr>
+            </th:block>
+        </th:block>
+
+
+
+        <!-- Tự chọn -->
+        <tr>
+            <td colspan="3" class="fw-bold text-start">Các học phần tự chọn</td>
+            <td colspan="1" class="text-center fw-bold">
+                <span th:text="${khungchuongtrinh.soTinChiTuChon} + '/' + ${khungchuongtrinh.soTinChiTuChon}"></span>
+            </td>
+            <td colspan="13" class="text-start fw-bold"></td>
+        </tr>
+
+        <th:block th:each="hp, stat : ${khungchuongtrinh.hocphans}">
+            <th:block th:if="${hp.loaiHp == 'Tự chọn'}">
+                <tr>
+                    <td th:text="${stat.index + 1}"></td>
+                    <td th:text="${hp.maHp}"></td>
+                    <td th:text="${hp.tenHp}"></td>
+                    <td th:text="${hp.soTinChi}"></td>
+                    <td th:each="i : ${#numbers.sequence(1,12)}"
+                        th:text="${hp.hasHocKy(i) ? 'x' : ''}"></td>
+                    <td th:text="${hp.hocPhanTienQuyet}"></td>
+                </tr>
+            </th:block>
+        </th:block>
         </tbody>
     </table>
 
