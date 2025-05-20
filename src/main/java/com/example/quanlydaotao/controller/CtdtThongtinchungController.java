@@ -1,9 +1,12 @@
 package com.example.quanlydaotao.controller;
 
 
+import com.example.quanlydaotao.entity.CtdtHocphan;
 import com.example.quanlydaotao.entity.CtdtKhungchuongtrinh;
 import com.example.quanlydaotao.entity.CtdtKhungchuongtrinhNhomkienthuc;
 import com.example.quanlydaotao.entity.CtdtThongtinchung;
+import com.example.quanlydaotao.service.HocPhanService;
+import com.example.quanlydaotao.service.NhomKienThucService;
 import com.example.quanlydaotao.service.ThongTinChungService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

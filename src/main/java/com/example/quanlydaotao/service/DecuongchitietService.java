@@ -32,7 +32,7 @@ public class DecuongchitietService {
         repository.deleteById(id);
     }
 
-    public CtdtDecuongchitiet findByHocPhanId(Integer hocPhanId) {
+    public List<CtdtDecuongchitiet> findByHocPhanId(Integer hocPhanId) {
         return repository.findByHocPhanId(hocPhanId);
     }
 } 

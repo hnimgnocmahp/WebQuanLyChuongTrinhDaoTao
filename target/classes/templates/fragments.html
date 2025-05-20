@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <!-- Định nghĩa fragment tên "navbar" -->
+    <div th:fragment="navbar">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" th:href="@{/}">Quản lý đào tạo</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/ctdt_hocphan}">Học phần</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/ctdt_khungchuongtrinh}"
+                  >Khung CT</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/ctdt_cotdiem}">Cột điểm</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/ctdt_decuongchitiet}"
+                  >Đề cương</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/ctdt_giangvien}">Giảng viên</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/ctdt_kehoachdayhoc}"
+                  >Kế hoạch dạy học</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/ctdt_kehoachmonhom}"
+                  >Kế hoạch nhóm</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  th:href="@{/ctdt_khungchuongtrinh_nhomkienthuc}"
+                  >Nhóm KT</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/ctdt_nhomkienthuc}"
+                  >Nhóm kiến thức</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/ctdt_phanconggiangday}"
+                  >Phân công GD</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/ctdt_thongtinchung}"
+                  >Thông tin chung</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/ctdt_user}">Người dùng</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/auth/login}">Đăng xuất</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </body>
+</html>

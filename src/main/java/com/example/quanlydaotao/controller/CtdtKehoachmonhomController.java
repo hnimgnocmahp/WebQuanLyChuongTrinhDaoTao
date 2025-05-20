@@ -33,6 +33,7 @@ public class CtdtKehoachmonhomController {
 
 
     @GetMapping()
+    @GetMapping("/ctdt_kehoachmonhom")
     public String listCtdtKehoachmonhom(Model model) {
         model.addAttribute("ctdt_kehoachmonhom", CtdtKehoachmonhomRepository.findAll());
         return "ctdt_kehoachmonhom_list";

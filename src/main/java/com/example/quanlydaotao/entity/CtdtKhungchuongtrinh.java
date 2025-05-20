@@ -73,12 +73,28 @@ public class CtdtKhungchuongtrinh {
 
     @Transient
     private List<CtdtKhungchuongtrinhNhomkienthuc> khungchuongtrinhNhomkienthucs;
+    private Integer soTinChiBatBuoc;
+
+    @Transient
+    private Integer soTinChiTuChon;
 
     public List<CtdtKhungchuongtrinhNhomkienthuc> getKhungchuongtrinhNhomkienthucs() {
         return khungchuongtrinhNhomkienthucs;
+    public Integer getSoTinChiBatBuoc() {
+        return soTinChiBatBuoc;
     }
 
     public void setKhungchuongtrinhNhomkienthucs(List<CtdtKhungchuongtrinhNhomkienthuc> khungchuongtrinhNhomkienthucs) {
         this.khungchuongtrinhNhomkienthucs = khungchuongtrinhNhomkienthucs;
+    public void setSoTinChiBatBuoc(Integer soTinChiBatBuoc) {
+        this.soTinChiBatBuoc = soTinChiBatBuoc;
+    }
+
+    public Integer getSoTinChiTuChon() {
+        return soTinChiTuChon;
+    }
+
+    public void setSoTinChiTuChon(Integer soTinChiTuChon) {
+        this.soTinChiTuChon = soTinChiTuChon;
     }
 }

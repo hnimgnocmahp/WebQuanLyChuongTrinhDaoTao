@@ -44,6 +44,14 @@ public class ThongTinChungService {
         ctdt.setKhungchuongtrinhs(nhomList);
         return ctdt;
     }
+            // Gán số tín chỉ bắt buộc và tự chọn nếu có
+            List<CtdtKhungchuongtrinhNhomkienthuc> nhomKienThucList = khungNhomRepo.findByIdKhungchuongtrinh(khungchuongtrinh.getId());
+            if (!nhomKienThucList.isEmpty()) {
+                CtdtKhungchuongtrinhNhomkienthuc nhomKienThuc = nhomKienThucList.get(0);
+                khungchuongtrinh.setSoTinChiBatBuoc(nhomKienThuc.getSotinchibatbuoc());
+                khungchuongtrinh.setSoTinChiTuChon(nhomKienThuc.getSotinchituchon());
+            }
+        }
 
     public CtdtThongtinchung getCtKhung(Integer id){
         CtdtThongtinchung ctdt = repo.findById(id).orElse(null);
