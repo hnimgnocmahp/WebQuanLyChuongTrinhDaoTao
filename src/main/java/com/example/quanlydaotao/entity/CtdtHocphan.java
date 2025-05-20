@@ -1,6 +1,7 @@
 package com.example.quanlydaotao.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.util.List;
 
@@ -12,30 +13,44 @@ public class CtdtHocphan {
     @Column(name = "id")
     private Integer id;
 
+    @NotBlank(message = "Mã học phần không được để trống")
+    @Size(max = 20, message = "Mã học phần tối đa 20 ký tự")
     @Column(name = "ma_hp")
     private String maHp;
 
+    @NotBlank(message = "Tên học phần không được để trống")
     @Column(name = "ten_hp")
     private String tenHp;
 
+
+    @NotNull(message = "Số tín chỉ không được để trống")
+    @Min(value = 1, message = "Số tín chỉ phải lớn hơn 0")
     @Column(name = "so_tin_chi")
     private Integer soTinChi;
 
+
+    @NotNull(message = "Số tiết lý thuyết không được để trống")
+    @Min(value = 0, message = "Số tiết lý thuyết không được âm")
     @Column(name = "so_tiet_ly_thuyet")
     private Integer soTietLyThuyet;
 
+    @NotNull(message = "Số tiết thực hành không được để trống")
+    @Min(value = 0, message = "Số tiết thực hành không được âm")
     @Column(name = "so_tiet_thuc_hanh")
     private Integer soTietThucHanh;
 
     @Column(name = "nhom_id")
     private Integer nhomId;
 
+    @NotBlank(message = "Loại học phần không được để trống")
     @Column(name = "loai_hp")
     private String loaiHp;
 
     @Column(name = "hoc_phan_tien_quyet")
     private String hocPhanTienQuyet;
 
+    @NotNull(message = "Hệ số học phần không được để trống")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Giá phải lớn hơn 0")
     @Column(name= "he_so_hoc_phan")
     private Float heSoHocPhan;
 

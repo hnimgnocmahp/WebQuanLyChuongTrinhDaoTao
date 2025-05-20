@@ -17,6 +17,7 @@
     <div th:replace="fragments :: navbar"></div>
 
     <div class="container mt-4">
+      <div th:if="${deleteError}" class="alert alert-danger" th:text="${deleteError}"></div>
       <h1 class="mb-4">Danh sách Học Phần</h1>
       <a
         th:href="@{/ctdt_hocphan/new}"
