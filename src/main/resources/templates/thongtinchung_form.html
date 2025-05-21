@@ -13,6 +13,7 @@
     <h1 th:text="${thongTinChung.id} == null ? 'Tạo CTĐT' : 'Cập nhật CTĐT'"></h1>
 
     <form th:action="@{/ctdt_thongtinchung/save}" th:object="${thongTinChung}" method="post">
+        <input type="hidden" th:field="*{id}" />
 
         <div class="mb-3">
             <label class="form-label">Mã CTĐT</label>
