@@ -26,7 +26,26 @@ public class ThongTinChungService {
         this.kehoachdayhocRepo = kehoachdayhocRepo;
     }
 
-    public List<CtdtThongtinchung> findAll() { return repo.findAll(); }
+    public List<CtdtThongtinchung> findAll() {
+        List<CtdtThongtinchung> list = repo.findAll();
+
+        for (CtdtThongtinchung ctdt : list) {
+            int tongTinChi = 0;
+            List<CtdtKhungchuongtrinh> khungs = khungRepo.findByCtdtId(ctdt.getId());
+
+            for (CtdtKhungchuongtrinh khung : khungs) {
+                if (khung.getSoTinChiToiThieu() != null) {
+                    tongTinChi += khung.getSoTinChiToiThieu();
+                }
+            }
+
+            ctdt.setTongTinChi(tongTinChi);
+        }
+
+        return list;
+    }
+
+
     public Optional<CtdtThongtinchung> findById(Integer id) { return repo.findById(id); }
     public CtdtThongtinchung save(CtdtThongtinchung thongtinchung) { return repo.save(thongtinchung); }
 
