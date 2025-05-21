@@ -5,6 +5,7 @@ import com.example.quanlydaotao.entity.CtdtDecuongchitiet;
 import com.example.quanlydaotao.entity.CtdtHocphan;
 import com.example.quanlydaotao.entity.CtdtThongtinchung;
 import com.example.quanlydaotao.service.HocPhanService;
+import com.example.quanlydaotao.service.NganhService;
 import com.example.quanlydaotao.service.NhomKienThucService;
 import com.example.quanlydaotao.service.ThongTinChungService;
 import jakarta.validation.Valid;
@@ -20,9 +21,11 @@ import java.util.Optional;
 @RequestMapping("/ctdt_thongtinchung")
 public class CtdtThongtinchungController {
     private final ThongTinChungService service;
+    private final NganhService nganhService;
 
-    public CtdtThongtinchungController(ThongTinChungService service) {
+    public CtdtThongtinchungController(ThongTinChungService service, NganhService nganhService) {
         this.service = service;
+        this.nganhService = nganhService;
     }
 
     @GetMapping
@@ -37,6 +40,7 @@ public class CtdtThongtinchungController {
         thongTinChung.setNamBanHanh(Year.now().getValue());
         m.addAttribute("thongTinChung", thongTinChung);
         m.addAttribute("thongTinChungList", service.findAll());
+        m.addAttribute("nganhList", nganhService.findAll());
         return "thongtinchung_form";
     }
     @PostMapping("/save")
@@ -64,6 +68,7 @@ public class CtdtThongtinchungController {
 
         model.addAttribute("thongTinChung", thongtinchung);
         model.addAttribute("thongTinChungList", service.findAll());
+        model.addAttribute("nganhList", nganhService.findAll());
         return "thongtinchung_form";
     }
 
