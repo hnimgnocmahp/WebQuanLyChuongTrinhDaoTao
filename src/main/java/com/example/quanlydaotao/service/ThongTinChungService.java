@@ -42,6 +42,14 @@ public class ThongTinChungService {
                 hp.setKehoachs(kehoachs);
             }
             khungchuongtrinh.setHocphans(hocphans);
+
+            // Gán số tín chỉ bắt buộc và tự chọn nếu có
+            List<CtdtKhungchuongtrinhNhomkienthuc> nhomKienThucList = khungchuongtrinhNhomkienthucRepository.findByIdKhungchuongtrinh(khungchuongtrinh.getId());
+            if (!nhomKienThucList.isEmpty()) {
+                CtdtKhungchuongtrinhNhomkienthuc nhomKienThuc = nhomKienThucList.get(0);
+                khungchuongtrinh.setSoTinChiBatBuoc(nhomKienThuc.getSotinchibatbuoc());
+                khungchuongtrinh.setSoTinChiTuChon(nhomKienThuc.getSotinchituchon());
+            }
         }
 
         ctdt.setKhungchuongtrinhs(nhomList);
