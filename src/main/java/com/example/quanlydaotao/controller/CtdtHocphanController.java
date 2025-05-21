@@ -19,14 +19,19 @@ public class CtdtHocphanController {
             this.nhomKienThucService = nhomKienThucService;
         }
 
-        // 1. LIST
-        @GetMapping
-        public String list(Model m) {
+    @GetMapping
+    public String list(@RequestParam(value = "keyword", required = false) String keyword, Model m) {
+        if (keyword != null && !keyword.isEmpty()) {
+            m.addAttribute("ctdt_hocphan", service.searchByMaOrTen(keyword));
+            m.addAttribute("keyword", keyword);
+        } else {
             m.addAttribute("ctdt_hocphan", service.findAll());
-            return "ctdt_hocphan_list";
         }
+        return "ctdt_hocphan_list";
+    }
 
-        // 2. SHOW CREATE FORM
+
+    // 2. SHOW CREATE FORM
         @GetMapping("/new")
         public String showCreate(Model m) {
             m.addAttribute("hocPhan", new CtdtHocphan());

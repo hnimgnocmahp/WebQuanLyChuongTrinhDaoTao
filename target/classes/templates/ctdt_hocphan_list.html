@@ -18,6 +18,19 @@
 
     <div class="container mt-4">
       <h1 class="mb-4">Danh sách Học Phần</h1>
+      <tr th:if="${#lists.isEmpty(ctdt_hocphan)}">
+        <td colspan="10" class="text-center text-muted">Không tìm thấy học phần phù hợp.</td>
+      </tr>
+
+      <form th:action="@{/ctdt_hocphan}" method="get" class="mb-3 d-flex" style="max-width: 400px;">
+        <input type="text"
+               name="keyword"
+               class="form-control me-2"
+               placeholder="Tìm theo mã hoặc tên học phần"
+               th:value="${keyword}">
+        <button type="submit" class="btn btn-outline-primary">Tìm</button>
+      </form>
+
       <a
         th:href="@{/ctdt_hocphan/new}"
         class="btn btn-primary float-end mb-3 me-3"

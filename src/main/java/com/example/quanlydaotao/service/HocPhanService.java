@@ -23,6 +23,9 @@ public class HocPhanService {
     public boolean existsByMaHp(String maHp){
         return existsByMaHp(maHp);
     }
+    public List<CtdtHocphan> searchByMaOrTen(String keyword) {
+        return repo.findByMaHpContainingIgnoreCaseOrTenHpContainingIgnoreCase(keyword, keyword);
+    }
 
 //    Optional<CtdtHocphan> findByMaHp(String maHp);
 //    boolean existsByMaHp(String maHp);

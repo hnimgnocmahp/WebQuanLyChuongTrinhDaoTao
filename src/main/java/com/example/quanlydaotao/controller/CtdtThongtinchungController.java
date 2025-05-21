@@ -21,11 +21,7 @@ public class CtdtThongtinchungController {
         this.service = service;
     }
 
-    @GetMapping
-    public String listCtdtThongtinchung(Model model) {
-        model.addAttribute("ctdt_thongtinchung", service.findAll());
-        return "ctdt_thongtinchung_list";
-    }
+
 
     @GetMapping("/new")
     public String showCreate(Model m) {
@@ -43,6 +39,18 @@ public class CtdtThongtinchungController {
         service.save(thongtinchung);
         return "redirect:/ctdt_thongtinchung";
     }
+    @GetMapping
+    public String listCtdtThongtinchung(@RequestParam(value = "keyword", required = false) String keyword,
+                                        Model model) {
+        if (keyword != null && !keyword.isEmpty()) {
+            model.addAttribute("ctdt_thongtinchung", service.searchByTenOrMaNganh(keyword));
+            model.addAttribute("keyword", keyword);
+        } else {
+            model.addAttribute("ctdt_thongtinchung", service.findAll());
+        }
+        return "ctdt_thongtinchung_list";
+    }
+
 
     @GetMapping("/kehoachdayhoc/{id}")
     public String showChiTietThongTinChung(@PathVariable Integer id, Model model) {
