@@ -26,6 +26,9 @@ public class HocPhanService {
     public boolean isReferencedAsPrerequisite(String maHp) {
         return repo.existsByHocPhanTienQuyet(maHp);
     }
+    public List<CtdtHocphan> searchByMaOrTen(String keyword) {
+        return repo.findByMaHpContainingIgnoreCaseOrTenHpContainingIgnoreCase(keyword, keyword);
+    }
 
 //    Optional<CtdtHocphan> findByMaHp(String maHp);
 //    boolean existsByMaHp(String maHp);

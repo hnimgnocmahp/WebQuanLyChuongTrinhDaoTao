@@ -50,6 +50,10 @@ public class ThongTinChungService {
     public CtdtThongtinchung save(CtdtThongtinchung thongtinchung) { return repo.save(thongtinchung); }
     public Optional<CtdtThongtinchung> findByMaCtdt(String MaCtdt) { return repo.findByMaCtdt(MaCtdt); }
 
+    public List<CtdtThongtinchung> searchByTenOrMaNganh(String keyword) {
+        return repo.findByTenCtdtContainingIgnoreCaseOrMaCtdtContainingIgnoreCase(keyword, keyword);
+    }
+
     public CtdtThongtinchung getChiTietThongTin(Integer ctdtId) {
         CtdtThongtinchung ctdt = repo.findById(ctdtId).orElse(null);
         List<CtdtKhungchuongtrinh> nhomList = khungRepo.findByCtdtId(ctdtId);
@@ -84,28 +88,28 @@ public class ThongTinChungService {
 //    }
 
 
-public CtdtThongtinchung getCtKhung(Integer id){
-    CtdtThongtinchung ctdt = repo.findById(id).orElse(null);
-    List<CtdtKhungchuongtrinh> nhomList = khungRepo.findByCtdtId(id);
+    public CtdtThongtinchung getCtKhung(Integer id){
+        CtdtThongtinchung ctdt = repo.findById(id).orElse(null);
+        List<CtdtKhungchuongtrinh> nhomList = khungRepo.findByCtdtId(id);
 
-    for (CtdtKhungchuongtrinh khungchuongtrinh : nhomList){
-        List<CtdtKhungchuongtrinhNhomkienthuc> khungchuongtrinhNhomkienthucs = khungchuongtrinhNhomkienthucRepository.findByIdKhungchuongtrinh(khungchuongtrinh.getId());
-        System.out.println(khungchuongtrinh.getId());
-        int batbuoc = 0;
-        int tuchon = 0;
-        for(CtdtKhungchuongtrinhNhomkienthuc khungchuongtrinhNhomkienthuc : khungchuongtrinhNhomkienthucs){
-//                System.out.println(khungchuongtrinhNhomkienthuc.getIdManhom());
-            CtdtNhomkienthuc nhomkienthuc = nhomkienthucRepository.findById(khungchuongtrinhNhomkienthuc.getIdManhom()).orElse(null);
-            khungchuongtrinhNhomkienthuc.setNhomkienthuc(nhomkienthuc);
-            batbuoc += khungchuongtrinhNhomkienthuc.getSotinchibatbuoc();
-            tuchon += khungchuongtrinhNhomkienthuc.getSotinchituchon();
+        for (CtdtKhungchuongtrinh khungchuongtrinh : nhomList){
+            List<CtdtKhungchuongtrinhNhomkienthuc> khungchuongtrinhNhomkienthucs = khungchuongtrinhNhomkienthucRepository.findByIdKhungchuongtrinh(khungchuongtrinh.getId());
+            System.out.println(khungchuongtrinh.getId());
+            int batbuoc = 0;
+            int tuchon = 0;
+            for(CtdtKhungchuongtrinhNhomkienthuc khungchuongtrinhNhomkienthuc : khungchuongtrinhNhomkienthucs){
+    //                System.out.println(khungchuongtrinhNhomkienthuc.getIdManhom());
+                CtdtNhomkienthuc nhomkienthuc = nhomkienthucRepository.findById(khungchuongtrinhNhomkienthuc.getIdManhom()).orElse(null);
+                khungchuongtrinhNhomkienthuc.setNhomkienthuc(nhomkienthuc);
+                batbuoc += khungchuongtrinhNhomkienthuc.getSotinchibatbuoc();
+                tuchon += khungchuongtrinhNhomkienthuc.getSotinchituchon();
+            }
+            khungchuongtrinh.setKhungchuongtrinhNhomkienthucs(khungchuongtrinhNhomkienthucs);
+            khungchuongtrinh.setTongSoTinChiBatBuoc(batbuoc);
+            khungchuongtrinh.setTongSoTinChiTuChon(tuchon);
         }
-        khungchuongtrinh.setKhungchuongtrinhNhomkienthucs(khungchuongtrinhNhomkienthucs);
-        khungchuongtrinh.setTongSoTinChiBatBuoc(batbuoc);
-        khungchuongtrinh.setTongSoTinChiTuChon(tuchon);
+        ctdt.setKhungchuongtrinhs(nhomList);
+        return ctdt;
     }
-    ctdt.setKhungchuongtrinhs(nhomList);
-    return ctdt;
-}
 }
 

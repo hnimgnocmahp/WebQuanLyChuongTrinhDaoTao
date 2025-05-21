@@ -13,5 +13,6 @@ public interface CtdtHocphanRepository extends JpaRepository<CtdtHocphan, Intege
     boolean existsByMaHp(String maHp);
     List<CtdtHocphan> findByNhomId(Integer nhomId);
     boolean existsByHocPhanTienQuyet(String maHp);
+    List<CtdtHocphan> findByMaHpContainingIgnoreCaseOrTenHpContainingIgnoreCase(String maHp, String tenHp);
 
 }
