@@ -29,10 +29,17 @@ public class CtdtThongtinchungController {
     }
 
     @GetMapping
-    public String listCtdtThongtinchung(Model model) {
-        model.addAttribute("ctdt_thongtinchung", service.findAll());
+    public String listCtdtThongtinchung(@RequestParam(value = "keyword", required = false) String keyword,
+                                        Model model) {
+        if (keyword != null && !keyword.isEmpty()) {
+            model.addAttribute("ctdt_thongtinchung", service.searchByTenOrMaNganh(keyword));
+            model.addAttribute("keyword", keyword);
+        } else {
+            model.addAttribute("ctdt_thongtinchung", service.findAll());
+        }
         return "ctdt_thongtinchung_list";
     }
+
 
     @GetMapping("/new")
     public String showCreate(Model m) {
@@ -114,4 +121,5 @@ public class CtdtThongtinchungController {
 
         return "thongtinchung_detail";
     }
+
 }

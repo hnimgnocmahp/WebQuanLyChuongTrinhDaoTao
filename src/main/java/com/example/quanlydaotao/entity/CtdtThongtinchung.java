@@ -22,9 +22,6 @@ import java.util.List;
         @JoinColumn(name = "id_nganh")
         private CtdtNganh nganh;
 
-        @Column(name = "ma_nganh")
-        private String maNganh;
-
         @Column(name = "khoa_quan_ly")
         private String khoaQuanLy;
 
@@ -62,9 +59,6 @@ import java.util.List;
     public void setNganh(CtdtNganh nganh) {
         this.nganh = nganh;
     }
-
-    public String getMaNganh() { return maNganh; }
-    public void setMaNganh(String maNganh) { this.maNganh = maNganh; }
 
     public String getKhoaQuanLy() { return khoaQuanLy; }
     public void setKhoaQuanLy(String khoaQuanLy) { this.khoaQuanLy = khoaQuanLy; }
