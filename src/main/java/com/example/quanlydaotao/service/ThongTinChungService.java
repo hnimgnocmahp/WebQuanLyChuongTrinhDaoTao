@@ -48,6 +48,7 @@ public class ThongTinChungService {
 
     public Optional<CtdtThongtinchung> findById(Integer id) { return repo.findById(id); }
     public CtdtThongtinchung save(CtdtThongtinchung thongtinchung) { return repo.save(thongtinchung); }
+    public Optional<CtdtThongtinchung> findByMaCtdt(String MaCtdt) { return repo.findByMaCtdt(MaCtdt); }
 
     public CtdtThongtinchung getChiTietThongTin(Integer ctdtId) {
         CtdtThongtinchung ctdt = repo.findById(ctdtId).orElse(null);
