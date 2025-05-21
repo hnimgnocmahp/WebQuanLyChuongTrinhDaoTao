@@ -3,6 +3,7 @@ package com.example.quanlydaotao.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "ctdt_kehoachmonhom")
@@ -36,8 +37,32 @@ public class CtdtKehoachmonhom {
     @Column(name = "trang_thai")
     private String trangThai;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hoc_phan_id", insertable = false, updatable = false)
+    private CtdtHocphan hocPhan;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "nhom_id", referencedColumnName = "id")
+    private List<CtdtPhanconggiangday> assignments;
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
+
+    public CtdtHocphan getHocPhan() {
+        return hocPhan;
+    }
+
+    public void setHocPhan(CtdtHocphan hocPhan) {
+        this.hocPhan = hocPhan;
+    }
+
+    public List<CtdtPhanconggiangday> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(List<CtdtPhanconggiangday> assignments) {
+        this.assignments = assignments;
+    }
 
     public String getMaNhom() { return maNhom; }
     public void setMaNhom(String maNhom) { this.maNhom = maNhom; }

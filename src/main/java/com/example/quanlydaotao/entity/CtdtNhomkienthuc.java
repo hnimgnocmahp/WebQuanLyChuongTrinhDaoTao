@@ -31,4 +31,6 @@ public class CtdtNhomkienthuc {
     public String getTrangthai() { return trangthai; }
     public void setTrangthai(String trangthai) { this.trangthai = trangthai; }
 
+
+
 }

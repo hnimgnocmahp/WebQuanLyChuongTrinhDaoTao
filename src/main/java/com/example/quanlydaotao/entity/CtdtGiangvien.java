@@ -2,6 +2,10 @@ package com.example.quanlydaotao.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+
 @Entity
 @Table(name = "ctdt_giangvien")
 public class CtdtGiangvien {
@@ -34,8 +38,62 @@ public class CtdtGiangvien {
     @Column(name = "trang_thai")
     private String trangThai;
 
+    private Integer namSinh;
+
+    public Integer getNamSinh() {
+        return namSinh;
+    }
+
+    public void setNamSinh(Integer namSinh) {
+        this.namSinh = namSinh;
+    }
+
+    @OneToMany(mappedBy = "giangVien", fetch = FetchType.LAZY)
+    private List<CtdtPhanconggiangday> assignments;
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
+
+    @Transient
+    private Map<Integer, List<Integer>> hockyMap;
+
+    public Map<Integer, List<Integer>> getHockyMap() {
+        return hockyMap;
+    }
+
+    public void setHockyMap(Map<Integer, List<Integer>> hockyMap) {
+        this.hockyMap = hockyMap;
+    }
+
+    @Transient
+    private Map<Integer, CtdtHocphan> hocphanMap;
+
+    public Map<Integer, CtdtHocphan> getHocphanMap() {
+        return hocphanMap;
+    }
+
+    public void setHocphanMap(Map<Integer, CtdtHocphan> hocphanMap) {
+        this.hocphanMap = hocphanMap;
+    }
+
+    @Transient
+    private Map<Integer, Long> groupsPerCourse;
+
+    public Map<Integer, Long> getGroupsPerCourse() {
+        return groupsPerCourse;
+    }
+
+    public void setGroupsPerCourse(Map<Integer, Long> groupsPerCourse) {
+        this.groupsPerCourse = groupsPerCourse;
+    }
+
+    public List<CtdtPhanconggiangday> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(List<CtdtPhanconggiangday> assignments) {
+        this.assignments = assignments;
+    }
 
     public Integer getUserId() { return userId; }
     public void setUserId(Integer userId) { this.userId = userId; }

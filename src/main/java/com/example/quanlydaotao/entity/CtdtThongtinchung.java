@@ -18,8 +18,9 @@ import java.util.List;
         @Column(name = "ten_ctdt")
         private String tenCtdt;
 
-        @Column(name = "nganh")
-        private String nganh;
+        @ManyToOne
+        @JoinColumn(name = "id_nganh")
+        private CtdtNganh nganh;
 
         @Column(name = "ma_nganh")
         private String maNganh;
@@ -54,8 +55,13 @@ import java.util.List;
     public String getTenCtdt() { return tenCtdt; }
     public void setTenCtdt(String tenCtdt) { this.tenCtdt = tenCtdt; }
 
-    public String getNganh() { return nganh; }
-    public void setNganh(String nganh) { this.nganh = nganh; }
+    public CtdtNganh getNganh() {
+        return nganh;
+    }
+
+    public void setNganh(CtdtNganh nganh) {
+        this.nganh = nganh;
+    }
 
     public String getMaNganh() { return maNganh; }
     public void setMaNganh(String maNganh) { this.maNganh = maNganh; }
@@ -92,4 +98,5 @@ import java.util.List;
     public void setKhungchuongtrinhs(List<CtdtKhungchuongtrinh> khungchuongtrinhs) {
         this.khungchuongtrinhs = khungchuongtrinhs;
     }
+
 }

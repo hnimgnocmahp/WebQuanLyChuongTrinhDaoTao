@@ -1,6 +1,9 @@
 package com.example.quanlydaotao.entity;
 
+import com.example.quanlydaotao.repository.CtdtNhomkienthucRepository;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "ctdt_khungchuongtrinh_nhomkienthuc")
@@ -37,4 +40,14 @@ public class CtdtKhungchuongtrinhNhomkienthuc {
     public Integer getSotinchituchon() { return sotinchituchon; }
     public void setSotinchituchon(Integer sotinchituchon) { this.sotinchituchon = sotinchituchon; }
 
+    @Transient
+    private CtdtNhomkienthuc nhomkienthuc;
+
+    public CtdtNhomkienthuc getNhomkienthuc() {
+        return nhomkienthuc;
+    }
+
+    public void setNhomkienthuc(CtdtNhomkienthuc nhomkienthuc) {
+        this.nhomkienthuc = nhomkienthuc;
+    }
 }

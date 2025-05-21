@@ -1,11 +1,16 @@
 package com.example.quanlydaotao.controller;
 
 import com.example.quanlydaotao.entity.CtdtGiangvien;
+import com.example.quanlydaotao.repository.CtdtGiangvienRepository;
 import com.example.quanlydaotao.service.GiangVienService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +21,7 @@ public class CtdtGiangvienController {
     private final GiangVienService service;
 
     @Autowired
+    private GiangVienService giangVienService;
     public CtdtGiangvienController(GiangVienService service) {
         this.service = service;
     }
@@ -23,6 +29,11 @@ public class CtdtGiangvienController {
     @GetMapping
     public String list(Model model) {
         model.addAttribute("ctdt_giangvien", service.findAll());
+        return "ctdt_giangvien_list";
+    }
+    @GetMapping("/ctdt_giangvien")
+    public String listCtdtGiangvien(Model model) {
+        model.addAttribute("ctdt_giangvien", giangVienService.findAll());
         return "ctdt_giangvien_list";
     }
 
@@ -42,7 +53,14 @@ public class CtdtGiangvienController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
         service.deleteById(id);
-        return "redirect:/ctdt_giangvien";
+        return "redirect:/ctdt_giangvien";}
+
+    @GetMapping("/phancong")
+    public String phanCong(Model m){
+        List<CtdtGiangvien> list = giangVienService.getPhanCong();
+        m.addAttribute("giangviens", list);
+        // sau khi gọi service, mỗi gv đã có assignments, groupsPerCourse và hocphanMap
+        return "giangvien_phancong";
     }
 
     @PostMapping("/save")

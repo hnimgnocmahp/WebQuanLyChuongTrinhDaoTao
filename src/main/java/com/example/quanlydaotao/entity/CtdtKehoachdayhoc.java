@@ -22,6 +22,18 @@ public class CtdtKehoachdayhoc {
     @Column(name = "nam_hoc")
     private Integer namHoc;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hoc_phan_id", insertable = false, updatable = false)
+    private CtdtHocphan hocPhan;
+
+    public CtdtHocphan getHocPhan() {
+        return hocPhan;
+    }
+
+    public void setHocPhan(CtdtHocphan hocPhan) {
+        this.hocPhan = hocPhan;
+    }
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 

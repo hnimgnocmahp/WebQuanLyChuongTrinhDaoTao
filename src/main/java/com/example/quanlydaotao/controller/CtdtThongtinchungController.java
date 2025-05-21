@@ -2,8 +2,11 @@ package com.example.quanlydaotao.controller;
 
 
 import com.example.quanlydaotao.entity.CtdtHocphan;
+import com.example.quanlydaotao.entity.CtdtKhungchuongtrinh;
+import com.example.quanlydaotao.entity.CtdtKhungchuongtrinhNhomkienthuc;
 import com.example.quanlydaotao.entity.CtdtThongtinchung;
 import com.example.quanlydaotao.service.HocPhanService;
+import com.example.quanlydaotao.service.NganhService;
 import com.example.quanlydaotao.service.NhomKienThucService;
 import com.example.quanlydaotao.service.ThongTinChungService;
 import jakarta.validation.Valid;
@@ -12,13 +15,17 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Year;
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/ctdt_thongtinchung")
 public class CtdtThongtinchungController {
     private final ThongTinChungService service;
-
-    public CtdtThongtinchungController(ThongTinChungService service) {
+    private final NganhService nganhService;
+    public CtdtThongtinchungController(ThongTinChungService service, NganhService nganhService) {
         this.service = service;
+        this.nganhService = nganhService;
     }
 
     @GetMapping
@@ -29,17 +36,37 @@ public class CtdtThongtinchungController {
 
     @GetMapping("/new")
     public String showCreate(Model m) {
-        m.addAttribute("thongTinChung", new CtdtThongtinchung());
+        CtdtThongtinchung thongTinChung = new CtdtThongtinchung();
+        thongTinChung.setNamBanHanh(Year.now().getValue());
+        m.addAttribute("thongTinChung", thongTinChung);
         m.addAttribute("thongTinChungList", service.findAll());
+        m.addAttribute("nganhList", nganhService.findAll());
         return "thongtinchung_form";
     }
 
     @PostMapping("/save")
     public String save(@Valid @ModelAttribute("thongTinChung") CtdtThongtinchung thongtinchung,
-                       BindingResult errs) {
+                       BindingResult errs,
+                       Model model) {
         if (errs.hasErrors()) {
             return "thongtinchung_form";
         }
+
+        Optional<CtdtThongtinchung> existing = service.findByMaCtdt(thongtinchung.getMaCtdt());
+        if (existing.isPresent() && !existing.get().getId().equals(thongtinchung.getId())) {
+            errs.rejectValue("maCtdt", "error.thongTinChung", "Mã CTDT đã tồn tại!");
+            return "thongtinchung_form";
+        }
+
+        // Không cập nhật tong_tin_chi khi lưu
+        if (thongtinchung.getId() != null) {
+            Optional<CtdtThongtinchung> oldEntity = service.findById(thongtinchung.getId());
+            if (oldEntity.isPresent()) {
+                // Giữ lại giá trị cũ của tong_tin_chi
+                thongtinchung.setTongTinChi(oldEntity.get().getTongTinChi());
+            }
+        }
+
         service.save(thongtinchung);
         return "redirect:/ctdt_thongtinchung";
     }
@@ -52,5 +79,39 @@ public class CtdtThongtinchungController {
         }
         model.addAttribute("thongTinChung", thongtin);
         return "kehoachdayhoc_detail";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Integer id, Model model) {
+        CtdtThongtinchung thongtinchung = service.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy thông tin chung với id: " + id));
+
+        model.addAttribute("thongTinChung", thongtinchung);
+        model.addAttribute("thongTinChungList", service.findAll());
+        model.addAttribute("nganhList", nganhService.findAll());
+        return "thongtinchung_form";
+    }
+
+    @GetMapping("/{id}/khung")
+    public String viewKhung(
+            @PathVariable Integer id,
+            Model model
+    ) {
+        // 1) Lấy toàn bộ cấu trúc khung – nhóm kiến thức
+        CtdtThongtinchung ctdt = service.getCtKhung(id);
+        model.addAttribute("ctdt", ctdt);
+
+        // 2) Tính tổng tín chỉ bắt buộc + tự chọn để in dòng "Tổng"
+        int totalBB = 0, totalTC = 0;
+        for (CtdtKhungchuongtrinh frame : ctdt.getKhungchuongtrinhs()) {
+            for (CtdtKhungchuongtrinhNhomkienthuc ent : frame.getKhungchuongtrinhNhomkienthucs()) {
+                totalBB += ent.getSotinchibatbuoc();
+                totalTC += ent.getSotinchituchon();
+            }
+        }
+        model.addAttribute("totalBB", totalBB);
+        model.addAttribute("totalTC", totalTC);
+
+        return "thongtinchung_detail";
     }
 }
