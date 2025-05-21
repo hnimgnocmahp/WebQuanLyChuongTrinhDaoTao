@@ -43,8 +43,8 @@
             <td th:text="${item.id}"></td>
             <td th:text="${item.maCtdt}"></td>
             <td th:text="${item.tenCtdt}"></td>
-            <td th:text="${item.nganh}"></td>
-            <td th:text="${item.maNganh}"></td>
+            <td th:text="${item.nganh.tenNganh}"></td>
+            <td th:text="${item.nganh.maNganh}"></td>
             <td th:text="${item.khoaQuanLy}"></td>
             <td th:text="${item.heDaoTao}"></td>
             <td th:text="${item.trinhDo}"></td>
@@ -53,10 +53,12 @@
             <td th:text="${item.namBanHanh}"></td>
             <td th:text="${item.trangThai}"></td>
             <td>
-                <a th:href="@{|/ctdt_thongtinchung/kehoachdayhoc/${item.id}|}" class="btn btn-sm btn-warning">
-                    <i class="fas fa-info-circle"></i>
-                </a>
-                <a th:href="@{|/ctdt_thongtinchung/${item.id}/khung|}" class="btn btn-sm btn-warning">Xem chi tiết khung</a>
+                <a
+                        th:href="@{|/ctdt_thongtinchung/edit/${item.id}|}"
+                        class="btn btn-sm btn-warning"
+                >Sửa</a
+                >
+                <a th:href="@{|/ctdt_thongtinchung/kehoachdayhoc/${item.id}|}" class="btn btn-sm btn-info">Xem thông tin chung</a>
 <!--                <a th:href="@{|/ctdt_hocphan/delete/${item.id}|}"-->
 <!--                   class="btn btn-sm btn-danger"-->
 <!--                   onclick="return confirm('Xác nhận xóa?');">Xóa</a>-->
