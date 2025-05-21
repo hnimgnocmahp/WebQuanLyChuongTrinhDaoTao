@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Configuration
 public class DataInitializer implements CommandLineRunner {
@@ -22,7 +23,7 @@ public class DataInitializer implements CommandLineRunner {
         if (userRepo.findByUsername(adminUsername).isEmpty()) {
             CtdtUser admin = new CtdtUser();
             admin.setUsername(adminUsername);
-            // Mật khẩu "123456" sẽ được mã hóa bằng BCrypt
+            // Mật khẩu “123456” sẽ được mã hóa bằng BCrypt
             admin.setPassword(passwordEncoder.encode("123456"));
             admin.setHoTen("Administrator");
             admin.setEmail("admin@truong.edu.vn");

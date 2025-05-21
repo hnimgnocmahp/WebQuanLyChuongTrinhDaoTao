@@ -17,6 +17,7 @@
     <div th:replace="fragments :: navbar"></div>
 
     <div class="container mt-4">
+      <div th:if="${deleteError}" class="alert alert-danger" th:text="${deleteError}"></div>
       <h1 class="mb-4">Danh sách Học Phần</h1>
       <a
         th:href="@{/ctdt_hocphan/new}"
@@ -35,6 +36,7 @@
             <th>Nhóm ID</th>
             <th>Loại HP</th>
             <th>HP Tiên quyết</th>
+            <th>Hệ số học phần</th>
             <th>Hành động</th>
           </tr>
         </thead>
@@ -49,6 +51,7 @@
             <td th:text="${item.nhomId}"></td>
             <td th:text="${item.loaiHp}"></td>
             <td th:text="${item.hocPhanTienQuyet}"></td>
+            <td th:text="${item.heSoHocPhan}"></td>
             <td>
               <a
                 th:href="@{|/ctdt_hocphan/edit/${item.id}|}"
@@ -61,13 +64,10 @@
                 onclick="return confirm('Xác nhận xóa?');"
                 >Xóa</a
               >
-              <a
-                class="btn btn-sm btn-info"
+              <a class="btn btn-sm btn-info"
                 href="#"
                 th:attr="data-bs-toggle='modal',data-bs-target='#deCuongModal'"
-                th:onclick="'showDeCuongChiTiet(' + ${item.id} + ')'"
-                >Chi tiết</a
-              >
+                th:onclick="'showDeCuongChiTiet(' + ${item.id} + ')'">Chi tiết</a>
             </td>
           </tr>
         </tbody>

@@ -28,7 +28,6 @@
         <tr>
             <th>ID</th>
             <th>Username</th>
-            <th>Password</th>
             <th>Họ tên</th>
             <th>Email</th>
             <th>Điện thoại</th>
@@ -39,10 +38,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="item : ${ctdt_user}">
+        <tr th:each="item : ${ctdt_user}" th:if="${item.vaiTro != 'ADMIN'}">
             <td th:text="${item.id}"></td>
             <td th:text="${item.username}"></td>
-            <td th:text="${item.password}"></td>
             <td th:text="${item.hoTen}"></td>
             <td th:text="${item.email}"></td>
             <td th:text="${item.soDienThoai}"></td>

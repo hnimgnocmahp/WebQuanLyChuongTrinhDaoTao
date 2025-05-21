@@ -3,6 +3,8 @@ package com.example.quanlydaotao.controller;
 
 import com.example.quanlydaotao.entity.CtdtDecuongchitiet;
 import com.example.quanlydaotao.entity.CtdtHocphan;
+import com.example.quanlydaotao.entity.CtdtKhungchuongtrinh;
+import com.example.quanlydaotao.entity.CtdtKhungchuongtrinhNhomkienthuc;
 import com.example.quanlydaotao.entity.CtdtThongtinchung;
 import com.example.quanlydaotao.service.HocPhanService;
 import com.example.quanlydaotao.service.NganhService;
@@ -81,5 +83,28 @@ public class CtdtThongtinchungController {
         }
         model.addAttribute("thongTinChung", thongtin);
         return "kehoachdayhoc_detail";
+    }
+
+    @GetMapping("/{id}/khung")
+    public String viewKhung(
+            @PathVariable Integer id,
+            Model model
+    ) {
+        // 1) Lấy toàn bộ cấu trúc khung – nhóm kiến thức
+        CtdtThongtinchung ctdt = service.getCtKhung(id);
+        model.addAttribute("ctdt", ctdt);
+
+        // 2) Tính tổng tín chỉ bắt buộc + tự chọn để in dòng "Tổng"
+        int totalBB = 0, totalTC = 0;
+        for (CtdtKhungchuongtrinh frame : ctdt.getKhungchuongtrinhs()) {
+            for (CtdtKhungchuongtrinhNhomkienthuc ent : frame.getKhungchuongtrinhNhomkienthucs()) {
+                totalBB += ent.getSotinchibatbuoc();
+                totalTC += ent.getSotinchituchon();
+            }
+        }
+        model.addAttribute("totalBB", totalBB);
+        model.addAttribute("totalTC", totalTC);
+
+        return "thongtinchung_detail";
     }
 }

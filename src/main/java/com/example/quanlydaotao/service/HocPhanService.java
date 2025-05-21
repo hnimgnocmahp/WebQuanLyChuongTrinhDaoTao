@@ -21,7 +21,10 @@ public class HocPhanService {
         return repo.findByMaHp(maHp);
     }
     public boolean existsByMaHp(String maHp){
-        return existsByMaHp(maHp);
+        return repo.existsByMaHp(maHp);
+    }
+    public boolean isReferencedAsPrerequisite(String maHp) {
+        return repo.existsByHocPhanTienQuyet(maHp);
     }
 
 //    Optional<CtdtHocphan> findByMaHp(String maHp);
