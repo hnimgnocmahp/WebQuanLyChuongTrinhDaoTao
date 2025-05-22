@@ -50,7 +50,8 @@ public class CtdtHocphan {
     private String hocPhanTienQuyet;
 
     @NotNull(message = "Hệ số học phần không được để trống")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Giá phải lớn hơn 0")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Giá trịị phải lớn hơn 0")
+    @DecimalMax(value = "1.0", inclusive = false, message = "Giá trị phải nhỏ hơn 1")
     @Column(name= "he_so_hoc_phan")
     private Float heSoHocPhan;
 
