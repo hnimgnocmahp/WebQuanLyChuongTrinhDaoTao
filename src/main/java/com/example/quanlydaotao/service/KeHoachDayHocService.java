@@ -1,5 +1,7 @@
 package com.example.quanlydaotao.service;
 
+import com.example.quanlydaotao.repository.CtdtGiangvienRepository;
+import com.example.quanlydaotao.repository.CtdtHocphanRepository;
 import com.example.quanlydaotao.repository.CtdtKehoachdayhocRepository;
 import com.example.quanlydaotao.entity.CtdtHocphan;
 import com.example.quanlydaotao.entity.CtdtKehoachdayhoc;
@@ -11,11 +13,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class KeHoachDayHocService {
     CtdtKehoachdayhocRepository repo;
+    CtdtHocphanRepository hocphanRepository;
+    CtdtGiangvienRepository giangvienRepository;
     
 
-    public KeHoachDayHocService(CtdtKehoachdayhocRepository repo) {
+    public KeHoachDayHocService(CtdtKehoachdayhocRepository repo, CtdtHocphanRepository hocphanRepository, CtdtGiangvienRepository giangvienRepository) {
         this.repo = repo;
+        this.hocphanRepository = hocphanRepository;
+        this.giangvienRepository = giangvienRepository;
     }
+
+ 
 
     public List<CtdtKehoachdayhoc> findAll() {
         return repo.findAll();

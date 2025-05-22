@@ -22,6 +22,28 @@ public class CtdtPhanconggiangday {
     @Column(name = "so_tiet")
     private Integer soTiet;
 
+    private String tenHocPhan;
+
+    private String tenGiangVien;
+
+
+    public String getTenHocPhan() {
+        return this.tenHocPhan;
+    }
+
+    public void setTenHocPhan(String tenHocPhan) {
+        this.tenHocPhan = tenHocPhan;
+    }
+
+    public String getTenGiangVien() {
+        return this.tenGiangVien;
+    }
+
+    public void setTenGiangVien(String tenGiangVien) {
+        this.tenGiangVien = tenGiangVien;
+    }
+
+
     public CtdtGiangvien getGiangVien() {
         return giangVien;
     }
@@ -37,6 +59,7 @@ public class CtdtPhanconggiangday {
     public void setGroup(CtdtKehoachmonhom group) {
         this.group = group;
     }
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nhom_id", insertable = false, updatable = false)

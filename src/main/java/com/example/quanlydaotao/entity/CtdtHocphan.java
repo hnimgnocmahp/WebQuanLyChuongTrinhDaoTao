@@ -61,6 +61,9 @@ public class CtdtHocphan {
     @OneToMany(mappedBy = "hocPhan", fetch = FetchType.LAZY)
     private List<CtdtKehoachmonhom> keHoachMonNhoms;
 
+
+
+
     public Float getHeSoHocPhan() {
         return heSoHocPhan;
     }
