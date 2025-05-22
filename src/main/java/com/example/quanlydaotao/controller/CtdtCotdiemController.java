@@ -103,6 +103,22 @@ public class CtdtCotdiemController {
             ctdtCotdiemRepository.save(cotDiem);
         }
 
+        // --- Cập nhật phuong_phap_danh_gia cho ctdt_decuongchitiet ---
+        List<CtdtCotdiem> cotDiemList = ctdtCotdiemRepository.findByDecuongId(decuongId);
+        StringBuilder danhGia = new StringBuilder();
+        for (CtdtCotdiem cot : cotDiemList) {
+            if (danhGia.length() > 0) danhGia.append(", ");
+            danhGia.append(cot.getTenCotDiem())
+                   .append(": ")
+                   .append(cot.getTyLePhanTram())
+                   .append("%");
+        }
+        ctdtDecuongchitietRepository.findById(decuongId).ifPresent(decuong -> {
+            decuong.setPhuongPhapDanhGia(danhGia.toString());
+            ctdtDecuongchitietRepository.save(decuong);
+        });
+        // --- END cập nhật phuong_phap_danh_gia ---
+
         redirectAttributes.addFlashAttribute("success", "Lưu các cột điểm thành công!");
         return "redirect:/ctdt_cotdiem";
     }
