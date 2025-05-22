@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Bảng phân công công tác của cán bộ, giảng viên cơ hữu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+  <style>
+    /* một số chỉnh sửa CSS cho border kẻ xiên */
+    th, td { vertical-align: middle; text-align: center; }
+    th.rotate {
+      height: 140px;
+      white-space: nowrap;
+    }
+    th.rotate > div {
+      transform:
+        translate(0px, 50px)
+        rotate(-90deg);
+      width: 30px;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="fragments :: navbar"></div>
+<div class="container mt-4">
+  <h2 class="text-center mb-4">BẢNG PHÂN CÔNG CÔNG TÁC CỦA CÁN BỘ, GIẢNG VIÊN CƠ HỮU</h2>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th rowspan="2">STT</th>
+      <th rowspan="2">Mã CB</th>
+      <th rowspan="2">Họ và tên GV</th>
+      <th rowspan="2">Năm sinh</th>
+      <th rowspan="2">Chức danh, học vị</th>
+      <th colspan="9">Phân công giảng dạy</th>
+<!--      <th rowspan="2">Tổng số tiết giảng dạy của GV</th>-->
+<!--      <th rowspan="2">Công tác khác</th>-->
+<!--      <th rowspan="2">Tổng CLC<br>(đã tính CVHT CLC)</th>-->
+<!--      <th rowspan="2">Tổng số tiết công tác của GV</th>-->
+    </tr>
+    <tr>
+      <th>Tên học phần</th>
+      <th>Mã học phần</th>
+      <th>Số TC</th>
+      <th>Số tiết của HP</th>
+      <th>Số lượng lớp, nhóm</th>
+      <th>Học kì 1</th>
+      <th>Học kì 2</th>
+      <th>Học kì 3</th>
+      <th>Tổng số tiết giảng dạy của GV</th>
+
+      <!--      <th>Số tiết của GV</th>-->
+    </tr>
+    </thead>
+    <tbody th:each="gv, gvStat : ${giangviens}">
+
+    <!-- vòng ngoài: lặp qua từng giảng viên -->
+      <!-- tính số dòng sẽ phải rowspan (số assignments + 1 hàng tổng cộng) -->
+      <th:block th:with="rows=${gv.hocphanMap.size() + 1}">
+        <!-- inner: lặp qua từng assignment -->
+        <tr th:each="assign, aStat : ${gv.hocphanMap}">
+          <!-- in STT, thông tin GV chỉ ở dòng đầu (aStat.index==0) -->
+          <td th:if="${aStat.index == 0}"
+              th:rowspan="${rows}"
+              th:text="${gvStat.index + 1}">1</td>
+          <td th:if="${aStat.index == 0}"
+              th:rowspan="${rows}"
+              th:text="${gv.maGv}">11381</td>
+          <td th:if="${aStat.index == 0}"
+              th:rowspan="${rows}"
+              th:text="${gv.hoTen}">Phạm Thế Bảo</td>
+          <td th:if="${aStat.index == 0}"
+              th:rowspan="${rows}"
+              th:text="${gv.namSinh}">1972
+          </td>
+          <td th:if="${aStat.index == 0}"
+              th:rowspan="${rows}"
+              th:text="${gv.trinhDo}">PGS., TS., GVCC</td>
+
+          <!-- thông tin assignment -->
+          <td th:text="${assign.value.tenHp}">Cấu trúc rời rạc</td>
+          <td th:text="${assign.value.maHp}">841403</td>
+          <td th:text="${assign.value.soTinChi}">4</td>
+          <td th:text="${assign.value.soTietLyThuyet + assign.value.soTietThucHanh}">60</td>
+          <td th:text="${gv.groupsPerCourse[assign.value.id]}">2</td>
+          <td th:text="${gv.hockyMap[assign.value.id][0]}"></td>
+          <td th:text="${gv.hockyMap[assign.value.id][1]}"></td>
+          <td th:text="${gv.hockyMap[assign.value.id][2]}"></td>
+
+          <!--          <td th:text="${assign.soTiet}">45</td>-->
+          <!-- Tổng số tiết giảng dạy của GV -->
+          <td th:text="${gv.groupsPerCourse.get(assign.value.id) *
+               (assign.value.soTietLyThuyet + assign.value.soTietThucHanh)}"></td>
+        </tr>
+        <!-- sau khi hết assignments, thêm 1 hàng Tổng cộng -->
+        <tr class="table-light">
+<!--          <td colspan="6" class="text-end fw-bold">Tổng cộng</td>-->
+<!--          &lt;!&ndash; Tổng số tiết giảng dạy của GV &ndash;&gt;-->
+<!--          <td th:text="${gv.groupsPerCourse[assign.group.hocPhan.id]*(assign.group.hocPhan.soTietLyThuyet + assign.group.hocPhan.soTietThucHanh)}">354</td>-->
+<!--          &lt;!&ndash; Công tác khác &ndash;&gt;-->
+<!--          <td th:text="${gv.otherTasks}">367.5</td>-->
+<!--          &lt;!&ndash; Tổng CLC &ndash;&gt;-->
+<!--          <td th:text="${gv.totalCLC}">—</td>-->
+<!--          &lt;!&ndash; Tổng số tiết công tác &ndash;&gt;-->
+<!--          <td th:text="${gv.assignments.stream().mapToInt(a->a.soTiet).sum() + gv.otherTasks + gv.totalCLC}">-->
+<!--            721.5-->
+<!--          </td>-->
+        </tr>
+    </th:block>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

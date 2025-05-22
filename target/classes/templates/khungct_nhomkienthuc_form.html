@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Khung chương trình - Nhóm kiến thức</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div th:replace="fragments :: navbar"></div>
+
+    <div class="container mt-4">
+      <h1 class="mb-4" th:text="${khungctNhom.id == null ? 'Thêm khung chương trình - nhóm kiến thức' : 'Sửa khung chương trình - nhóm kiến thức'}"></h1>
+
+      <form th:action="@{/ctdt_khungchuongtrinh_nhomkienthuc/save}" th:object="${khungctNhom}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <!-- Tổng hợp lỗi chung -->
+        <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger">
+          <ul>
+            <li th:each="err : ${#fields.globalErrors()}" th:text="${err}"></li>
+          </ul>
+        </div>
+
+        <div class="mb-3">
+          <label for="idKhungchuongtrinh" class="form-label">Khung chương trình </label>
+          <select
+            id="idKhungchuongtrinh"
+            class="form-select"
+            th:field="*{idKhungchuongtrinh}"
+            required
+          >
+            <option value="" disabled th:if="${khungctNhom.id == null}">Chọn khung chương trình</option>
+            <option th:each="prog : ${khungchuongtrinhList}"
+                    th:value="${prog.id}"
+                    th:text="${prog.id + ' - ' + prog.maNhom + ' - ' + prog.tenNhom}" />
+          </select>
+          <div th:if="${#fields.hasErrors('idKhungchuongtrinh')}" th:errors="*{idKhungchuongtrinh}" class="text-danger mt-1"></div>
+        </div>
+
+        <div class="mb-3">
+          <label for="idManhom" class="form-label">Nhóm kiến thức</label>
+          <select
+            id="idManhom"
+            class="form-select"
+            th:field="*{idManhom}"
+            required
+          >
+            <option value="" disabled th:if="${khungctNhom.id == null}">Chọn nhóm kiến thức</option>
+            <option th:each="nh : ${nhomKienthucList}"
+                    th:value="${nh.id}"
+                    th:text="${nh.manhom + ' - ' + nh.tenNhom}" />
+          </select>
+          <div th:if="${#fields.hasErrors('idManhom')}" th:errors="*{idManhom}" class="text-danger mt-1"></div>
+        </div>
+
+        <div class="mb-3">
+          <label for="sotinchibatbuoc" class="form-label">Số tín chỉ bắt buộc</label>
+          <input
+            type="number"
+            id="sotinchibatbuoc"
+            class="form-control"
+            th:field="*{sotinchibatbuoc}"
+            placeholder="Nhập số tín chỉ bắt buộc"
+            min="0"
+            required
+          />
+          <div th:if="${#fields.hasErrors('sotinchibatbuoc')}" th:errors="*{sotinchibatbuoc}" class="text-danger mt-1"></div>
+        </div>
+
+        <div class="mb-3">
+          <label for="sotinchituchon" class="form-label">Số tín chỉ tự chọn</label>
+          <input
+            type="number"
+            id="sotinchituchon"
+            class="form-control"
+            th:field="*{sotinchituchon}"
+            placeholder="Nhập số tín chỉ tự chọn"
+            min="0"
+            required
+          />
+          <div th:if="${#fields.hasErrors('sotinchituchon')}" th:errors="*{sotinchituchon}" class="text-danger mt-1"></div>
+        </div>
+
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Lưu</button>
+          <a th:href="@{/ctdt_khungchuongtrinh_nhomkienthuc}" class="btn btn-secondary">Quay lại</a>
+        </div>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title th:text="${kehoach.id == null ? 'Thêm kế hoạch dạy học' : 'Sửa kế hoạch dạy học'}"></title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div th:replace="fragments :: navbar"></div>
+
+    <div class="container mt-4">
+      <h1 class="mb-4"
+          th:text="${kehoach.id == null ? 'Thêm mới kế hoạch dạy học' : 'Sửa kế hoạch dạy học'}">
+        Tiêu đề
+      </h1>
+
+      <form
+        th:action="@{/ctdt_kehoachdayhoc/save}"
+        th:object="${kehoach}"
+        method="post"
+      >
+        <!-- global error -->
+        <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger"
+             th:errors="*{ }">Có lỗi</div>
+
+        <!-- ID (hidden khi sửa) -->
+        <input type="hidden" th:field="*{id}" />
+
+        <!-- CTĐT -->
+<div class="mb-3">
+  <label for="ctdt" class="form-label">CTĐT</label>
+  <select id="ctdt"
+          class="form-select"
+          th:field="*{ctdtId}"
+          required>
+    <option value="">-- Chọn CTĐT --</option>
+    <option th:each="c : ${ctdtList}"
+            th:value="${c.id}"
+            th:text="${c.maCtdt} + ' - ' + ${c.tenCtdt}">
+    </option>
+  </select>
+  <!-- đây mới là chỗ hiển thị lỗi -->
+  <div class="text-danger"
+       th:if="${#fields.hasErrors('ctdtId')}"
+       th:errors="*{ctdtId}">Lỗi CTĐT</div>
+</div>
+
+  <!-- Học phần -->
+  <div class="mb-3">
+    <label for="hocPhan" class="form-label">Học phần</label>
+    <select id="hocPhan"
+            class="form-select"
+            th:field="*{hocPhanId}"
+            required>
+      <option value="">-- Chọn học phần --</option>
+      <option th:each="hp : ${hocphanList}"
+              th:value="${hp.id}"
+              th:text="${hp.maHp} + ' - ' + ${hp.tenHp}">
+      </option>
+    </select>
+    <div class="text-danger"
+        th:if="${#fields.hasErrors('hocPhanId')}"
+        th:errors="*{hocPhanId}">Lỗi học phần</div>
+  </div>
+
+  <!-- Học kỳ -->
+  <div class="mb-3">
+    <label for="hocKy" class="form-label">Học kỳ</label>
+    <input type="number"
+          class="form-control"
+          id="hocKy"
+          min="1"
+          th:field="*{hocKy}"
+          required/>
+    <div class="text-danger"
+        th:if="${#fields.hasErrors('hocKy')}"
+        th:errors="*{hocKy}">Lỗi học kỳ</div>
+  </div>
+
+  <!-- Năm học -->
+  <div class="mb-3">
+    <label for="namHoc" class="form-label">Năm học</label>
+    <input type="text"
+          class="form-control"
+          id="namHoc"
+          placeholder="Ví dụ: 2023"
+          th:field="*{namHoc}"
+          required/>
+    <div class="text-danger"
+        th:if="${#fields.hasErrors('namHoc')}"
+        th:errors="*{namHoc}">Lỗi năm học</div>
+  </div>
+
+
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Lưu</button>
+          <a th:href="@{/ctdt_kehoachdayhoc}" class="btn btn-secondary">Hủy</a>
+        </div>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

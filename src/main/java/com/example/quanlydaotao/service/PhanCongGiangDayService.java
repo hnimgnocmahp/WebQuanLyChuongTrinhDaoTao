@@ -15,4 +15,7 @@ public class PhanCongGiangDayService {
     public List<CtdtPhanconggiangday> findByGroupId(Integer nhomId) {
         return repo.findByNhomId(nhomId);
     }
+    
+    public void deleteById(Integer id) { repo.deleteById(id); }
+ 
 }

@@ -2,6 +2,7 @@ package com.example.quanlydaotao.entity;
 
 import com.example.quanlydaotao.repository.CtdtNhomkienthucRepository;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 
 import java.util.List;
 
@@ -19,9 +20,11 @@ public class CtdtKhungchuongtrinhNhomkienthuc {
     @Column(name = "id_manhom")
     private Integer idManhom;
 
+    @Min(value = 0, message = "Số tin chỉ tối thiểu phải bằng 0")
     @Column(name = "sotinchibatbuoc")
     private Integer sotinchibatbuoc;
 
+    @Min(value = 0, message = "Số tin chỉ tối thiểu phải bằng 0")
     @Column(name = "sotinchituchon")
     private Integer sotinchituchon;
 
