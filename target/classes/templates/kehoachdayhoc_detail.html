@@ -37,37 +37,19 @@
 
         </tr>
 
-        <tr>
-            <td colspan="3" class="fw-bold text-start">Các học phần bắt buộc</td>
-            <td colspan="1" class="text-center fw-bold">
-                <span   th:if="${khungchuongtrinh.soTinChiBatBuoc != null}"
-                        th:text="${khungchuongtrinh.soTinChiBatBuoc} + '/' + ${khungchuongtrinh.soTinChiBatBuoc}"></span>
             </td>
             <td colspan="13" class="text-start fw-bold"></td>
         </tr>
 
-        <th:block th:each="hp, stat : ${khungchuongtrinh.hocphans}">
-            <th:block th:if="${hp.loaiHp == 'Bắt buộc'}">
-                <tr>
-                    <td th:text="${stat.index + 1}"></td>
-                    <td th:text="${hp.maHp}"></td>
-                    <td th:text="${hp.tenHp}"></td>
-                    <td th:text="${hp.soTinChi}"></td>
-                    <td th:each="i : ${#numbers.sequence(1,12)}"
-                        th:text="${hp.hasHocKy(i) ? 'x' : ''}"></td>
-                    <td th:text="${hp.hocPhanTienQuyet}"></td>
-                </tr>
-            </th:block>
-        </th:block>
+        <!-- Hàng học phần -->
+        <tr th:each="hp, stat : ${khungchuongtrinh.hocphans}">
+            <td th:text="${stat.index + 1}"></td>
+            <td th:text="${hp.maHp}"></td>
+            <td th:text="${hp.tenHp}"></td>
+            <td th:text="${hp.soTinChi}"></td>
 
-
-
-        <!-- Tự chọn -->
-        <tr>
-            <td colspan="3" class="fw-bold text-start">Các học phần tự chọn</td>
-            <td colspan="1" class="text-center fw-bold">
-                <span   th:if="${khungchuongtrinh.soTinChiTuChon != null}"
-                        th:text="${khungchuongtrinh.soTinChiTuChon} + '/' + ${khungchuongtrinh.soTinChiTuChon}"></span>
+            <td th:each="i : ${#numbers.sequence(1,8)}"
+                th:text="${hp.hasHocKy(i) ? 'x' : ''}">
             </td>
             <td colspan="13" class="text-start fw-bold"></td>
         </tr>
