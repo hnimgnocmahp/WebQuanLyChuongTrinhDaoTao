@@ -10,29 +10,28 @@
 <div th:replace="fragments :: navbar"></div>
 
 <div class="container mt-4">
-    <h1 th:text="${thongTinChung.id} == null ? 'Tạo CTĐT' : 'Cập nhật CTĐT'"></h1>
+    <h1 th:text="${thongTinChung.id} != null ? 'Cập nhật CTĐT' : 'Tạo CTĐT'"></h1>
 
     <form th:action="@{/ctdt_thongtinchung/save}" th:object="${thongTinChung}" method="post">
         <input type="hidden" th:field="*{id}" />
 
         <div class="mb-3">
             <label class="form-label">Mã CTĐT</label>
-            <!-- Bỏ readonly để cho phép chỉnh sửa khi cập nhật -->
             <input type="text" th:field="*{maCtdt}" class="form-control" required />
             <span class="text-danger" th:if="${#fields.hasErrors('maCtdt')}" th:errors="*{maCtdt}"></span>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Tên CTĐT</label>
-            <input type="text" th:field="*{tenCtdt}" class="form-control" required/>
+            <input type="text" th:field="*{tenCtdt}" class="form-control"/>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Ngành</label>
-<!--            <input type="text" th:field="*{nganh}" class="form-control" required/>-->
+            <!--            <input type="text" th:field="*{nganh}" class="form-control" required/>-->
             <div class="form-floating mb-3">
                 <select id="nganh" required
-                        th:field="*{nganh.id}"
+                        th:field="*{nganh}"
                         class="form-select">
                     <option value="" selected>-- Chọn --</option>
                     <option  th:each="nganh : ${nganhList}"
@@ -46,22 +45,22 @@
 
         <div class="mb-3">
             <label class="form-label">Khoa quản lý</label>
-            <input type="text" th:field="*{khoaQuanLy}" class="form-control" required/>
+            <input type="text" th:field="*{khoaQuanLy}" class="form-control"/>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Hệ đào tạo</label>
-            <input type="text" th:field="*{heDaoTao}" class="form-control" required/>
+            <input type="text" th:field="*{heDaoTao}" class="form-control"/>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Trình độ</label>
-            <input type="text" th:field="*{trinhDo}" class="form-control" required/>
+            <input type="text" th:field="*{trinhDo}" class="form-control"/>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Thời gian đào tạo</label>
-            <input type="text" th:field="*{thoiGianDaoTao}" class="form-control" required/>
+            <input type="text" th:field="*{thoiGianDaoTao}" class="form-control"/>
         </div>
 
         <div class="mb-3">

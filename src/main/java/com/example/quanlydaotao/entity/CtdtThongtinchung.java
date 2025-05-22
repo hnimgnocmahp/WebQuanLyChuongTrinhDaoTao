@@ -18,7 +18,7 @@ public class CtdtThongtinchung {
     @Column(name = "ten_ctdt")
     private String tenCtdt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)            // hoặc mặc định EAGER
     @JoinColumn(name = "id_nganh")
     private CtdtNganh nganh;
 

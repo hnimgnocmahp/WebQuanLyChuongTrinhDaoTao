@@ -1,7 +1,6 @@
 package com.example.quanlydaotao.controller;
 
 
-import com.example.quanlydaotao.entity.CtdtDecuongchitiet;
 import com.example.quanlydaotao.entity.CtdtHocphan;
 import com.example.quanlydaotao.entity.CtdtKhungchuongtrinh;
 import com.example.quanlydaotao.entity.CtdtKhungchuongtrinhNhomkienthuc;
@@ -24,17 +23,23 @@ import java.util.Optional;
 public class CtdtThongtinchungController {
     private final ThongTinChungService service;
     private final NganhService nganhService;
-
     public CtdtThongtinchungController(ThongTinChungService service, NganhService nganhService) {
         this.service = service;
         this.nganhService = nganhService;
     }
 
     @GetMapping
-    public String listCtdtThongtinchung(Model model) {
-        model.addAttribute("ctdt_thongtinchung", service.findAll());
+    public String listCtdtThongtinchung(@RequestParam(value = "keyword", required = false) String keyword,
+                                        Model model) {
+        if (keyword != null && !keyword.isEmpty()) {
+            model.addAttribute("ctdt_thongtinchung", service.searchByTenOrMaNganh(keyword));
+            model.addAttribute("keyword", keyword);
+        } else {
+            model.addAttribute("ctdt_thongtinchung", service.findAll());
+        }
         return "ctdt_thongtinchung_list";
     }
+
 
     @GetMapping("/new")
     public String showCreate(Model m) {
@@ -45,6 +50,7 @@ public class CtdtThongtinchungController {
         m.addAttribute("nganhList", nganhService.findAll());
         return "thongtinchung_form";
     }
+
     @PostMapping("/save")
     public String save(@Valid @ModelAttribute("thongTinChung") CtdtThongtinchung thongtinchung,
                        BindingResult errs,
@@ -59,8 +65,27 @@ public class CtdtThongtinchungController {
             return "thongtinchung_form";
         }
 
+        // Không cập nhật tong_tin_chi khi lưu
+        if (thongtinchung.getId() != null) {
+            Optional<CtdtThongtinchung> oldEntity = service.findById(thongtinchung.getId());
+            if (oldEntity.isPresent()) {
+                // Giữ lại giá trị cũ của tong_tin_chi
+                thongtinchung.setTongTinChi(oldEntity.get().getTongTinChi());
+            }
+        }
+
         service.save(thongtinchung);
         return "redirect:/ctdt_thongtinchung";
+    }
+
+    @GetMapping("/kehoachdayhoc/{id}")
+    public String showChiTietThongTinChung(@PathVariable Integer id, Model model) {
+        CtdtThongtinchung thongtin = service.getChiTietThongTin(id);
+        if (thongtin == null) {
+            return "redirect:/ctdt_thongtinchung?error=notfound";
+        }
+        model.addAttribute("thongTinChung", thongtin);
+        return "kehoachdayhoc_detail";
     }
 
     @GetMapping("/edit/{id}")
@@ -72,17 +97,6 @@ public class CtdtThongtinchungController {
         model.addAttribute("thongTinChungList", service.findAll());
         model.addAttribute("nganhList", nganhService.findAll());
         return "thongtinchung_form";
-    }
-
-
-    @GetMapping("/kehoachdayhoc/{id}")
-    public String showChiTietThongTinChung(@PathVariable Integer id, Model model) {
-        CtdtThongtinchung thongtin = service.getChiTietThongTin(id);
-        if (thongtin == null) {
-            return "redirect:/ctdt_thongtinchung?error=notfound";
-        }
-        model.addAttribute("thongTinChung", thongtin);
-        return "kehoachdayhoc_detail";
     }
 
     @GetMapping("/{id}/khung")
@@ -107,4 +121,5 @@ public class CtdtThongtinchungController {
 
         return "thongtinchung_detail";
     }
+
 }

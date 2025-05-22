@@ -1,6 +1,5 @@
 package com.example.quanlydaotao.service;
 
-import com.example.quanlydaotao.repository.CtdtKhungchuongtrinhNhomkienthucRepository;
 import com.example.quanlydaotao.entity.*;
 import com.example.quanlydaotao.repository.*;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,9 @@ public class ThongTinChungService {
         this.khungRepo = khungRepo;
         this.kehoachdayhocRepo = kehoachdayhocRepo;
     }
-
+    public List<CtdtThongtinchung> searchByTenOrMaNganh(String keyword) {
+        return repo.findByTenCtdtContainingIgnoreCaseOrMaCtdtContainingIgnoreCase(keyword, keyword);
+    }
     public List<CtdtThongtinchung> findAll() { return repo.findAll(); }
     public Optional<CtdtThongtinchung> findById(Integer id) { return repo.findById(id); }
     public CtdtThongtinchung save(CtdtThongtinchung thongtinchung) { return repo.save(thongtinchung); }
